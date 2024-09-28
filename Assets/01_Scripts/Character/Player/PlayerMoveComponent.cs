@@ -4,7 +4,10 @@ using StateType = StateComponent.StateType;
 
 public class PlayerMoveComponent : MonoBehaviour
 {
+    #region 설정 값
     [SerializeField, Header("이동")]
+    private Transform bodyTransform;
+
     private float walkSpeed = 2f;
 
     [SerializeField]
@@ -23,16 +26,20 @@ public class PlayerMoveComponent : MonoBehaviour
     private float mouseSpeed = 0.3f;
 
     [SerializeField]
-    private Vector2 pitchLimit = new(10, 340);
+    private Vector2 pitchLimit = new(60, 340);
 
     private void Reset()
     {
         GameObject go = GameObject.Find("Player");
         Debug.Assert(go != null);
 
+        bodyTransform = go.transform.FindChildByName("Body");
+        Debug.Assert(bodyTransform != null);
+
         cameraTargetTransform = go.transform.FindChildByName("CameraTarget");
         Debug.Assert(cameraTargetTransform != null);
     }
+    #endregion
 
     #region 컴포넌트
     private Animator animator;
@@ -100,17 +107,15 @@ public class PlayerMoveComponent : MonoBehaviour
     private Vector2 currentPlayerInputMove;
     private Vector2 currentVelocity = Vector2.zero;
     private Quaternion mouseRotation;
+    private float currentMoveSpeed;
     #endregion
 
     private void Update()
     {
         #region 마우스 회전
         {
-            mouseRotation *= Quaternion.AngleAxis(playerInputLook.x * mouseSpeed, Vector3.up);
-            mouseRotation *= Quaternion.AngleAxis(-playerInputLook.y * mouseSpeed, Vector3.right);
+            mouseRotation *= Quaternion.Euler(-playerInputLook.y * mouseSpeed, playerInputLook.x * mouseSpeed, 0);
             cameraTargetTransform.rotation = mouseRotation;
-
-            mouseRotation = Quaternion.Lerp(cameraTargetTransform.rotation, mouseRotation, mouseSpeed * Time.deltaTime);
 
             Vector3 angle = cameraTargetTransform.localEulerAngles;
             angle.z = 0f;
@@ -123,24 +128,34 @@ public class PlayerMoveComponent : MonoBehaviour
             {
                 angle.x = pitchLimit.y;
             }
-            
+
             cameraTargetTransform.localEulerAngles = new(angle.x, angle.y, 0f);
+            mouseRotation = Quaternion.Lerp(cameraTargetTransform.rotation, mouseRotation, mouseSpeed * Time.deltaTime);
         }
         #endregion
 
         #region 캐릭터 이동
         {
-            currentPlayerInputMove = Vector2.SmoothDamp(currentPlayerInputMove, playerInputMove, ref currentVelocity, 1f / sensitivity);
-            Vector3 moveDirection = Vector3.zero;
+            currentPlayerInputMove = Vector2.SmoothDamp(currentPlayerInputMove, playerInputMove, ref currentVelocity, 1f / sensitivity);            
             float moveSpeed = isRunning ? runSpeed : walkSpeed;
 
             if (currentPlayerInputMove.magnitude > deadZone)
             {
-                moveDirection = (Vector3.right * currentPlayerInputMove.x) + (Vector3.forward * currentPlayerInputMove.y);
-                moveDirection = moveDirection.normalized * moveSpeed;
+                Quaternion cameraRotation = Quaternion.Euler(0, cameraTargetTransform.eulerAngles.y, 0);                
+                Vector3 inputDirection = new(currentPlayerInputMove.x, 0, currentPlayerInputMove.y);
+                Quaternion inputRotation = Quaternion.LookRotation(inputDirection);
+                Quaternion lookRotation =  cameraRotation * inputRotation;
+
+                bodyTransform.rotation = Quaternion.Slerp(bodyTransform.rotation, lookRotation, 0.2f);
+
+                transform.Translate(bodyTransform.forward * moveSpeed * Time.deltaTime);
             }
 
-            transform.Translate(moveDirection * Time.deltaTime);
+            currentMoveSpeed = Mathf.Lerp(currentMoveSpeed, playerInputMove.magnitude * moveSpeed, 1f / sensitivity * 10);
+
+            animator.SetFloat("SpeedX", currentPlayerInputMove.x * moveSpeed);
+            animator.SetFloat("SpeedY", currentPlayerInputMove.y * moveSpeed);
+            animator.SetFloat("SpeedZ", currentMoveSpeed);
         }
         #endregion
     }
@@ -148,6 +163,9 @@ public class PlayerMoveComponent : MonoBehaviour
     private void OnGUI()
     {
         GUI.color = Color.red;
-        GUILayout.Label(playerInputLook.ToString());
+        GUILayout.Label(cameraTargetTransform.forward.ToString());
+
+        GUI.color = Color.blue;
+        GUILayout.Label(bodyTransform.forward.ToString());
     }
 }
