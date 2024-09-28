@@ -8,10 +8,11 @@ public class PlayerMoveComponent : MonoBehaviour
     [SerializeField, Header("ÀÌµ¿")]
     private Transform bodyTransform;
 
-    private float walkSpeed = 2f;
+    [SerializeField]
+    private float walkSpeed = 2.2f;
 
     [SerializeField]
-    private float runSpeed = 4f;
+    private float runSpeed = 5.5f;
 
     [SerializeField]
     private float sensitivity = 50f;
@@ -79,6 +80,16 @@ public class PlayerMoveComponent : MonoBehaviour
             };
 
             action.canceled += (context) => playerInputMove = Vector2.zero;
+            action.Enable();
+        }
+        #endregion
+
+        #region Run
+        {
+            InputAction action = actionMap.FindAction("Run");
+
+            action.started += (context) => isRunning = true;
+            action.canceled += (context) => isRunning = false;
             action.Enable();
         }
         #endregion
