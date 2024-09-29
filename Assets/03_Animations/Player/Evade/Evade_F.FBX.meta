@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d86c9794cb4708a48a02a67aab5527dd
+guid: 545de0a4f4720e7499d725e1268ede01
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable:
@@ -959,7 +959,7 @@ ModelImporter:
     second: Star001
   - first:
       74: 7400000
-    second: Unarmed Idle
+    second: Evade_F
   - first:
       95: 9500000
     second: //RootNode
@@ -1047,15 +1047,26 @@ ModelImporter:
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
-      copied configuration does not match position in animation file:\n\t'thigh_l'
-      : position error = 1.694443 mm\n\t'thigh_r' : position error = 1.935132 mm\n\t'hand_l'
-      : position error = 1.648918 mm\n\t'hand_r' : position error = 1.253647 mm\n"
+      copied configuration does not match position in animation file:\n\t'lowerarm_l'
+      : position error = 1.148820 mm\n\t'hand_l' : position error = 2.732119 mm\n\t'middle_02_l'
+      : position error = 1.205511 mm\n\t'ring_02_l' : position error = 1.315688 mm\n\t'hand_r'
+      : position error = 1.490144 mm\n\t'middle_02_r' : position error = 1.204069
+      mm\n\t'ring_02_r' : position error = 1.314596 mm\n"
     animationImportErrors: 
     animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
       might lower retargeting quality:\nNote: Activate translation DOF on avatar
-      to improve retargeting quality.\n\t'lowerarm_l' has translation animation that
-      will be discarded.\n\t'hand_l' has translation animation that will be discarded.\n\t'hand_r'
-      has translation animation that will be discarded.\n"
+      to improve retargeting quality.\n\t'thigh_l' has translation animation that
+      will be discarded.\n\t'calf_l' has translation animation that will be discarded.\n\t'foot_l'
+      has translation animation that will be discarded.\n\t'ball_l' has translation
+      animation that will be discarded.\n\t'thigh_r' has translation animation that
+      will be discarded.\n\t'calf_r' has translation animation that will be discarded.\n\t'foot_r'
+      has translation animation that will be discarded.\n\t'ball_r' has translation
+      animation that will be discarded.\n\t'upperarm_l' has translation animation
+      that will be discarded.\n\t'lowerarm_l' has translation animation that will
+      be discarded.\n\t'hand_l' has translation animation that will be discarded.\n\t'upperarm_r'
+      has translation animation that will be discarded.\n\t'lowerarm_r' has translation
+      animation that will be discarded.\n\t'hand_r' has translation animation that
+      will be discarded.\n\t'head' has translation animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -1069,30 +1080,38 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Unarmed Idle
+      name: Evade_F
       takeName: Take 001
       internalID: 7400000
       firstFrame: 0
-      lastFrame: 300
+      lastFrame: 45
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
       loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
+      keepOriginalOrientation: 1
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.9425087
+        functionName: Anim_EndEvade
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: e8ef9ab8def1adb408cd97092c2bfc33,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
