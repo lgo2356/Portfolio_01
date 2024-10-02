@@ -11,6 +11,8 @@ public class Sword : Weapon
 
     private Transform slotTransform;
     private Transform handTransform;
+    private bool isNextCombo = false;
+    private bool isComboEnalbed = false;
 
     protected override void Reset()
     {
@@ -50,5 +52,51 @@ public class Sword : Weapon
         transform.position = Vector3.zero;
         transform.rotation = Quaternion.identity;
         transform.SetParent(slotTransform, false);
+    }
+
+    public void EnableCombo()
+    {
+        isComboEnalbed = true;
+    }
+
+    public void DisableCombo()
+    {
+        isComboEnalbed = false;
+    }
+
+    public override void DoNextCombo()
+    {
+        base.DoNextCombo();
+
+        if (isNextCombo == false)
+            return;
+
+        isNextCombo = false;
+
+        animator.SetTrigger("DoNextCombo");
+    }
+
+    public override void DoAction()
+    {
+        if (isComboEnalbed)
+        {
+            isComboEnalbed = false;
+            isNextCombo = true;
+
+            return;
+        }
+
+        if (stateComponent.IsIdleState == false)
+            return;
+
+        base.DoAction();
+    }
+
+    public override void EndAction()
+    {
+        base.EndAction();
+
+        isNextCombo = false;
+        isComboEnalbed = false;
     }
 }

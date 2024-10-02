@@ -41,4 +41,19 @@ public class Weapon : MonoBehaviour
     {
         
     }
+
+    public virtual void DoNextCombo()
+    {
+        
+    }
+
+    public virtual void DoAction()
+    {
+
+    }
+
+    public virtual void EndAction()
+    {
+
+    }
 }

@@ -111,6 +111,17 @@ public class WeaponComponent : MonoBehaviour
     }
     #endregion
 
+    #region 공격
+    public void DoAction()  // Start Combo
+    {
+        if (weaponTable[currentWeaponType] == null)
+            return;
+
+        animator.SetBool("IsAction", true);
+        weaponTable[currentWeaponType].DoAction();
+    }
+    #endregion
+
     #region 애니메이션 이벤트
     private void BeginAnimEquip()
     {
@@ -131,6 +142,29 @@ public class WeaponComponent : MonoBehaviour
     {
         animator.SetBool("IsUnequipping", false);
         SetUnarmed();
+    }
+
+    private void DoAnimNextCombo()
+    {
+        weaponTable[currentWeaponType].DoNextCombo();
+    }
+
+    private void EndAnimAction()
+    {
+        animator.SetBool("IsAction", false);
+        weaponTable[currentWeaponType].EndAction();
+    }
+
+    private void BeginAnimComboInputSection()
+    {
+        Sword sword = weaponTable[currentWeaponType] as Sword;
+        sword?.EnableCombo();
+    }
+
+    private void EndAnimComboInputSection()
+    {
+        Sword sword = weaponTable[currentWeaponType] as Sword;
+        sword?.DisableCombo();
     }
     #endregion
 }

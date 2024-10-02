@@ -45,6 +45,11 @@ public class Player : MonoBehaviour
         {
             weaponComponent.SetGreatSword();
         };
+
+        actionMap.FindAction("Action").started += (callback) =>
+        {
+            weaponComponent.DoAction();
+        };
     }
 
     private void OnAnimatorMove()
