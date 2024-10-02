@@ -193,6 +193,13 @@ MonoBehaviour:
     GateFit: 2
     FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
+    Iso: 200
+    ShutterSpeed: 0.005
+    Aperture: 16
+    BladeCount: 5
+    Curvature: {x: 2, y: 11}
+    BarrelClipping: 0.25
+    Anamorphism: 0
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -240,6 +247,59 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &267765691
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 267765692}
+  - component: {fileID: 267765693}
+  m_Layer: 0
+  m_Name: Retarget_Knight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &267765692
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 267765691}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1612451646}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &267765693
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 267765691}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 44eddc44e5d6ea249be3a63c300088e8, type: 3}
+  m_Controller: {fileID: 9100000, guid: c54ddbea8e054b142b8720bb188b6e3f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &296461263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -730,6 +790,37 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &589707700
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 589707701}
+  m_Layer: 0
+  m_Name: Hand_GreatSword
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &589707701
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 589707700}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.6019373, y: 0.020813644, z: 0.26247326, w: 0.75388724}
+  m_LocalPosition: {x: -0.308, y: 0.048, z: -0.429}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9183906144106022077}
+  m_LocalEulerAnglesHint: {x: 246.709, y: -226.038, z: -110.35901}
 --- !u!114 &625263332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -875,22 +966,22 @@ PrefabInstance:
     - target: {fileID: 1265613410340036403, guid: 63dd5f1c42a488343abd14abd7ee1019,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1481391073162817086, guid: 63dd5f1c42a488343abd14abd7ee1019,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1537707221215150403, guid: 63dd5f1c42a488343abd14abd7ee1019,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1776400712932708469, guid: 63dd5f1c42a488343abd14abd7ee1019,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2112720302029808364, guid: 63dd5f1c42a488343abd14abd7ee1019,
         type: 3}
@@ -1478,6 +1569,37 @@ MonoBehaviour:
   playerTransform: {fileID: 6127164363625593027}
   mouseSpeed: 0.03
   pitchLimit: {x: 60, y: 340}
+--- !u!1 &1100408207
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1100408208}
+  m_Layer: 0
+  m_Name: Slot_Shield
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1100408208
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100408207}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.3707007, y: -0.9253518, z: 0.023463925, w: 0.07585788}
+  m_LocalPosition: {x: -0.035038736, y: -0.20203757, z: -0.19279374}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6516386213651975479}
+  m_LocalEulerAnglesHint: {x: 5.72, y: -172.9, z: -43.307}
 --- !u!114 &1166974183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1501,6 +1623,37 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &1203043881
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1203043882}
+  m_Layer: 0
+  m_Name: Slot_GreatSword
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1203043882
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1203043881}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.9570308, y: 0.28373548, z: -0.02768614, w: 0.05310181}
+  m_LocalPosition: {x: 0.137, y: -0.205, z: -0.186}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6516386213651975479}
+  m_LocalEulerAnglesHint: {x: 6.739, y: -178.681, z: 147.05}
 --- !u!114 &1211982116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1653,6 +1806,7 @@ Transform:
   - {fileID: 6452323919728843660}
   - {fileID: 7958391869459807369}
   - {fileID: 3216117009293881383}
+  - {fileID: 267765692}
   m_Father: {fileID: 6127164363625593027}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1658299108
@@ -2447,7 +2601,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2888486593606104355}
   m_Layer: 0
-  m_Name: PT_Right_Hand_Weapon_slot
+  m_Name: Hand_Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2670,13 +2824,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2060079534580097353}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.11497976, y: 0.9915611, z: -0.057070583, w: -0.018144593}
-  m_LocalPosition: {x: -0.030501276, y: -0.119329065, z: -0.18213855}
+  m_LocalRotation: {x: -0.22094086, y: 0.97344685, z: -0.05478872, w: -0.024176573}
+  m_LocalPosition: {x: -0.135, y: 0.263, z: -0.235}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6516386213651975479}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 6.739, y: -178.681, z: -25.498}
 --- !u!4 &1355761890202207886
 Transform:
   m_ObjectHideFlags: 0
@@ -2880,7 +3034,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1249331305186551966}
   m_Layer: 0
-  m_Name: PT_Quiver_Shield_slot
+  m_Name: Slot_Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4330,6 +4484,7 @@ GameObject:
   - component: {fileID: 6127164363632744232}
   - component: {fileID: 6127164363632744229}
   - component: {fileID: 6127164363632744235}
+  - component: {fileID: 6127164363632744236}
   - component: {fileID: 6127164363632744230}
   - component: {fileID: 6127164363632744231}
   m_Layer: 0
@@ -4348,7 +4503,7 @@ Transform:
   m_GameObject: {fileID: 6127164363625358563}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7660445, z: 0, w: 0.64278764}
-  m_LocalPosition: {x: 36.7575, y: -8.77, z: 45.489525}
+  m_LocalPosition: {x: 36.7575, y: -9.816, z: 45.489525}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4397,6 +4552,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 0c2dbe13-a1fc-469b-846d-ba2ee733f21a
     m_ActionName: PlayerActions/Evade[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f8e9cf4a-0260-4c37-9f16-5569fbc30972
+    m_ActionName: PlayerActions/Equip_Sword[/Keyboard/2]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: PlayerActions
@@ -4515,6 +4674,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3a38d803de07894586e33615992461d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6127164363632744236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6127164363625358563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cff3b6c097dc94242abf0245a668a1c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponPrefabs:
+  - {fileID: 4489677676252728369, guid: 1761ad7f528fc814ab08c952cd9e559f, type: 3}
+  - {fileID: 3014535142870448668, guid: 4f7fbafac4abdf24eb9a69f1ddfd5b21, type: 3}
 --- !u!1 &6141590108529707463
 GameObject:
   m_ObjectHideFlags: 0
@@ -4937,6 +5111,8 @@ Transform:
   - {fileID: 6026686070574440034}
   - {fileID: 8057550735479577853}
   - {fileID: 1249331305186551966}
+  - {fileID: 1100408208}
+  - {fileID: 1203043882}
   - {fileID: 1076844811839900820}
   - {fileID: 969991704905997458}
   m_Father: {fileID: 169664938926533961}
@@ -6158,6 +6334,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2888486593606104355}
+  - {fileID: 589707701}
   - {fileID: 5231347482559388688}
   - {fileID: 7743076163876835078}
   - {fileID: 3907976706773011284}
