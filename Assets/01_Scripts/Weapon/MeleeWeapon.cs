@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MeleeWeapon : Weapon
@@ -5,9 +6,25 @@ public class MeleeWeapon : Weapon
     private bool isNextCombo = false;
     private bool isComboEnalbed = false;
 
+    protected Collider[] colliders;
+    private List<GameObject> hitObjectList;
+
     protected override void Awake()
     {
         base.Awake();
+
+        colliders = GetComponentsInChildren<Collider>();
+        hitObjectList = new();
+    }
+
+    protected void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject == rootObject)
+        {
+            return;
+        }
+
+
     }
 
     public void EnableCombo()
@@ -56,5 +73,23 @@ public class MeleeWeapon : Weapon
 
         isNextCombo = false;
         isComboEnalbed = false;
+    }
+
+    public virtual void EnableCollision()
+    {
+        foreach (Collider collider in colliders)
+        {
+            collider.enabled = true;
+        }
+    }
+
+    public virtual void DisableCollision()
+    {
+        foreach (Collider collider in colliders)
+        {
+            collider.enabled = false;
+        }
+
+        hitObjectList.Clear();
     }
 }

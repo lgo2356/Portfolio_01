@@ -168,5 +168,17 @@ public class WeaponComponent : MonoBehaviour
         MeleeWeapon meleeWeapon = weaponTable[currentWeaponType] as MeleeWeapon;
         meleeWeapon?.DisableCombo();
     }
+
+    private void BeginAnimCollision()
+    {
+        MeleeWeapon meleeWeapon = weaponTable[currentWeaponType] as MeleeWeapon;
+        meleeWeapon?.EnableCollision();
+    }
+
+    private void EndAnimCollision()
+    {
+        MeleeWeapon meleeWeapon = weaponTable[currentWeaponType] as MeleeWeapon;
+        meleeWeapon?.DisableCollision();
+    }
     #endregion
 }

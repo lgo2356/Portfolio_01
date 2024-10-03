@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2494456606382170278}
   - component: {fileID: 1527226618060615427}
   - component: {fileID: 3662899626124958665}
+  - component: {fileID: 1857695682317461857}
   - component: {fileID: 11893670197382053}
   m_Layer: 0
   m_Name: GreatSword_01
@@ -84,6 +85,29 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &1857695682317461857
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3014535142870448668}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.09991249
+  m_Height: 0.75189424
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.121185705, z: -0.000000074505806}
 --- !u!114 &11893670197382053
 MonoBehaviour:
   m_ObjectHideFlags: 0
