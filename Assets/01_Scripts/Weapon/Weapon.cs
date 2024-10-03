@@ -8,6 +8,7 @@ public class Weapon : MonoBehaviour
 
     protected Animator animator;
     protected StateComponent stateComponent;
+    protected PlayerMoveComponent moveComponent;
 
     protected GameObject rootObject;
 
@@ -30,6 +31,7 @@ public class Weapon : MonoBehaviour
     {
         animator = rootObject.GetComponent<Animator>();
         stateComponent = rootObject.GetComponent<StateComponent>();
+        moveComponent = rootObject.GetComponent<PlayerMoveComponent>();
     }
 
     public virtual void Equip()
@@ -54,6 +56,19 @@ public class Weapon : MonoBehaviour
 
     public virtual void EndAction()
     {
+        stateComponent.SetIdleState();
 
+        if (moveComponent != null)
+        {
+            moveComponent.Release();
+        }
+    }
+
+    protected void SetPlayerMove()
+    {
+        if (moveComponent == null)
+            return;
+
+        moveComponent.Hold();
     }
 }

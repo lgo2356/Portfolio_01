@@ -41,6 +41,9 @@ public class PlayerMoveComponent : MonoBehaviour
     private Vector2 playerInputMove;
     #endregion
 
+    public void Hold() => canMove = false;
+    public void Release() => canMove = true;
+
     private void Awake()
     {
         Awake_GetComponents();

@@ -1,7 +1,7 @@
 using UnityEngine;
 using WeaponType = WeaponComponent.WeaponType;
 
-public class GreatSword : Weapon
+public class GreatSword : MeleeWeapon
 {
     [SerializeField]
     private string slotName = "Slot_GreatSword";

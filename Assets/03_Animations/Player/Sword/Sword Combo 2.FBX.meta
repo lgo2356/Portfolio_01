@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b93c433ff443edf4c8c71d40dbd1a526
+guid: 36dbaeda8670906468dcf7f42e47cd4f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable:
@@ -959,7 +959,7 @@ ModelImporter:
     second: Star001
   - first:
       74: 7400000
-    second: Sword Combo 03
+    second: Sword Combo 2
   - first:
       95: 9500000
     second: //RootNode
@@ -1048,13 +1048,14 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
       copied configuration does not match position in animation file:\n\t'thigh_l'
-      : position error = 4.252517 mm\n\t'calf_l' : position error = 2.043401 mm\n\t'thigh_r'
-      : position error = 2.954123 mm\n\t'calf_r' : position error = 1.014896 mm\n\t'lowerarm_l'
-      : position error = 1.722022 mm\n\t'hand_l' : position error = 4.486752 mm\n\t'middle_02_l'
-      : position error = 1.205563 mm\n\t'ring_02_l' : position error = 1.315654 mm\n\t'hand_r'
-      : position error = 2.969564 mm\n\t'middle_02_r' : position error = 1.336165
-      mm\n\t'middle_03_r' : position error = 1.016021 mm\n\t'ring_02_r' : position
-      error = 1.564562 mm\n\t'ring_03_r' : position error = 1.079246 mm\n"
+      : position error = 5.493808 mm\n\t'calf_l' : position error = 1.585972 mm\n\t'thigh_r'
+      : position error = 4.569818 mm\n\t'calf_r' : position error = 1.640418 mm\n\t'lowerarm_l'
+      : position error = 1.836196 mm\n\t'hand_l' : position error = 2.678418 mm\n\t'middle_02_l'
+      : position error = 1.205472 mm\n\t'ring_02_l' : position error = 1.315688 mm\n\t'upperarm_r'
+      : position error = 1.651918 mm\n\t'hand_r' : position error = 7.025980 mm\n\t'middle_02_r'
+      : position error = 1.346477 mm\n\t'middle_03_r' : position error = 1.027234
+      mm\n\t'ring_02_r' : position error = 1.583370 mm\n\t'ring_03_r' : position
+      error = 1.094665 mm\n\t'pinky_02_r' : position error = 1.010899 mm\n"
     animationImportErrors: 
     animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
       might lower retargeting quality:\nNote: Activate translation DOF on avatar
@@ -1064,19 +1065,17 @@ ModelImporter:
       animation that will be discarded.\n\t'thigh_r' has translation animation that
       will be discarded.\n\t'calf_r' has translation animation that will be discarded.\n\t'foot_r'
       has translation animation that will be discarded.\n\t'ball_r' has translation
-      animation that will be discarded.\n\t'spine_01' has translation animation that
-      will be discarded.\n\t'spine_02' has translation animation that will be discarded.\n\t'spine_03'
-      has translation animation that will be discarded.\n\t'upperarm_l' has translation
-      animation that will be discarded.\n\t'lowerarm_l' has translation animation
-      that will be discarded.\n\t'hand_l' has translation animation that will be
-      discarded.\n\t'upperarm_r' has translation animation that will be discarded.\n\t'lowerarm_r'
-      has translation animation that will be discarded.\n\t'hand_r' has translation
-      animation that will be discarded.\n\t'index_01_r' has translation animation
-      that will be discarded.\n\t'middle_01_r' has translation animation that will
-      be discarded.\n\t'ring_01_r' has translation animation that will be discarded.\n\t'ring_02_r'
-      has translation animation that will be discarded.\n\t'ring_03_r' has translation
-      animation that will be discarded.\n\t'pinky_01_r' has translation animation
-      that will be discarded.\n\t'head' has translation animation that will be discarded.\n"
+      animation that will be discarded.\n\t'upperarm_l' has translation animation
+      that will be discarded.\n\t'lowerarm_l' has translation animation that will
+      be discarded.\n\t'hand_l' has translation animation that will be discarded.\n\t'upperarm_r'
+      has translation animation that will be discarded.\n\t'lowerarm_r' has translation
+      animation that will be discarded.\n\t'hand_r' has translation animation that
+      will be discarded.\n\t'index_01_r' has translation animation that will be discarded.\n\t'middle_01_r'
+      has translation animation that will be discarded.\n\t'ring_01_r' has translation
+      animation that will be discarded.\n\t'ring_02_r' has translation animation
+      that will be discarded.\n\t'ring_03_r' has translation animation that will
+      be discarded.\n\t'pinky_01_r' has translation animation that will be discarded.\n\t'head'
+      has translation animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -1090,11 +1089,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Sword Combo 03
+      name: Sword Combo 2
       takeName: Take 001
       internalID: 7400000
       firstFrame: 0
-      lastFrame: 70
+      lastFrame: 66
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -1114,7 +1113,39 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.95091885
+      - time: 0.26812816
+        functionName: BeginAnimComboInputSection
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: cff3b6c097dc94242abf0245a668a1c8,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.40248963
+        functionName: DoAnimNextCombo
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: cff3b6c097dc94242abf0245a668a1c8,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.60876894
+        functionName: DoAnimNextCombo
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: cff3b6c097dc94242abf0245a668a1c8,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.6273187
+        functionName: EndAnimComboInputSection
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: cff3b6c097dc94242abf0245a668a1c8,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.96258885
         functionName: EndAnimAction
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: cff3b6c097dc94242abf0245a668a1c8,
