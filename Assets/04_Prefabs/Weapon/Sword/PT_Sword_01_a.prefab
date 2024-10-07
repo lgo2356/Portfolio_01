@@ -121,5 +121,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 2
+  weaponDatas:
+  - Power: 5
+    LaunchDistance: 2
+    HitStopFrame: 0
+    ImpactIndex: 1
+    IsCanMove: 0
+    HitParticle: {fileID: 0}
+    HitParticleScaleOffset: {x: 0, y: 0, z: 0}
+    HitParticlePositionOffset: {x: 0, y: 0, z: 0}
+  - Power: 5
+    LaunchDistance: 5
+    HitStopFrame: 0
+    ImpactIndex: 1
+    IsCanMove: 0
+    HitParticle: {fileID: 0}
+    HitParticleScaleOffset: {x: 0, y: 0, z: 0}
+    HitParticlePositionOffset: {x: 0, y: 0, z: 0}
+  - Power: 10
+    LaunchDistance: 8
+    HitStopFrame: 0
+    ImpactIndex: 1
+    IsCanMove: 0
+    HitParticle: {fileID: 0}
+    HitParticleScaleOffset: {x: 0, y: 0, z: 0}
+    HitParticlePositionOffset: {x: 0, y: 0, z: 0}
   slotName: Slot_Sword
   handName: Hand_Sword

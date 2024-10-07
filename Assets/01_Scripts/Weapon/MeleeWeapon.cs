@@ -3,8 +3,9 @@ using UnityEngine;
 
 public class MeleeWeapon : Weapon
 {
-    private bool isNextCombo = false;
-    private bool isComboEnalbed = false;
+    private bool isInpuNextCombo = false;
+    private bool isNextComboEnalbed = false;
+    private int comboIndex = 0;
 
     protected Collider[] colliders;
     private List<GameObject> hitObjectList;
@@ -17,6 +18,11 @@ public class MeleeWeapon : Weapon
         hitObjectList = new();
     }
 
+    protected override void Start()
+    {
+        DisableCollision();
+    }
+
     protected void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == rootObject)
@@ -24,37 +30,52 @@ public class MeleeWeapon : Weapon
             return;
         }
 
+        IDamagable damagable = other.GetComponent<IDamagable>();
 
+        if (damagable == null)
+        {
+            return;
+        }
+
+        if (hitObjectList.Find(hitObj => hitObj == other.gameObject))
+        {
+            return;
+        }
+
+        hitObjectList.Add(other.gameObject);
+
+        damagable.OnDamaged(rootObject, this, Vector3.zero, weaponDatas[comboIndex]);
     }
 
     public void EnableCombo()
     {
-        isComboEnalbed = true;
+        isNextComboEnalbed = true;
     }
 
     public void DisableCombo()
     {
-        isComboEnalbed = false;
+        isNextComboEnalbed = false;
     }
 
     public override void DoNextCombo()
     {
         base.DoNextCombo();
 
-        if (isNextCombo == false)
+        if (isInpuNextCombo == false)
             return;
 
-        isNextCombo = false;
+        isInpuNextCombo = false;
+        comboIndex++;
 
         animator.SetTrigger("DoNextCombo");
     }
 
     public override void DoAction()
     {
-        if (isComboEnalbed)
+        if (isNextComboEnalbed)
         {
-            isComboEnalbed = false;
-            isNextCombo = true;
+            isNextComboEnalbed = false;
+            isInpuNextCombo = true;
 
             return;
         }
@@ -71,8 +92,9 @@ public class MeleeWeapon : Weapon
     {
         base.EndAction();
 
-        isNextCombo = false;
-        isComboEnalbed = false;
+        isInpuNextCombo = false;
+        isNextComboEnalbed = false;
+        comboIndex = 0;
     }
 
     public virtual void EnableCollision()

@@ -1,10 +1,27 @@
 using UnityEngine;
 using WeaponType = WeaponComponent.WeaponType;
 
+[System.Serializable]
+public class WeaponData
+{
+    public float Power;
+    public float LaunchDistance;
+    public float HitStopFrame;
+    public int ImpactIndex;
+    public bool IsCanMove;
+
+    public GameObject HitParticle;
+    public Vector3 HitParticleScaleOffset = Vector3.one;
+    public Vector3 HitParticlePositionOffset;
+}
+
 public class Weapon : MonoBehaviour
 {
     [SerializeField]
     protected WeaponType weaponType;
+
+    [SerializeField]
+    protected WeaponData[] weaponDatas;
 
     protected Animator animator;
     protected StateComponent stateComponent;
@@ -32,6 +49,11 @@ public class Weapon : MonoBehaviour
         animator = rootObject.GetComponent<Animator>();
         stateComponent = rootObject.GetComponent<StateComponent>();
         moveComponent = rootObject.GetComponent<PlayerMoveComponent>();
+    }
+
+    protected virtual void Start()
+    {
+
     }
 
     public virtual void Equip()

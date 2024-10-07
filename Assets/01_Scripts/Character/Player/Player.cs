@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : MonoBehaviour
+public class Player : Character
 {
     [SerializeField]
     private Transform bodyTransform;
@@ -17,17 +17,16 @@ public class Player : MonoBehaviour
         Debug.Assert(bodyTransform != null);
     }
 
-    private Animator animator;
-
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         Awake_GetComponent();
         Awake_BindInput();
     }
 
     private void Awake_GetComponent()
     {
-        animator = GetComponent<Animator>();
         weaponComponent = GetComponent<WeaponComponent>();
     }
 
@@ -50,10 +49,5 @@ public class Player : MonoBehaviour
         {
             weaponComponent.DoAction();
         };
-    }
-
-    private void OnAnimatorMove()
-    {
-        transform.position += animator.deltaPosition;
     }
 }

@@ -121,5 +121,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 3
+  weaponDatas:
+  - Power: 0
+    LaunchDistance: 3
+    HitStopFrame: 0
+    IsCanMove: 0
+    HitParticle: {fileID: 0}
+    HitParticleScaleOffset: {x: 0, y: 0, z: 0}
+    HitParticlePositionOffset: {x: 0, y: 0, z: 0}
+  - Power: 0
+    LaunchDistance: 5
+    HitStopFrame: 0
+    IsCanMove: 0
+    HitParticle: {fileID: 0}
+    HitParticleScaleOffset: {x: 0, y: 0, z: 0}
+    HitParticlePositionOffset: {x: 0, y: 0, z: 0}
+  - Power: 0
+    LaunchDistance: 5
+    HitStopFrame: 0
+    IsCanMove: 0
+    HitParticle: {fileID: 0}
+    HitParticleScaleOffset: {x: 0, y: 0, z: 0}
+    HitParticlePositionOffset: {x: 0, y: 0, z: 0}
+  - Power: 0
+    LaunchDistance: 8
+    HitStopFrame: 0
+    IsCanMove: 0
+    HitParticle: {fileID: 0}
+    HitParticleScaleOffset: {x: 0, y: 0, z: 0}
+    HitParticlePositionOffset: {x: 0, y: 0, z: 0}
   slotName: Slot_GreatSword
   handName: Hand_GreatSword
