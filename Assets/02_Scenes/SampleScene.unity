@@ -1570,6 +1570,89 @@ MonoBehaviour:
   playerTransform: {fileID: 6127164363625593027}
   mouseSpeed: 0.03
   pitchLimit: {x: 60, y: 340}
+--- !u!1 &1079735534
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1079735538}
+  - component: {fileID: 1079735537}
+  - component: {fileID: 1079735536}
+  m_Layer: 0
+  m_Name: Destination
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!23 &1079735536
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079735534}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1079735537
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079735534}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1079735538
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079735534}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.57, y: -10.52, z: 21.94}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1100408207
 GameObject:
   m_ObjectHideFlags: 0
@@ -5370,7 +5453,10 @@ GameObject:
   - component: {fileID: 8016155378811550645}
   - component: {fileID: 8016155378811550646}
   - component: {fileID: 8016155378811550648}
+  - component: {fileID: 8016155378811550649}
   - component: {fileID: 8016155378811550647}
+  - component: {fileID: 8016155378811550650}
+  - component: {fileID: 8016155378811550651}
   m_Layer: 0
   m_Name: Skeleton 01
   m_TagString: Untagged
@@ -5753,7 +5839,7 @@ Transform:
   m_GameObject: {fileID: 3644791575024483187}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.5349956, z: -0, w: 0.8448549}
-  m_LocalPosition: {x: 16.322273, y: -11.781073, z: 40.933937}
+  m_LocalPosition: {x: 17.33, y: -11.975, z: 40.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7250,10 +7336,10 @@ GameObject:
   - component: {fileID: 6127164363632744229}
   - component: {fileID: 6127164363632744235}
   - component: {fileID: 6127164363632744236}
+  - component: {fileID: 6127164363632744237}
   - component: {fileID: 6127164363632744230}
   - component: {fileID: 6127164363632744231}
-  - component: {fileID: 6127164363632744237}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7322,6 +7408,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: f8e9cf4a-0260-4c37-9f16-5569fbc30972
     m_ActionName: PlayerActions/Equip_Sword[/Keyboard/2]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 71c2bc0e-2345-4ae4-8f16-3f9c0f45928a
+    m_ActionName: PlayerActions/Equip_GreatSword[/Keyboard/3]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 09fa9d87-70f8-4b53-a9a3-119090e0f9b2
+    m_ActionName: PlayerActions/Action[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: PlayerActions
@@ -9664,6 +9758,47 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 20
+--- !u!114 &8016155378811550649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3644791575024483187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473f4216e50219d4883845649966de4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8016155378811550650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3644791575024483187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf5038a1a1f94a74390c452a80f31698, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceFromTarget: 1.2
+--- !u!114 &8016155378811550651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3644791575024483187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57e04abee1b73d141aea017f5a162b67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scanRange: 10
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!4 &8057550735479577853
 Transform:
   m_ObjectHideFlags: 0
@@ -10369,8 +10504,9 @@ SceneRoots:
   m_Roots:
   - {fileID: 1658299110}
   - {fileID: 330585546}
-  - {fileID: 792845851}
   - {fileID: 410087041}
+  - {fileID: 792845851}
   - {fileID: 752219643}
   - {fileID: 6127164363625593027}
   - {fileID: 4170111209415893449}
+  - {fileID: 1079735538}
