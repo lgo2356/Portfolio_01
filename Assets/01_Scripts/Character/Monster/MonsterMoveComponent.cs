@@ -53,8 +53,6 @@ public class MonsterMoveComponent : MonoBehaviour
             transform.rotation = lookRotation;
 
             transform.position += transform.forward * moveSpeed * Time.deltaTime;
-
-            Debug.DrawRay(transform.position, lookDirection * 10f, Color.red);
         }
     }
 
@@ -97,5 +95,11 @@ public class MonsterMoveComponent : MonoBehaviour
 
         if (enabled)
             enabled = false;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(destination, 0.1f);
     }
 }

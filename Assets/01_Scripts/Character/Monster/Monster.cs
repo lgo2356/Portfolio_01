@@ -1,54 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(MonsterMoveComponent))]
-[RequireComponent(typeof(ChaseComponent))]
-[RequireComponent(typeof(ObjectScanComponent))]
+[RequireComponent(typeof(AIController))]
 public class Monster : Character, IDamagable
 {
-    private MonsterMoveComponent moveComponent;
-    private ChaseComponent chaseComponent;
-    private ObjectScanComponent playerScanComponent;
-
-    protected override void Awake()
-    {
-        base.Awake();
-
-        moveComponent = GetComponent<MonsterMoveComponent>();
-        chaseComponent = GetComponent<ChaseComponent>();
-        playerScanComponent = GetComponent<ObjectScanComponent>();
-    }
-
-    protected override void Start()
-    {
-        base.Start();
-
-        GameObject destObject = GameObject.Find("Destination");
-
-        //chaseComponent.StartChase(destObject);
-
-        Start_BindEvent();
-    }
-
-    private void Start_BindEvent()
-    {
-        playerScanComponent.OnFoundAction += (found) =>
-        {
-            //TODO : Start chasing player
-            print($"Found : {found.name}");
-
-            chaseComponent.StartChase(found);
-        };
-
-        playerScanComponent.OnLostAction += (lost) =>
-        {
-            //TODO : Stop chasing player
-            print($"Lost : {lost.name}");
-
-            chaseComponent.StopChase();
-        };
-    }
-
     public void OnDamaged(GameObject attacker, Weapon causer, Vector3 hitPoint, WeaponData weaponData)
     {
         hpComponent.AddDamage(weaponData.Power);
