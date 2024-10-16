@@ -105,6 +105,11 @@ public class MeleeWeapon : Weapon
         }
     }
 
+    public virtual void EnableCollision(int index)
+    {
+        colliders[index].enabled = true;
+    }
+
     public virtual void DisableCollision()
     {
         foreach (Collider collider in colliders)

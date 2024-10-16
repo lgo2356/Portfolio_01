@@ -36,7 +36,7 @@ public class PerceptionComponent : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(Coroutine_CheckLostPerceivedObject());
+        StartCoroutine(Coroutine_RemoveOutOfPerceivedTime());
     }
 
     private void Update()
@@ -72,30 +72,26 @@ public class PerceptionComponent : MonoBehaviour
         }
     }
 
-    private IEnumerator Coroutine_CheckLostPerceivedObject()
+    private IEnumerator Coroutine_RemoveOutOfPerceivedTime()
     {
-        List<GameObject> reservedRemoveKeys = new();
+        List<GameObject> removeReservationList = new();
 
         while (true)
         {
-            float now = Time.realtimeSinceStartup;
-
             foreach (var perceivedData in perceivedTable)
             {
-                if ((now - perceivedData.Value) >= lostTime)
+                if ((Time.realtimeSinceStartup - perceivedData.Value) >= lostTime)
                 {
                     OnLostAction?.Invoke(perceivedData.Key);
 
-                    reservedRemoveKeys.Add(perceivedData.Key);
+                    removeReservationList.Add(perceivedData.Key);
                 }
             }
 
-            foreach (GameObject removeKey in reservedRemoveKeys)
+            removeReservationList.RemoveAll((go) =>
             {
-                perceivedTable.Remove(removeKey);
-            }
-
-            reservedRemoveKeys.Clear();
+                return perceivedTable.Remove(go);
+            });
 
             yield return null;
         }

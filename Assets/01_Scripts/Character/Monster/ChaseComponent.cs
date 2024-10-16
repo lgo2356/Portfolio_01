@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class ChaseComponent : MonoBehaviour
@@ -9,14 +10,11 @@ public class ChaseComponent : MonoBehaviour
 
     private GameObject target;
 
+    public event Action<GameObject> OnCompleteAction;
+
     private void Awake()
     {
         moveComponent = GetComponent<MonsterMoveComponent>();
-    }
-
-    private void Start()
-    {
-        
     }
 
     private void Update()
@@ -24,21 +22,28 @@ public class ChaseComponent : MonoBehaviour
         if (target == null)
             return;
 
-        if (Vector3.Distance(target.transform.position, transform.position) <= distanceFromTarget)
-        {
-            moveComponent.StopMove();
+        moveComponent
+            .SetDestination(target.transform.position)
+            .SetMoveSpeed(1.5f)
+            .StartMove();
 
-            distanceFromTarget = 2f;
-        }
-        else
-        {
-            moveComponent
-                .SetDestination(target.transform.position)
-                .SetMoveSpeed(1.5f)
-                .StartMove();
+        //if (Vector3.Distance(target.transform.position, transform.position) <= distanceFromTarget)
+        //{
+        //    OnCompleteAction?.Invoke(target);
 
-            distanceFromTarget = 1.2f;
-        }
+        //    StopChase();
+
+        //    distanceFromTarget = 2f;
+        //}
+        //else
+        //{
+        //    moveComponent
+        //        .SetDestination(target.transform.position)
+        //        .SetMoveSpeed(1.5f)
+        //        .StartMove();
+
+        //    distanceFromTarget = 1.2f;
+        //}
     }
 
     public void StartChase(GameObject target)
@@ -53,6 +58,8 @@ public class ChaseComponent : MonoBehaviour
     public void StopChase()
     {
         enabled = false;
+
+        moveComponent.StopMove();
 
         target = null;
     }

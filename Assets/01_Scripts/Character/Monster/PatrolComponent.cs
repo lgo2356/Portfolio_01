@@ -1,93 +1,77 @@
-using System.Collections.Generic;
-using System.Linq;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
+[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(MonsterMoveComponent))]
 public class PatrolComponent : MonoBehaviour
 {
     [SerializeField]
-    private GameObject patrolPath;
+    private PatrolPoint patrolPoint;
 
+    private NavMeshAgent navMeshAgent;
     private MonsterMoveComponent moveComponent;
 
-    private Queue<Vector3> forwardPaths;
-    private Stack<Vector3> reversePaths;
-    private Vector3 currentPatrolPoint;
+    private IEnumerator patrolCoroutine;
+    private Vector3 destination;
 
     private void Awake()
     {
+        navMeshAgent = GetComponent<NavMeshAgent>();
         moveComponent = GetComponent<MonsterMoveComponent>();
-
-        forwardPaths = new();
-        reversePaths = new();
     }
 
     private void Start()
     {
-        Start_GetPatrolPath();
+        MoveNextPatrolPoint();
     }
 
-    private void Start_GetPatrolPath()
+    private IEnumerator Corouine_Patrol(float time)
     {
-        if (patrolPath == null)
-            return;
-
-        Transform start = patrolPath.transform.FindChildByName("StartPoint");
-        Transform end = patrolPath.transform.FindChildByName("EndPoint");
-
-        List<Transform> foundPaths = patrolPath.transform.FindChildrenByName("Waypoint", true);
+        while (true)
         {
-            foundPaths.Insert(0, start);
-            foundPaths.Add(end);
+            if (Vector3.Distance(destination, transform.position) <= navMeshAgent.stoppingDistance)
+            {
+                yield return new WaitForSeconds(time);
+
+                MoveNextPatrolPoint();
+            }
+
+            yield return null;
         }
-
-        List<Vector3> temp = foundPaths.Select(path => path.position).ToList();
-
-        foreach (Vector3 point in temp)
-        {
-            forwardPaths.Enqueue(point);
-        }
-
-        currentPatrolPoint = forwardPaths.Peek();
     }
 
-    private void Update()
+    private void MoveNextPatrolPoint()
     {
-        if (Vector3.Distance(currentPatrolPoint, transform.position) < 0.1f)
-        {
-            if (forwardPaths.Count > 0)
-            {
-                Vector3 point = forwardPaths.Dequeue();
-                reversePaths.Push(point);
+        destination = patrolPoint.GetNextMovePosition();
+        patrolPoint.UpdateNextIndex();
 
-                currentPatrolPoint = point;
-            }
-            else
-            {
-                while (reversePaths.Count > 0)
-                {
-                    Vector3 point = reversePaths.Pop();
-                    forwardPaths.Enqueue(point);
-                }
-
-                reversePaths.Clear();
-            }
-        }
-        else
-        {
-            moveComponent
-                .SetMoveSpeed(1.2f)
-                .SetDestination(currentPatrolPoint)
-                .StartMove();
-        }
+        moveComponent
+            .SetDestination(destination)
+            .SetMoveSpeed(1.2f)
+            .StartMove();
     }
 
     public void StartPatrol()
     {
-        enabled = true;
+        if (patrolCoroutine != null)
+        {
+            Debug.LogError("Coroutine_Patrol 코루틴은 중복 실행할 수 없습니다.");
+            return;
+        }
+
+        patrolCoroutine = Corouine_Patrol(0.0f);
+        StartCoroutine(patrolCoroutine);
     }
 
     public void StopPatrol()
     {
-        enabled = false;
+        if (patrolCoroutine == null)
+            return;
+
+        StopCoroutine(patrolCoroutine);
+        patrolCoroutine = null;
+
+        moveComponent.StopMove();
     }
 }

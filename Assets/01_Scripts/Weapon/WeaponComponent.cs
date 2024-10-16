@@ -85,7 +85,7 @@ public class WeaponComponent : MonoBehaviour
         SetWeaponType(WeaponType.GreatSword);
     }
 
-    private void SetWeaponType(WeaponType newType)
+    public void SetWeaponType(WeaponType newType)
     {
         if (currentWeaponType == newType)
         {
@@ -169,10 +169,25 @@ public class WeaponComponent : MonoBehaviour
         meleeWeapon?.DisableCombo();
     }
 
-    private void BeginAnimCollision()
+    private void BeginAnimCollision(AnimationEvent evt)
     {
         MeleeWeapon meleeWeapon = weaponTable[currentWeaponType] as MeleeWeapon;
-        meleeWeapon?.EnableCollision();
+
+        if (string.IsNullOrEmpty(evt.stringParameter))
+        {
+            meleeWeapon?.EnableCollision();
+        }
+        else
+        {
+            string[] strIndexes = evt.stringParameter.Split(",");
+            
+            foreach (string strIndex in strIndexes)
+            {
+                int index = int.Parse(strIndex);
+
+                meleeWeapon?.EnableCollision(index);
+            }
+        }
     }
 
     private void EndAnimCollision()

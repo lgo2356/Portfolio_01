@@ -1,48 +1,91 @@
+using System;
 using UnityEngine;
 
-[RequireComponent(typeof(MonsterMoveComponent))]
 [RequireComponent(typeof(PerceptionComponent))]
-[RequireComponent(typeof(ChaseComponent))]
 [RequireComponent(typeof(PatrolComponent))]
+[RequireComponent(typeof(CombatComponent))]
 public class AIController : MonoBehaviour
 {
-    private MonsterMoveComponent moveComponent;
-    private PerceptionComponent playerScanComponent;
-    private ChaseComponent chaseComponent;
+    public enum AIState
+    {
+        Idle = 0,
+        Patrol, Chase, Combat,
+        Max,
+    }
+
+    private PerceptionComponent perceptionComponent;
     private PatrolComponent patrolComponent;
+    private CombatComponent combatComponent;
+
+    private AIState currentState = AIState.Idle;
+
+    public event Action<AIState, AIState> OnAIStateChanged;
+
+    public bool IsIdleState => currentState == AIState.Idle;
+    public bool IsPatrolState => currentState == AIState.Patrol;
+    public bool IsChaseState => currentState == AIState.Chase;
+    public bool IsCombatState => currentState == AIState.Combat;
 
     private void Awake()
     {
-        moveComponent = GetComponent<MonsterMoveComponent>();
-        playerScanComponent = GetComponent<PerceptionComponent>();
-        chaseComponent = GetComponent<ChaseComponent>();
+        perceptionComponent = GetComponent<PerceptionComponent>();
         patrolComponent = GetComponent<PatrolComponent>();
+        combatComponent = GetComponent<CombatComponent>();
     }
 
     private void Start()
     {
-        //GameObject destObject = GameObject.Find("Destination");
-        //chaseComponent.StartChase(destObject);
-
         Start_BindEvent();
     }
 
     private void Start_BindEvent()
     {
-        playerScanComponent.OnFoundAction += (found) =>
+        #region Perception
+        perceptionComponent.OnFoundAction += (found) =>
         {
             print($"Found : {found.name}");
 
             patrolComponent.StopPatrol();
-            chaseComponent.StartChase(found);
+            combatComponent.StartCombat(found);
         };
 
-        playerScanComponent.OnLostAction += (lost) =>
+        perceptionComponent.OnLostAction += (lost) =>
         {
             print($"Lost : {lost.name}");
 
-            chaseComponent.StopChase();
             patrolComponent.StartPatrol();
         };
+        #endregion
+    }
+
+    public void SetIdle()
+    {
+        ChangeState(AIState.Idle);
+    }
+
+    public void SetPatrol()
+    {
+        ChangeState(AIState.Patrol);
+    }
+
+    public void SetChase()
+    {
+        ChangeState(AIState.Chase);
+    }
+
+    public void SetCombat()
+    {
+        ChangeState(AIState.Combat);
+    }
+
+    public void ChangeState(AIState newState)
+    {
+        if (currentState == newState)
+            return;
+
+        AIState prevState = currentState;
+        currentState = newState;
+
+        OnAIStateChanged?.Invoke(prevState, newState);
     }
 }
