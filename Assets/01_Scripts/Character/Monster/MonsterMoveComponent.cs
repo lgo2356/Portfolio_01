@@ -8,7 +8,6 @@ public class MonsterMoveComponent : MonoBehaviour
 
     private Vector3 destination;
     private float moveSpeed;
-    private GameObject lookTarget;
 
     public Vector3 Destination => destination;
     public float MoveSpeed => moveSpeed;
@@ -24,73 +23,44 @@ public class MonsterMoveComponent : MonoBehaviour
         destination = transform.position;
     }
 
-    //TODO : Y 축으로 이동하는 거 고려하기
-    //TODO : Distance 계산할 때 Y 값 제외하는 법 생각하기
     private void Update()
     {
-        //if (Vector3.Distance(destination, transform.position) < 0.1f)
-        //{
-        //    animator.SetFloat("MoveSpeedZ", 0f);
-
-        //    StopMove();
-        //}
-        //else
-        //{
-        //    animator.SetFloat("MoveSpeedZ", moveSpeed);
-
-        //    Vector3 lookDirection;
-
-        //    if (lookTarget != null)
-        //    {
-        //        lookDirection = lookTarget.transform.position - transform.position;
-        //    }
-        //    else
-        //    {
-        //        lookDirection = destination - transform.position;
-        //        lookDirection.y = 0f;
-        //    }
-
-        //    Quaternion lookRotation = Quaternion.LookRotation(lookDirection.normalized, Vector3.up);
-        //    transform.rotation = lookRotation;
-
-        //    transform.position += transform.forward * moveSpeed * Time.deltaTime;
-        //}
-
         animator.SetFloat("MoveSpeedZ", navMeshAgent.velocity.magnitude);
     }
 
-    public MonsterMoveComponent SetDestination(Vector3 dest)
+    public void SetDestination(Vector3 dest)
     {
         destination = dest;
+        
+        if (navMeshAgent.isStopped)
+        {
+            navMeshAgent.isStopped = false;
+        }
 
-        return this;
+        navMeshAgent.SetDestination(dest);
     }
 
     public MonsterMoveComponent SetMoveSpeed(float speed)
     {
         moveSpeed = speed;
+        
+        navMeshAgent.speed = speed;
 
         return this;
     }
 
-    public MonsterMoveComponent SetLookTarget(GameObject target)
+    public void StartMove(Vector3 dest, float speed)
     {
-        lookTarget = target;
+        Debug.Assert(speed != 0f);
 
-        return this;
-    }
+        destination = dest;
+        moveSpeed = speed;
 
-    public void StartMove()
-    {
-        if (enabled == false)
-            enabled = true;
+        navMeshAgent.isStopped = false;
+        navMeshAgent.speed = speed;
 
-        Debug.Assert(destination != null, "목적지가 설정되지 않았습니다.");
-        Debug.Assert(moveSpeed != 0f, "이동 속도가 0 입니다.");
-
-        NavMeshPath navMeshPath = CreateNavMeshPath(destination);
+        NavMeshPath navMeshPath = CreateNavMeshPath(dest);
         {
-            navMeshAgent.speed = moveSpeed;
             navMeshAgent.SetPath(navMeshPath);
         }
     }
@@ -99,18 +69,18 @@ public class MonsterMoveComponent : MonoBehaviour
     {
         destination = transform.position;
         moveSpeed = 0f;
+        
+        navMeshAgent.isStopped = true;
+        navMeshAgent.speed = 0.0f;
 
         animator.SetFloat("MoveSpeedZ", 0f);
-
-        if (enabled)
-            enabled = false;
     }
 
-    private NavMeshPath CreateNavMeshPath(Vector3 destination)
+    private NavMeshPath CreateNavMeshPath(Vector3 dest)
     {
         NavMeshPath navMeshPath = new();
 
-        bool isFoundPath = navMeshAgent.CalculatePath(destination, navMeshPath);
+        bool isFoundPath = navMeshAgent.CalculatePath(dest, navMeshPath);
         Debug.Assert(isFoundPath);
 
         return navMeshPath;

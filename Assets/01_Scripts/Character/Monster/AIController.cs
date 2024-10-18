@@ -1,33 +1,22 @@
-using System;
 using UnityEngine;
+using AIState = AIStateComponent.AIState;
 
 [RequireComponent(typeof(PerceptionComponent))]
 [RequireComponent(typeof(PatrolComponent))]
 [RequireComponent(typeof(CombatComponent))]
-public class AIController : MonoBehaviour
+public partial class AIController : MonoBehaviour
 {
-    public enum AIState
-    {
-        Idle = 0,
-        Patrol, Chase, Combat,
-        Max,
-    }
-
+    private AIStateComponent stateComponent;
+    private IdleComponent idleComponent;
     private PerceptionComponent perceptionComponent;
     private PatrolComponent patrolComponent;
     private CombatComponent combatComponent;
-
-    private AIState currentState = AIState.Idle;
-
-    public event Action<AIState, AIState> OnAIStateChanged;
-
-    public bool IsIdleState => currentState == AIState.Idle;
-    public bool IsPatrolState => currentState == AIState.Patrol;
-    public bool IsChaseState => currentState == AIState.Chase;
-    public bool IsCombatState => currentState == AIState.Combat;
+    private WeaponComponent weaponComponent;
 
     private void Awake()
     {
+        stateComponent = GetComponent<AIStateComponent>();
+        idleComponent = GetComponent<IdleComponent>();
         perceptionComponent = GetComponent<PerceptionComponent>();
         patrolComponent = GetComponent<PatrolComponent>();
         combatComponent = GetComponent<CombatComponent>();
@@ -36,56 +25,80 @@ public class AIController : MonoBehaviour
     private void Start()
     {
         Start_BindEvent();
+        Start_InitAIStateCanvas();
+
+        stateComponent.SetPatrolState();
     }
 
     private void Start_BindEvent()
     {
+        #region State
+        stateComponent.OnAIStateChanged += (prevState, newState) =>
+        {
+            print($"{prevState} -> {newState}");
+            
+            switch (newState)
+            {
+                case AIState.Idle:
+                {
+                    idleComponent.StartIdle();
+                    break;
+                }
+
+                case AIState.Patrol:
+                {
+                    patrolComponent.StartPatrol();
+                    break;
+                }
+            }
+
+            switch (prevState)
+            {
+                case AIState.Idle:
+                {
+                    break;
+                }
+
+                case AIState.Patrol:
+                {
+                    patrolComponent.StopPatrol();
+                    break;
+                }
+
+                case AIState.Combat:
+                {
+                    combatComponent.StopCombat();
+                    break;
+                }
+            }
+        };
+        #endregion
+
         #region Perception
         perceptionComponent.OnFoundAction += (found) =>
         {
             print($"Found : {found.name}");
 
-            patrolComponent.StopPatrol();
             combatComponent.StartCombat(found);
+            stateComponent.SetCombatState();
         };
 
         perceptionComponent.OnLostAction += (lost) =>
         {
             print($"Lost : {lost.name}");
 
-            patrolComponent.StartPatrol();
+            stateComponent.SetIdleState();
         };
         #endregion
     }
 
-    public void SetIdle()
+    private void Update()
     {
-        ChangeState(AIState.Idle);
+        Update_UpdateAIStateText();
     }
 
-    public void SetPatrol()
+    private void LateUpdate()
     {
-        ChangeState(AIState.Patrol);
-    }
-
-    public void SetChase()
-    {
-        ChangeState(AIState.Chase);
-    }
-
-    public void SetCombat()
-    {
-        ChangeState(AIState.Combat);
-    }
-
-    public void ChangeState(AIState newState)
-    {
-        if (currentState == newState)
-            return;
-
-        AIState prevState = currentState;
-        currentState = newState;
-
-        OnAIStateChanged?.Invoke(prevState, newState);
+        LateUpdate_Billboard();
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,6 +19,9 @@ public class WeaponComponent : MonoBehaviour
 
     private WeaponType currentWeaponType = WeaponType.Unarmed;
     private Dictionary<WeaponType, Weapon> weaponTable;
+
+    public event Action OnAnimEquipEnd;
+    public event Action OnAnimActionEnd;
 
     public bool IsUnarmed { get => currentWeaponType == WeaponType.Unarmed; }
     public bool IsSword { get => currentWeaponType == WeaponType.Sword; }
@@ -131,6 +135,8 @@ public class WeaponComponent : MonoBehaviour
     private void EndAnimEquip()
     {
         animator.SetBool("IsEquipping", false);
+
+        OnAnimEquipEnd?.Invoke();
     }
 
     private void BeginAnimUnequip()
@@ -154,7 +160,10 @@ public class WeaponComponent : MonoBehaviour
     private void EndAnimAction()
     {
         animator.SetBool("IsAction", false);
+
         weaponTable[currentWeaponType].EndAction();
+
+        OnAnimActionEnd?.Invoke();
     }
 
     private void BeginAnimComboInputSection()

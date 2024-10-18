@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7325596481177733978}
   - component: {fileID: 5910522313588884735}
   - component: {fileID: 8494514520946683957}
-  - component: {fileID: 8095846094295467032}
+  - component: {fileID: 327982569134257072}
   m_Layer: 0
   m_Name: SM_Env_Ground_Dirt_Round_01
   m_TagString: Untagged
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 7990071298527269344}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.4787812, y: -12.077969, z: 36.86634}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -84,7 +84,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8095846094295467032
+--- !u!65 &327982569134257072
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -103,5 +103,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 7.7970314, y: 0.088393554, z: 7.5245123}
-  m_Center: {x: 0.0000001192093, y: 0.044196777, z: 0}
+  m_Size: {x: 7.7970304, y: 0, z: 7.5245113}
+  m_Center: {x: 0.00000011920929, y: 0.044196777, z: 0}

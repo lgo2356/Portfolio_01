@@ -14,6 +14,7 @@ public class PatrolComponent : MonoBehaviour
 
     private IEnumerator patrolCoroutine;
     private Vector3 destination;
+    private bool isPatrol = false;
 
     private void Awake()
     {
@@ -21,53 +22,54 @@ public class PatrolComponent : MonoBehaviour
         moveComponent = GetComponent<MonsterMoveComponent>();
     }
 
-    private void Start()
+    private IEnumerator Coroutine_Patrol(float time)
     {
-        MoveNextPatrolPoint();
-    }
-
-    private IEnumerator Corouine_Patrol(float time)
-    {
-        while (true)
+        while (isPatrol)
         {
             if (Vector3.Distance(destination, transform.position) <= navMeshAgent.stoppingDistance)
             {
                 yield return new WaitForSeconds(time);
 
-                MoveNextPatrolPoint();
+                MoveToNextPatrolPoint();
             }
 
             yield return null;
         }
     }
 
-    private void MoveNextPatrolPoint()
+    private void MoveToNextPatrolPoint()
     {
         destination = patrolPoint.GetNextMovePosition();
         patrolPoint.UpdateNextIndex();
 
-        moveComponent
-            .SetDestination(destination)
-            .SetMoveSpeed(1.2f)
-            .StartMove();
+        moveComponent.StartMove(destination, 1.2f);
     }
 
     public void StartPatrol()
     {
+        print("StartPatrol");
+        
         if (patrolCoroutine != null)
         {
-            Debug.LogError("Coroutine_Patrol 코루틴은 중복 실행할 수 없습니다.");
+            Debug.LogError("Coroutine_Patrol can't be duplicated");
             return;
         }
 
-        patrolCoroutine = Corouine_Patrol(0.0f);
+        isPatrol = true;
+
+        destination = transform.position;
+        patrolCoroutine = Coroutine_Patrol(0.0f);
         StartCoroutine(patrolCoroutine);
     }
 
     public void StopPatrol()
     {
+        print("StopPatrol");
+        
         if (patrolCoroutine == null)
             return;
+
+        isPatrol = false;
 
         StopCoroutine(patrolCoroutine);
         patrolCoroutine = null;

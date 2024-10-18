@@ -24,6 +24,7 @@ public class PerceptionComponent : MonoBehaviour
 
     private Collider[] colliderBuffer;
     private Dictionary<GameObject, float> perceivedTable;
+    private bool bPerceivedTableClearFlag = false;
 
     public event Action<GameObject> OnFoundAction;
     public event Action<GameObject> OnLostAction;
@@ -72,12 +73,26 @@ public class PerceptionComponent : MonoBehaviour
         }
     }
 
+    public void ClearPerceivedObject()
+    {
+        bPerceivedTableClearFlag = true;
+    }
+
     private IEnumerator Coroutine_RemoveOutOfPerceivedTime()
     {
         List<GameObject> removeReservationList = new();
 
         while (true)
         {
+            // Loop문에서 Collection을 조회하는 중에 Collection의 변화가 생기면 InvalidOperationException이 발생한다.
+            // 열거자의 일관성을 지키기 위해서 예외를 던진다.
+            // 따라서 Collection을 클리어하는 플래그를 두고 Loop문에 진입하기 전에 클리어한다.
+            if (bPerceivedTableClearFlag)
+            {
+                perceivedTable.Clear();
+                bPerceivedTableClearFlag = false;
+            }
+            
             foreach (var perceivedData in perceivedTable)
             {
                 if ((Time.realtimeSinceStartup - perceivedData.Value) >= lostTime)
@@ -88,10 +103,7 @@ public class PerceptionComponent : MonoBehaviour
                 }
             }
 
-            removeReservationList.RemoveAll((go) =>
-            {
-                return perceivedTable.Remove(go);
-            });
+            removeReservationList.RemoveAll((go) => perceivedTable.Remove(go));
 
             yield return null;
         }
@@ -105,9 +117,7 @@ public class PerceptionComponent : MonoBehaviour
 
         Gizmos.color = Color.blue;
 
-        Vector3 direction;
-
-        direction = Quaternion.AngleAxis(+perceptionAngle / 2f, Vector3.up) * transform.forward;
+        Vector3 direction = Quaternion.AngleAxis(+perceptionAngle / 2f, Vector3.up) * transform.forward;
         Gizmos.DrawLine(transform.position, transform.position + direction.normalized * perceptionDistance);
 
         direction = Quaternion.AngleAxis(-perceptionAngle / 2f, Vector3.up) * transform.forward;
