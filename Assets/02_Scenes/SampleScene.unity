@@ -3547,7 +3547,7 @@ GameObject:
   - component: {fileID: 2769200854368847487}
   - component: {fileID: 4995518525221696763}
   m_Layer: 0
-  m_Name: SM_Chr_Skeleton_LightArmor_01
+  m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

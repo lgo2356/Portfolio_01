@@ -1,9 +1,29 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(AIController))]
 public class Monster : Character, IDamagable
 {
+    private Dictionary<Material, Color> materialTable;
+    
+    protected override void Awake()
+    {
+        base.Awake();
+
+        materialTable = new Dictionary<Material, Color>();
+        
+        Renderer[] renderers = transform.GetComponentsInChildren<Renderer>();
+        
+        foreach (Renderer r in renderers)
+        {
+            foreach (Material material in r.materials)
+            {
+                materialTable.Add(material, material.color);
+            }
+        }
+    }
+    
     public void OnDamaged(GameObject attacker, Weapon causer, Vector3 hitPoint, WeaponData weaponData)
     {
         hpComponent.AddDamage(weaponData.Power);
@@ -40,6 +60,8 @@ public class Monster : Character, IDamagable
             {
                 StartCoroutine(Coroutine_Launch(30, weaponData.LaunchDistance));
             }
+
+            StartCoroutine(Coroutine_SetDamagedColor(30));
         }
     }
 
@@ -56,14 +78,18 @@ public class Monster : Character, IDamagable
         }
     }
 
-    // 데미지 받았을 때 색깔
-    private IEnumerator Coroutine_SetDamagedColor(int frame, float time)
+    private IEnumerator Coroutine_SetDamagedColor(int frame)
     {
-        WaitForFixedUpdate waitForFixedUpdate = new();
-
-        for (int i = 0; i < frame; i++)
+        foreach (var m in materialTable)
         {
-            yield return waitForFixedUpdate;
+            m.Key.color = Color.red;
+        }
+
+        yield return new WaitForSeconds(0.15f);
+        
+        foreach (var m in materialTable)
+        {
+            m.Key.color = m.Value;
         }
     }
 }
