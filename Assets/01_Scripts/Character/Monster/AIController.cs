@@ -2,7 +2,6 @@ using UnityEngine;
 using AIState = AIStateComponent.AIState;
 
 [RequireComponent(typeof(PerceptionComponent))]
-[RequireComponent(typeof(PatrolComponent))]
 [RequireComponent(typeof(CombatComponent))]
 public partial class AIController : MonoBehaviour
 {
@@ -27,7 +26,8 @@ public partial class AIController : MonoBehaviour
         Start_BindEvent();
         Start_InitAIStateCanvas();
 
-        stateComponent.SetPatrolState();
+        // stateComponent.SetPatrolState();
+        stateComponent.SetIdleState();
     }
 
     private void Start_BindEvent()
@@ -47,7 +47,11 @@ public partial class AIController : MonoBehaviour
 
                 case AIState.Patrol:
                 {
+                    if (patrolComponent == null)
+                        return;
+                    
                     patrolComponent.StartPatrol();
+                    
                     break;
                 }
             }
@@ -56,12 +60,17 @@ public partial class AIController : MonoBehaviour
             {
                 case AIState.Idle:
                 {
+                    idleComponent.StopIdle();
                     break;
                 }
 
                 case AIState.Patrol:
                 {
+                    if (patrolComponent == null)
+                        return;
+                    
                     patrolComponent.StopPatrol();
+                    
                     break;
                 }
 

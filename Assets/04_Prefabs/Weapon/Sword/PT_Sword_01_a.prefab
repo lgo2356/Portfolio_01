@@ -105,9 +105,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.06
-  m_Height: 0.62889004
+  m_Height: 0.7537128
   m_Direction: 1
-  m_Center: {x: 0, y: -0.41059646, z: 0}
+  m_Center: {x: 0, y: -0.47300807, z: 0}
 --- !u!114 &4596169535631454584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,7 +123,7 @@ MonoBehaviour:
   weaponType: 2
   weaponDatas:
   - Power: 5
-    LaunchDistance: 2
+    LaunchDistance: 3
     HitStopFrame: 0
     ImpactIndex: 1
     IsCanMove: 0
@@ -131,7 +131,7 @@ MonoBehaviour:
     HitParticleScaleOffset: {x: 0, y: 0, z: 0}
     HitParticlePositionOffset: {x: 0, y: 0, z: 0}
   - Power: 5
-    LaunchDistance: 5
+    LaunchDistance: 3
     HitStopFrame: 0
     ImpactIndex: 1
     IsCanMove: 0
@@ -139,7 +139,7 @@ MonoBehaviour:
     HitParticleScaleOffset: {x: 0, y: 0, z: 0}
     HitParticlePositionOffset: {x: 0, y: 0, z: 0}
   - Power: 10
-    LaunchDistance: 8
+    LaunchDistance: 10
     HitStopFrame: 0
     ImpactIndex: 1
     IsCanMove: 0

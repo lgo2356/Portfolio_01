@@ -4,28 +4,21 @@ using UnityEngine;
 
 public class WeaponComponent : MonoBehaviour
 {
-    public enum WeaponType
-    {
-        Unarmed = 0,
-        Fist, Sword, GreatSword,
-        Max,
-    }
-
     [SerializeField]
     private GameObject[] weaponPrefabs;
 
     private Animator animator;
     private StateComponent stateComponent;
 
-    private WeaponType currentWeaponType = WeaponType.Unarmed;
+    private WeaponType currentType = WeaponType.Unarmed;
     private Dictionary<WeaponType, Weapon> weaponTable;
 
     public event Action OnAnimEquipEnd;
     public event Action OnAnimActionEnd;
 
-    public bool IsUnarmed { get => currentWeaponType == WeaponType.Unarmed; }
-    public bool IsSword { get => currentWeaponType == WeaponType.Sword; }
-    public bool IsGreateSword { get => currentWeaponType == WeaponType.GreatSword; }
+    public bool IsUnarmed => currentType == WeaponType.Unarmed;
+    public bool IsSword => currentType == WeaponType.Sword;
+    public bool IsGreatSword => currentType == WeaponType.GreatSword;
 
     private void Awake()
     {
@@ -47,13 +40,13 @@ public class WeaponComponent : MonoBehaviour
             weaponTable.Add((WeaponType)i, null);
         }
 
-        for (int i = 0; i < weaponPrefabs.Length; i++)
+        foreach (GameObject t in weaponPrefabs)
         {
-            GameObject go = Instantiate(weaponPrefabs[i], transform);
+            GameObject go = Instantiate(t, transform);
             Weapon weapon = go.GetComponent<Weapon>();
 
-            go.name = weapon.WeaponType.ToString();
-            weaponTable[weapon.WeaponType] = weapon;
+            go.name = weapon.Type.ToString();
+            weaponTable[weapon.Type] = weapon;
         }
     }
 
@@ -65,12 +58,12 @@ public class WeaponComponent : MonoBehaviour
 
         animator.SetInteger("WeaponType", (int)WeaponType.Unarmed);
 
-        if (weaponTable[currentWeaponType] != null)
+        if (weaponTable[currentType] != null)
         {
-            weaponTable[currentWeaponType].Unequip();
+            weaponTable[currentType].Unequip();
         }
 
-        currentWeaponType = WeaponType.Unarmed;
+        currentType = WeaponType.Unarmed;
     }
 
     public void SetSword()
@@ -89,9 +82,17 @@ public class WeaponComponent : MonoBehaviour
         SetWeaponType(WeaponType.GreatSword);
     }
 
+    public void SetKatana()
+    {
+        if (stateComponent.IsIdleState == false)
+            return;
+        
+        SetWeaponType(WeaponType.Katana);
+    }
+
     public void SetWeaponType(WeaponType newType)
     {
-        if (currentWeaponType == newType)
+        if (currentType == newType)
         {
             animator.SetInteger("WeaponType", (int)newType);
             animator.SetBool("IsUnequipping", true);
@@ -100,7 +101,7 @@ public class WeaponComponent : MonoBehaviour
         }
         else if (IsUnarmed == false)
         {
-            weaponTable[currentWeaponType].Unequip();
+            weaponTable[currentType].Unequip();
         }
 
         if (weaponTable[newType] == null)
@@ -111,25 +112,23 @@ public class WeaponComponent : MonoBehaviour
         animator.SetInteger("WeaponType", (int)newType);
         animator.SetBool("IsEquipping", true);
 
-        currentWeaponType = newType;
+        currentType = newType;
     }
     #endregion
 
-    #region 공격
     public void DoAction()  // Start Combo
     {
-        if (weaponTable[currentWeaponType] == null)
+        if (weaponTable[currentType] == null)
             return;
 
         animator.SetBool("IsAction", true);
-        weaponTable[currentWeaponType].DoAction();
+        weaponTable[currentType].DoAction();
     }
-    #endregion
 
-    #region 애니메이션(Equip) 이벤트
+    #region Equip
     private void BeginAnimEquip()
     {
-        weaponTable[currentWeaponType].Equip();
+        weaponTable[currentType].Equip();
     }
 
     private void EndAnimEquip()
@@ -141,7 +140,7 @@ public class WeaponComponent : MonoBehaviour
 
     private void BeginAnimUnequip()
     {
-        weaponTable[currentWeaponType].Unequip();
+        weaponTable[currentType].Unequip();
     }
 
     private void EndAnimUnequip()
@@ -151,39 +150,40 @@ public class WeaponComponent : MonoBehaviour
     }
     #endregion
 
-    #region 애니메이션(Action) 이벤트
+    #region Action
     private void DoAnimNextCombo()
     {
-        weaponTable[currentWeaponType].DoNextCombo();
+        weaponTable[currentType].DoNextCombo();
     }
 
     private void EndAnimAction()
     {
         animator.SetBool("IsAction", false);
 
-        weaponTable[currentWeaponType].EndAction();
+        weaponTable[currentType].EndAction();
 
         OnAnimActionEnd?.Invoke();
     }
 
     private void BeginAnimComboInputSection()
     {
-        MeleeWeapon meleeWeapon = weaponTable[currentWeaponType] as MeleeWeapon;
+        MeleeWeapon meleeWeapon = weaponTable[currentType] as MeleeWeapon;
         meleeWeapon?.EnableCombo();
     }
 
     private void EndAnimComboInputSection()
     {
-        MeleeWeapon meleeWeapon = weaponTable[currentWeaponType] as MeleeWeapon;
+        MeleeWeapon meleeWeapon = weaponTable[currentType] as MeleeWeapon;
         meleeWeapon?.DisableCombo();
     }
 
     private void BeginAnimCollision(AnimationEvent evt)
     {
-        MeleeWeapon meleeWeapon = weaponTable[currentWeaponType] as MeleeWeapon;
+        MeleeWeapon meleeWeapon = weaponTable[currentType] as MeleeWeapon;
 
         if (string.IsNullOrEmpty(evt.stringParameter))
         {
+            print($"Enable Collider {meleeWeapon}");
             meleeWeapon?.EnableCollision();
         }
         else
@@ -201,7 +201,7 @@ public class WeaponComponent : MonoBehaviour
 
     private void EndAnimCollision()
     {
-        MeleeWeapon meleeWeapon = weaponTable[currentWeaponType] as MeleeWeapon;
+        MeleeWeapon meleeWeapon = weaponTable[currentType] as MeleeWeapon;
         meleeWeapon?.DisableCollision();
     }
     #endregion

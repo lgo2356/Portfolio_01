@@ -1,5 +1,4 @@
 using UnityEngine;
-using WeaponType = WeaponComponent.WeaponType;
 
 public class Fist : MeleeWeapon
 {
@@ -13,7 +12,7 @@ public class Fist : MeleeWeapon
     {
         base.Reset();
 
-        weaponType = WeaponType.Fist;
+        type = WeaponType.Fist;
     }
 
     protected override void Awake()

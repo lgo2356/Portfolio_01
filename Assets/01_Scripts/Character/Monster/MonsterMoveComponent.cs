@@ -56,12 +56,20 @@ public class MonsterMoveComponent : MonoBehaviour
         destination = dest;
         moveSpeed = speed;
 
-        navMeshAgent.isStopped = false;
         navMeshAgent.speed = speed;
+        navMeshAgent.isStopped = false;
 
         NavMeshPath navMeshPath = CreateNavMeshPath(dest);
         {
-            navMeshAgent.SetPath(navMeshPath);
+            if (navMeshPath != null)
+            {
+                navMeshAgent.SetPath(navMeshPath);
+            }
+            else
+            {
+                Debug.LogError("NavMeshPath Creating has been failed.");
+                return;
+            }
         }
     }
 
@@ -81,7 +89,12 @@ public class MonsterMoveComponent : MonoBehaviour
         NavMeshPath navMeshPath = new();
 
         bool isFoundPath = navMeshAgent.CalculatePath(dest, navMeshPath);
-        Debug.Assert(isFoundPath);
+
+        if (isFoundPath == false)
+        {
+            navMeshPath = null;
+            Debug.Assert(isFoundPath, $"{dest} is invalid path.");
+        }
 
         return navMeshPath;
     }

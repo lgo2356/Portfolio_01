@@ -1,5 +1,5 @@
 using UnityEngine;
-using WeaponType = WeaponComponent.WeaponType;
+using UnityEngine.Serialization;
 
 [System.Serializable]
 public class WeaponData
@@ -15,10 +15,18 @@ public class WeaponData
     public Vector3 HitParticlePositionOffset;
 }
 
+public enum WeaponType
+{
+    Unarmed = 0,
+    Fist, Sword, GreatSword, Katana,
+    Max,
+}
+
 public class Weapon : MonoBehaviour
 {
+    [FormerlySerializedAs("weaponType")]
     [SerializeField]
-    protected WeaponType weaponType;
+    protected WeaponType type;
 
     [SerializeField]
     protected WeaponData[] weaponDatas;
@@ -29,7 +37,7 @@ public class Weapon : MonoBehaviour
 
     protected GameObject rootObject;
 
-    public WeaponType WeaponType => weaponType;
+    public WeaponType Type => type;
 
     protected virtual void Reset()
     {

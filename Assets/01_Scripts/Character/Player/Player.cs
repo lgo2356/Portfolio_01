@@ -45,6 +45,11 @@ public class Player : Character
             weaponComponent.SetGreatSword();
         };
 
+        actionMap.FindAction("Equip_Katana").started += (callback) =>
+        {
+            weaponComponent.SetKatana();
+        };
+
         actionMap.FindAction("Action").started += (callback) =>
         {
             weaponComponent.DoAction();

@@ -1,5 +1,4 @@
 using UnityEngine;
-using WeaponType = WeaponComponent.WeaponType;
 
 public class GreatSword : MeleeWeapon
 {
@@ -16,7 +15,7 @@ public class GreatSword : MeleeWeapon
     {
         base.Reset();
 
-        weaponType = WeaponType.GreatSword;
+        type = WeaponType.GreatSword;
     }
 
     protected override void Awake()
@@ -32,7 +31,7 @@ public class GreatSword : MeleeWeapon
         transform.SetParent(slotTransform, false);
     }
 
-    public override void Equip()  // µî -> ¼Õ
+    public override void Equip()  // ï¿½ï¿½ -> ï¿½ï¿½
     {
         base.Equip();
 
@@ -42,7 +41,7 @@ public class GreatSword : MeleeWeapon
         transform.SetParent(handTransform, false);
     }
 
-    public override void Unequip()  // ¼Õ -> µî
+    public override void Unequip()  // ï¿½ï¿½ -> ï¿½ï¿½
     {
         base.Unequip();
 

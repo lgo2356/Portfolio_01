@@ -32,7 +32,7 @@ public class Monster : Character, IDamagable
 
             transform.LookAt(attacker.transform, Vector3.up);
 
-            animator.SetInteger("ImpactType", (int)causer.WeaponType);
+            animator.SetInteger("ImpactType", (int)causer.Type);
             animator.SetInteger("ImpactIndex", weaponData.ImpactIndex);
             animator.SetTrigger("DoImpact");
 
@@ -47,8 +47,19 @@ public class Monster : Character, IDamagable
     {
         WaitForFixedUpdate waitForFixedUpdate = new();
 
-        float launchDistance = rigidbody.drag * distance * 10000f;
+        float launchDistance = rigidbody.drag * distance * 1000f;
         rigidbody.AddForce(-transform.forward * launchDistance);
+
+        for (int i = 0; i < frame; i++)
+        {
+            yield return waitForFixedUpdate;
+        }
+    }
+
+    // 데미지 받았을 때 색깔
+    private IEnumerator Coroutine_SetDamagedColor(int frame, float time)
+    {
+        WaitForFixedUpdate waitForFixedUpdate = new();
 
         for (int i = 0; i < frame; i++)
         {

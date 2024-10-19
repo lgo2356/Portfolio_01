@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using WeaponType = WeaponComponent.WeaponType;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(MonsterMoveComponent))]
 [RequireComponent(typeof(ChaseComponent))]
@@ -23,8 +23,9 @@ public class CombatComponent : MonoBehaviour
     [SerializeField]
     private LayerMask layerMask;
 
+    [FormerlySerializedAs("weaponType")]
     [SerializeField]
-    private WeaponType weaponType;
+    private WeaponType type;
 
     private Animator animator;
     private AIStateComponent stateComponent;
@@ -78,7 +79,7 @@ public class CombatComponent : MonoBehaviour
         this.target = target;
         combatPosition = transform.position;
 
-        weaponComponent.SetWeaponType(weaponType);
+        weaponComponent.SetWeaponType(type);
         
         checkCombatRangeCoroutine = StartCoroutine(Coroutine_CheckCombatRange());
         combatCoroutine = StartCoroutine(Coroutine_Attack());

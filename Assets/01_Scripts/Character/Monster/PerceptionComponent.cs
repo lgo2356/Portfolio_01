@@ -24,7 +24,7 @@ public class PerceptionComponent : MonoBehaviour
 
     private Collider[] colliderBuffer;
     private Dictionary<GameObject, float> perceivedTable;
-    private bool bPerceivedTableClearFlag = false;
+    private bool bPerceivedTableClearFlag;
 
     public event Action<GameObject> OnFoundAction;
     public event Action<GameObject> OnLostAction;
@@ -32,7 +32,7 @@ public class PerceptionComponent : MonoBehaviour
     private void Awake()
     {
         colliderBuffer = new Collider[10];
-        perceivedTable = new();
+        perceivedTable = new Dictionary<GameObject, float>();
     }
 
     private void Start()

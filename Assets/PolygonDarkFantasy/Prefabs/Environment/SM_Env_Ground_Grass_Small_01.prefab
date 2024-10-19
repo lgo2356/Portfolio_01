@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7564688119056825770}
   - component: {fileID: 6869379586135749135}
   - component: {fileID: 8696458711803102917}
-  - component: {fileID: 5280947598104886769}
   m_Layer: 0
   m_Name: SM_Env_Ground_Grass_Small_01
   m_TagString: Untagged
@@ -84,24 +83,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5280947598104886769
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7183517861263943440}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.7150745, y: 0.29250455, z: 3.6786475}
-  m_Center: {x: 0.03441602, y: -0.0179189, z: -0.19676882}

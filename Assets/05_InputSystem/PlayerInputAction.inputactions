@@ -42,6 +42,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Action",
+                    "type": "Button",
+                    "id": "09fa9d87-70f8-4b53-a9a3-119090e0f9b2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Equip_Sword",
                     "type": "Button",
                     "id": "f8e9cf4a-0260-4c37-9f16-5569fbc30972",
@@ -60,9 +69,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Action",
+                    "name": "Equip_Katana",
                     "type": "Button",
-                    "id": "09fa9d87-70f8-4b53-a9a3-119090e0f9b2",
+                    "id": "001e03c7-86cd-46c8-8cec-b327a5a9bda3",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -177,6 +186,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Equip_GreatSword",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a1ee493c-4bbc-45a0-92d0-112e803801f4",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Equip_Katana",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
