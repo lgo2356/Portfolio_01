@@ -1,3 +1,4 @@
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -6,13 +7,17 @@ public class WeaponData
 {
     public float Power;
     public float LaunchDistance;
-    public float HitStopFrame;
+    public int HitStopFrame;
     public int ImpactIndex;
     public bool IsCanMove;
 
     public GameObject HitParticle;
     public Vector3 HitParticleScaleOffset = Vector3.one;
     public Vector3 HitParticlePositionOffset;
+
+    public float CameraShakeDuration;
+    public Vector3 CameraShakeDirection;
+    public Vector3 CameraShakeDirectionDeviation;
 }
 
 public enum WeaponType
@@ -34,6 +39,7 @@ public class Weapon : MonoBehaviour
     protected Animator animator;
     protected StateComponent stateComponent;
     protected PlayerMoveComponent moveComponent;
+    protected CinemachineImpulseSource impulseSource;
 
     protected GameObject rootObject;
 
@@ -57,6 +63,8 @@ public class Weapon : MonoBehaviour
         animator = rootObject.GetComponent<Animator>();
         stateComponent = rootObject.GetComponent<StateComponent>();
         moveComponent = rootObject.GetComponent<PlayerMoveComponent>();
+        
+        impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
     protected virtual void Start()

@@ -15,7 +15,7 @@ public class MeleeWeapon : Weapon
         base.Awake();
 
         colliders = GetComponentsInChildren<Collider>();
-        hitObjectList = new();
+        hitObjectList = new List<GameObject>();
     }
 
     protected override void Start()
@@ -45,6 +45,8 @@ public class MeleeWeapon : Weapon
         hitObjectList.Add(other.gameObject);
 
         damagable.OnDamaged(rootObject, this, Vector3.zero, weaponDatas[comboIndex]);
+        
+        ShakeCamera();
     }
 
     public void EnableCombo()
@@ -118,5 +120,32 @@ public class MeleeWeapon : Weapon
         }
 
         hitObjectList.Clear();
+    }
+
+    private void ShakeCamera()
+    {
+        if (impulseSource == null)
+            return;
+
+        WeaponData weaponData = weaponDatas[comboIndex];
+
+        if (weaponData.CameraShakeDuration <= 0.0f)
+            return;
+
+        if (weaponData.CameraShakeDirection.magnitude <= 0.0f)
+            return;
+
+        impulseSource.m_ImpulseDefinition.m_ImpulseDuration = weaponData.CameraShakeDuration;
+
+        Vector3 camShakeDir = weaponData.CameraShakeDirection;
+        Vector3 camShakeDirDeviation = weaponData.CameraShakeDirectionDeviation;
+        {
+            camShakeDir.x += UnityEngine.Random.Range(-camShakeDirDeviation.x, camShakeDirDeviation.x);
+            camShakeDir.y += UnityEngine.Random.Range(-camShakeDirDeviation.y, camShakeDirDeviation.y);
+            camShakeDir.z += UnityEngine.Random.Range(-camShakeDirDeviation.z, camShakeDirDeviation.z);
+        }
+
+        impulseSource.m_DefaultVelocity = camShakeDir;
+        impulseSource.GenerateImpulse();
     }
 }

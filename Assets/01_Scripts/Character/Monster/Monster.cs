@@ -11,6 +11,11 @@ public class Monster : Character, IDamagable
     {
         base.Awake();
 
+        Awake_InitMaterial();
+    }
+
+    private void Awake_InitMaterial()
+    {
         materialTable = new Dictionary<Material, Color>();
         
         Renderer[] renderers = transform.GetComponentsInChildren<Renderer>();
@@ -60,9 +65,11 @@ public class Monster : Character, IDamagable
             {
                 StartCoroutine(Coroutine_Launch(30, weaponData.LaunchDistance));
             }
-
+            
             StartCoroutine(Coroutine_SetDamagedColor(30));
         }
+
+        StartCoroutine(Coroutine_StopAnimation(attacker, weaponData.HitStopFrame));
     }
 
     private IEnumerator Coroutine_Launch(int frame, float distance)
@@ -80,16 +87,34 @@ public class Monster : Character, IDamagable
 
     private IEnumerator Coroutine_SetDamagedColor(int frame)
     {
-        foreach (var m in materialTable)
+        foreach (KeyValuePair<Material, Color> m in materialTable)
         {
             m.Key.color = Color.red;
         }
 
         yield return new WaitForSeconds(0.15f);
         
-        foreach (var m in materialTable)
+        foreach (KeyValuePair<Material, Color> m in materialTable)
         {
             m.Key.color = m.Value;
         }
+    }
+
+    private IEnumerator Coroutine_StopAnimation(GameObject attacker, int frame)
+    {
+        Animator attackerAnim = attacker.GetComponent<Animator>();
+        {
+            attackerAnim.speed = 0.0f;
+        }
+
+        animator.speed = 0.0f;
+        
+        for (int i = 0; i < frame; i++)
+        {
+            yield return new WaitForFixedUpdate();
+        }
+
+        attackerAnim.speed = 1.0f;
+        animator.speed = 1.0f;
     }
 }
