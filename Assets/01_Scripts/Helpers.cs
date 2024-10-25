@@ -9,15 +9,7 @@ public static class ExtendTransformHelpers
     {
         Transform[] children = transform.GetComponentsInChildren<Transform>();
 
-        foreach (Transform child in children)
-        {
-            if (child.name.Equals(name))
-            {
-                return child;
-            }
-        }
-
-        return null;
+        return children.FirstOrDefault(child => child.name.Equals(name));
     }
 
     public static List<Transform> FindChildrenByName(this Transform transform, string name, bool isWildcard = false)

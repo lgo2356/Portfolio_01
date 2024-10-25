@@ -86,6 +86,7 @@ public class Staff : RangeWeapon
             GameObject go = Instantiate(projectilePrefab, position, rootObject.transform.rotation);
             Projectile projectile = go.GetComponent<Projectile>();
             {
+                //TODO : 락인한 대상 방향으로 보내기
                 Vector3 direction = rootObject.transform.forward;
 
                 projectile.Direction = direction;

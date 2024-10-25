@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+//TODO : 유도 미사일 추가
 public class Projectile : MonoBehaviour
 {
     [SerializeField]
