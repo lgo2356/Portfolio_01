@@ -12,7 +12,7 @@ public class WeaponData
     public bool IsCanMove;
 
     public GameObject HitParticle;
-    public Vector3 HitParticleScaleOffset = Vector3.one;
+    public Vector3 HitParticleScaleOffset = Vector3.zero;
     public Vector3 HitParticlePositionOffset;
 
     public float CameraShakeDuration;
@@ -23,7 +23,7 @@ public class WeaponData
 public enum WeaponType
 {
     Unarmed = 0,
-    Fist, Sword, GreatSword, Katana,
+    Fist, Sword, GreatSword, Katana, Staff, Warp,
     Max,
 }
 
@@ -100,6 +100,11 @@ public class Weapon : MonoBehaviour
         {
             moveComponent.Release();
         }
+    }
+
+    public virtual void ShootProjectile()
+    {
+        
     }
 
     protected void SetPlayerMove()

@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class MeleeWeapon : Weapon
 {
-    private bool isInpuNextCombo = false;
-    private bool isNextComboEnalbed = false;
+    private bool isInputNextCombo = false;
+    private bool isNextComboEnabled = false;
     private int comboIndex = 0;
 
     protected Collider[] colliders;
@@ -44,29 +44,32 @@ public class MeleeWeapon : Weapon
 
         hitObjectList.Add(other.gameObject);
 
-        damagable.OnDamaged(rootObject, this, Vector3.zero, weaponDatas[comboIndex]);
+        Vector3 hitPoint = colliders[0].ClosestPoint(other.transform.position);
+        hitPoint = other.transform.InverseTransformPoint(hitPoint);
+        
+        damagable.OnDamaged(rootObject, this, hitPoint, weaponDatas[comboIndex]);
         
         ShakeCamera();
     }
 
     public void EnableCombo()
     {
-        isNextComboEnalbed = true;
+        isNextComboEnabled = true;
     }
 
     public void DisableCombo()
     {
-        isNextComboEnalbed = false;
+        isNextComboEnabled = false;
     }
 
     public override void DoNextCombo()
     {
         base.DoNextCombo();
 
-        if (isInpuNextCombo == false)
+        if (isInputNextCombo == false)
             return;
 
-        isInpuNextCombo = false;
+        isInputNextCombo = false;
         comboIndex++;
 
         animator.SetTrigger("DoNextCombo");
@@ -74,10 +77,10 @@ public class MeleeWeapon : Weapon
 
     public override void DoAction()
     {
-        if (isNextComboEnalbed)
+        if (isNextComboEnabled)
         {
-            isNextComboEnalbed = false;
-            isInpuNextCombo = true;
+            isNextComboEnabled = false;
+            isInputNextCombo = true;
 
             return;
         }
@@ -94,8 +97,8 @@ public class MeleeWeapon : Weapon
     {
         base.EndAction();
 
-        isInpuNextCombo = false;
-        isNextComboEnalbed = false;
+        isInputNextCombo = false;
+        isNextComboEnabled = false;
         comboIndex = 0;
     }
 

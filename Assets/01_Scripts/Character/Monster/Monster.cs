@@ -57,6 +57,7 @@ public class Monster : Character, IDamagable
 
             transform.LookAt(attacker.transform, Vector3.up);
 
+            animator.SetInteger(1, 1);
             animator.SetInteger("ImpactType", (int)causer.Type);
             animator.SetInteger("ImpactIndex", weaponData.ImpactIndex);
             animator.SetTrigger("DoImpact");

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HPComponent : MonoBehaviour
+public class HpComponent : MonoBehaviour
 {
     [SerializeField]
     private float maxHP = 100f;
@@ -22,6 +22,6 @@ public class HPComponent : MonoBehaviour
         currentHP += (amount * -1f);
         currentHP = Mathf.Clamp(currentHP, 0f, maxHP);
 
-        Debug.Log($"{gameObject.name} - Ã¼·Â : {currentHP} / {maxHP}");
+        // Debug.Log($"{gameObject.name} - Ã¼ï¿½ï¿½ : {currentHP} / {maxHP}");
     }
 }

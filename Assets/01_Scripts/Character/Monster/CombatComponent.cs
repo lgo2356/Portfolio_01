@@ -5,7 +5,7 @@ using UnityEngine.Serialization;
 
 [RequireComponent(typeof(MonsterMoveComponent))]
 [RequireComponent(typeof(ChaseComponent))]
-[RequireComponent(typeof(WeaponComponent))]
+[RequireComponent(typeof(WeaponController))]
 public class CombatComponent : MonoBehaviour
 {
     [SerializeField]
@@ -30,7 +30,7 @@ public class CombatComponent : MonoBehaviour
     private Animator animator;
     private AIStateComponent stateComponent;
     private MonsterMoveComponent moveComponent;
-    private WeaponComponent weaponComponent;
+    private WeaponController weaponController;
 
     private GameObject target;
     private Vector3 combatPosition;
@@ -49,7 +49,7 @@ public class CombatComponent : MonoBehaviour
         animator = GetComponent<Animator>();
         stateComponent = GetComponent<AIStateComponent>();
         moveComponent = GetComponent<MonsterMoveComponent>();
-        weaponComponent = GetComponent<WeaponComponent>();
+        weaponController = GetComponent<WeaponController>();
     }
 
     private void Start()
@@ -60,12 +60,12 @@ public class CombatComponent : MonoBehaviour
     private void Start_BindEvent()
     {
         #region Weapon
-        weaponComponent.OnAnimEquipEnd += () =>
+        weaponController.OnAnimEquipEnd += () =>
         {
 
         };
 
-        weaponComponent.OnAnimActionEnd += () =>
+        weaponController.OnAnimActionEnd += () =>
         {
 
         };
@@ -79,7 +79,7 @@ public class CombatComponent : MonoBehaviour
         this.target = target;
         combatPosition = transform.position;
 
-        weaponComponent.SetWeaponType(type);
+        weaponController.SetWeaponType(type);
         
         checkCombatRangeCoroutine = StartCoroutine(Coroutine_CheckCombatRange());
         combatCoroutine = StartCoroutine(Coroutine_Attack());
@@ -102,28 +102,20 @@ public class CombatComponent : MonoBehaviour
         {
             if (Vector3.Distance(target.transform.position, transform.position) > attackDistance)
             {
-                //TODO : Chase
-
                 moveComponent
                     .SetMoveSpeed(2.0f)
                     .SetDestination(target.transform.position);
-
-                //chaseComponent.StartChase(target);
             }
             else
             {
-                //TODO : Attack
-
-                //chaseComponent.StopChase();
-
                 moveComponent.StopMove();
                 
                 transform.LookAt(target.transform);
 
                 animator.SetInteger("ActionType", 1);
-                weaponComponent.DoAction();
+                weaponController.DoAction();
 
-                float coolTime = GetCoolTime();
+                float coolTime = GetAttackCoolTime();
 
                 yield return new WaitForSeconds(coolTime);
             }
@@ -132,7 +124,7 @@ public class CombatComponent : MonoBehaviour
         }
     }
 
-    private float GetCoolTime()
+    private float GetAttackCoolTime()
     {
         float result = attackCoolTime;
         float deviation = UnityEngine.Random.Range(-attackCoolTimeDeviation, attackCoolTimeDeviation);

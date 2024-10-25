@@ -1,15 +1,16 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PatrolPoint : MonoBehaviour
 {
     [SerializeField]
-    private bool isLoop = false;
+    private bool isLoop;
 
     [SerializeField]
-    private bool isReverse = false;
+    private bool isReverse;
 
     [SerializeField]
-    private int nextIndex = 0;
+    private int nextIndex;
 
     [SerializeField]
     private float drawHeightOffset = 0.1f;

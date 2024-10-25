@@ -10,7 +10,7 @@ public partial class AIController : MonoBehaviour
     private PerceptionComponent perceptionComponent;
     private PatrolComponent patrolComponent;
     private CombatComponent combatComponent;
-    private WeaponComponent weaponComponent;
+    private WeaponController weaponController;
 
     private void Awake()
     {

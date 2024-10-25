@@ -128,25 +128,37 @@ MonoBehaviour:
     HitStopFrame: 0
     ImpactIndex: 1
     IsCanMove: 0
-    HitParticle: {fileID: 0}
+    HitParticle: {fileID: 1521653833230474388, guid: 2e5d0784eff6a9b45a088fdfc1117888,
+      type: 3}
     HitParticleScaleOffset: {x: 0, y: 0, z: 0}
     HitParticlePositionOffset: {x: 0, y: 0, z: 0}
+    CameraShakeDuration: 0
+    CameraShakeDirection: {x: 0, y: 0, z: 0}
+    CameraShakeDirectionDeviation: {x: 0, y: 0, z: 0}
   - Power: 5
     LaunchDistance: 3
     HitStopFrame: 0
     ImpactIndex: 1
     IsCanMove: 0
-    HitParticle: {fileID: 0}
+    HitParticle: {fileID: 1521653833230474388, guid: 2e5d0784eff6a9b45a088fdfc1117888,
+      type: 3}
     HitParticleScaleOffset: {x: 0, y: 0, z: 0}
     HitParticlePositionOffset: {x: 0, y: 0, z: 0}
+    CameraShakeDuration: 0
+    CameraShakeDirection: {x: 0, y: 0, z: 0}
+    CameraShakeDirectionDeviation: {x: 0, y: 0, z: 0}
   - Power: 10
     LaunchDistance: 10
     HitStopFrame: 0
     ImpactIndex: 1
     IsCanMove: 0
-    HitParticle: {fileID: 0}
+    HitParticle: {fileID: 1521653833230474388, guid: 2e5d0784eff6a9b45a088fdfc1117888,
+      type: 3}
     HitParticleScaleOffset: {x: 0, y: 0, z: 0}
     HitParticlePositionOffset: {x: 0, y: 0, z: 0}
+    CameraShakeDuration: 0
+    CameraShakeDirection: {x: 0, y: 0, z: 0}
+    CameraShakeDirectionDeviation: {x: 0, y: 0, z: 0}
   slotName: Slot_Sword
   handName: Hand_Sword
 --- !u!114 &210206599829646654

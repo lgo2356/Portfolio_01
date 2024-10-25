@@ -6,7 +6,7 @@ public class Player : Character
     [SerializeField]
     private Transform bodyTransform;
 
-    private WeaponComponent weaponComponent;
+    private WeaponController weaponController;
 
     private void Reset()
     {
@@ -27,7 +27,7 @@ public class Player : Character
 
     private void Awake_GetComponent()
     {
-        weaponComponent = GetComponent<WeaponComponent>();
+        weaponController = GetComponent<WeaponController>();
     }
 
     private void Awake_BindInput()
@@ -37,22 +37,27 @@ public class Player : Character
 
         actionMap.FindAction("Equip_Sword").started += (callback) =>
         {
-            weaponComponent.SetSword();
+            weaponController.SetSword();
         };
 
         actionMap.FindAction("Equip_GreatSword").started += (callback) =>
         {
-            weaponComponent.SetGreatSword();
+            weaponController.SetGreatSword();
         };
 
         actionMap.FindAction("Equip_Katana").started += (callback) =>
         {
-            weaponComponent.SetKatana();
+            weaponController.SetKatana();
+        };
+
+        actionMap.FindAction("Equip_Staff").started += callback =>
+        {
+            weaponController.SetStaff();
         };
 
         actionMap.FindAction("Action").started += (callback) =>
         {
-            weaponComponent.DoAction();
+            weaponController.DoAction();
         };
     }
 }

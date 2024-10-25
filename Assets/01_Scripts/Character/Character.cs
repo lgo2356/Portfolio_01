@@ -4,20 +4,20 @@ using UnityEngine;
 [RequireComponent(typeof(CapsuleCollider))]
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(StateComponent))]
-[RequireComponent(typeof(HPComponent))]
+[RequireComponent(typeof(HpComponent))]
 public class Character : MonoBehaviour
 {
     protected new Rigidbody rigidbody;
     protected Animator animator;
     protected StateComponent stateComponent;
-    protected HPComponent hpComponent;
+    protected HpComponent hpComponent;
 
     protected virtual void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         stateComponent = GetComponent<StateComponent>();
-        hpComponent = GetComponent<HPComponent>();
+        hpComponent = GetComponent<HpComponent>();
     }
 
     protected virtual void Start()

@@ -14,7 +14,7 @@ public class PatrolComponent : MonoBehaviour
 
     private IEnumerator patrolCoroutine;
     private Vector3 destination;
-    private bool isPatrol = false;
+    private bool isPatrol;
 
     private void Awake()
     {
