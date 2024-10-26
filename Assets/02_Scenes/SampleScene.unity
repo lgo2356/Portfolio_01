@@ -218,7 +218,7 @@ Transform:
   m_GameObject: {fileID: 121212678}
   serializedVersion: 2
   m_LocalRotation: {x: 0.15816459, y: -0.75421613, z: 0.19680174, w: 0.6061445}
-  m_LocalPosition: {x: 40.694756, y: -7.4700003, z: 46.61748}
+  m_LocalPosition: {x: 40.56467, y: -7.4700003, z: 47.10026}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -755,7 +755,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damping: {x: 0.5, y: 0.5, z: 0.5}
-  ShoulderOffset: {x: 0, y: -0.4, z: 0}
+  ShoulderOffset: {x: 0.5, y: -0.4, z: 0}
   VerticalArmLength: 0.4
   CameraSide: 1
   CameraDistance: 4
@@ -2066,6 +2066,37 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &1241192795
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1241192796}
+  m_Layer: 0
+  m_Name: Hand_Warp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1241192796
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241192795}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5985542, y: -0.060545966, z: 0.2900127, w: 0.7442847}
+  m_LocalPosition: {x: -0.108, y: -0.033, z: -0.031}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9183906144106022077}
+  m_LocalEulerAnglesHint: {x: -58.856, y: -57.73, z: 77.124}
 --- !u!114 &1331248181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2545,7 +2576,7 @@ Transform:
   m_GameObject: {fileID: 1926294132}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7937781, z: -0, w: 0.60820746}
-  m_LocalPosition: {x: 40.694756, y: -7.4700003, z: 46.61748}
+  m_LocalPosition: {x: 40.56467, y: -7.4700003, z: 47.10026}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6758,6 +6789,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 001e03c7-86cd-46c8-8cec-b327a5a9bda3
     m_ActionName: PlayerActions/Equip_Katana[/Keyboard/4]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 46e61cbf-fdb0-4224-b8c0-e5321e398cda
+    m_ActionName: PlayerActions/Equip_Staff[/Keyboard/5]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b4340ae4-370d-485e-90e3-a796c682b750
+    m_ActionName: PlayerActions/Equip_Warp[/Keyboard/6]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: PlayerActions
@@ -6893,6 +6932,7 @@ MonoBehaviour:
   - {fileID: 3014535142870448668, guid: 4f7fbafac4abdf24eb9a69f1ddfd5b21, type: 3}
   - {fileID: 100000, guid: 4f354ba23c3e35741885729ce4a3a3b3, type: 3}
   - {fileID: 6416291301515761843, guid: 1fb1aa4aaf20088459fa48d468af9553, type: 3}
+  - {fileID: 3844808660582485764, guid: 19eaf6e1c67d6bc488f50cd46f258664, type: 3}
 --- !u!114 &6127164363632744237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9004,6 +9044,7 @@ Transform:
   - {fileID: 589707701}
   - {fileID: 2058326070}
   - {fileID: 440043272}
+  - {fileID: 1241192796}
   - {fileID: 5231347482559388688}
   - {fileID: 7743076163876835078}
   - {fileID: 3907976706773011284}

@@ -54,6 +54,11 @@ public class Player : Character
         {
             weaponController.SetStaff();
         };
+        
+        actionMap.FindAction("Equip_Warp").started += callback =>
+        {
+            weaponController.SetWarp();
+        };
 
         actionMap.FindAction("Action").started += (callback) =>
         {

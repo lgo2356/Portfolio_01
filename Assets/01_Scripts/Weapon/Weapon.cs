@@ -107,6 +107,11 @@ public class Weapon : MonoBehaviour
         
     }
 
+    public virtual void ShowFX()
+    {
+        
+    }
+
     protected void SetPlayerMove()
     {
         if (moveComponent == null)

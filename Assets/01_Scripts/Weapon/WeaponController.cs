@@ -97,6 +97,14 @@ public class WeaponController : MonoBehaviour
         
         SetWeaponType(WeaponType.Staff);
     }
+    
+    public void SetWarp()
+    {
+        if (stateComponent.IsIdleState == false)
+            return;
+        
+        SetWeaponType(WeaponType.Warp);
+    }
 
     public void SetWeaponType(WeaponType newType)
     {
@@ -217,5 +225,10 @@ public class WeaponController : MonoBehaviour
     private void DoAnimProjectile()
     {
         weaponTable[currentType].ShootProjectile();
+    }
+
+    private void DoAnimFX()
+    {
+        weaponTable[currentType].ShowFX();
     }
 }

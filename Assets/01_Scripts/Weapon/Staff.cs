@@ -65,6 +65,8 @@ public class Staff : RangeWeapon
     public override void ShootProjectile()
     {
         base.ShootProjectile();
+        
+        SetPlayerMove();
 
         {
             if (muzzlePrefab == null)
@@ -88,6 +90,7 @@ public class Staff : RangeWeapon
             {
                 //TODO : 락인한 대상 방향으로 보내기
                 Vector3 direction = rootObject.transform.forward;
+                // Vector3 direction = Camera.main.transform.forward;
 
                 projectile.Direction = direction;
             }
