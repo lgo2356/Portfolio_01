@@ -2,7 +2,6 @@ using UnityEngine;
 using AIState = AIStateComponent.AIState;
 
 [RequireComponent(typeof(PerceptionComponent))]
-[RequireComponent(typeof(CombatComponent))]
 public partial class AIController : MonoBehaviour
 {
     private AIStateComponent stateComponent;

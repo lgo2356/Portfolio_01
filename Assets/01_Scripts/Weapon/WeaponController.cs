@@ -13,9 +13,6 @@ public class WeaponController : MonoBehaviour
     private WeaponType currentType = WeaponType.Unarmed;
     private Dictionary<WeaponType, Weapon> weaponTable;
 
-    public event Action OnAnimEquipEnd;
-    public event Action OnAnimActionEnd;
-
     public bool IsUnarmed => currentType == WeaponType.Unarmed;
     public bool IsSword => currentType == WeaponType.Sword;
     public bool IsGreatSword => currentType == WeaponType.GreatSword;
@@ -150,8 +147,6 @@ public class WeaponController : MonoBehaviour
     private void EndAnimEquip()
     {
         animator.SetBool("IsEquipping", false);
-
-        OnAnimEquipEnd?.Invoke();
     }
 
     private void BeginAnimUnequip()
@@ -177,8 +172,6 @@ public class WeaponController : MonoBehaviour
         animator.SetBool("IsAction", false);
 
         weaponTable[currentType].EndAction();
-
-        OnAnimActionEnd?.Invoke();
     }
 
     private void BeginAnimComboInputSection()

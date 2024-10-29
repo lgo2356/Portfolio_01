@@ -3,7 +3,6 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(CapsuleCollider))]
 [RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(StateComponent))]
 [RequireComponent(typeof(HpComponent))]
 public class Character : MonoBehaviour
 {

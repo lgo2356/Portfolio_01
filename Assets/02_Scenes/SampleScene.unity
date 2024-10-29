@@ -3991,15 +3991,15 @@ GameObject:
   - component: {fileID: 4912017733495976542}
   - component: {fileID: 4912017733495976541}
   - component: {fileID: 4912017733495976544}
-  - component: {fileID: 4912017733495976540}
   - component: {fileID: 4912017733495976539}
   - component: {fileID: 4912017733495976537}
-  - component: {fileID: 4912017733495976536}
   - component: {fileID: 4912017733495976535}
   - component: {fileID: 4912017733495976534}
   - component: {fileID: 4912017733495976533}
   - component: {fileID: 4912017733495976545}
   - component: {fileID: 4912017733495976546}
+  - component: {fileID: 4912017733495976548}
+  - component: {fileID: 4912017733495976547}
   m_Layer: 0
   m_Name: Skeleton_Armed_01
   m_TagString: Untagged
@@ -5986,23 +5986,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponPrefabs:
   - {fileID: 2001536435507662984, guid: d7e6c30ff522a2e479783d9ecf48f3d8, type: 3}
---- !u!114 &4912017733495976536
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1837752745436639890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1344e21f0ae03d34396b0dbfb19c8157, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  combatDistance: 10
-  attackDistance: 2
-  attackCoolTime: 2
-  attackCoolTimeDeviation: 0.5
-  weaponType: 0
 --- !u!114 &4912017733495976537
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6034,18 +6017,6 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 8
---- !u!114 &4912017733495976540
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1837752745436639890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3a38d803de07894586e33615992461d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4912017733495976541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6133,6 +6104,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   patrolPoint: {fileID: 488881228}
+--- !u!114 &4912017733495976547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837752745436639890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3a38d803de07894586e33615992461d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4912017733495976548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837752745436639890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a6896ed229bef340bf0124d7afbc7ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  combatDistance: 10
+  attackDistance: 2
+  attackCoolTime: 2
+  attackCoolTimeDeviation: 0.5
+  weaponType: 1
 --- !u!1 &4948947395279281066
 GameObject:
   m_ObjectHideFlags: 0
