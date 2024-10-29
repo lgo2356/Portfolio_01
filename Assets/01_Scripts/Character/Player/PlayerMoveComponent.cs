@@ -4,8 +4,7 @@ using StateType = StateComponent.StateType;
 
 public class PlayerMoveComponent : MonoBehaviour
 {
-    #region ¼³Á¤ °ª
-    [SerializeField, Header("ÇÃ·¹ÀÌ¾î Ä«¸Þ¶ó Transform")]
+    [SerializeField, Header("ë§ˆìš°ìŠ¤")]
     private Transform cameraTargetTransform;
 
     [SerializeField]
@@ -28,18 +27,15 @@ public class PlayerMoveComponent : MonoBehaviour
         cameraTargetTransform = go.transform.FindChildByName("CameraTarget");
         Debug.Assert(cameraTargetTransform != null);
     }
-    #endregion
 
-    #region ÄÄÆ÷³ÍÆ®
+    #region Component
     private Animator animator;
     private StateComponent stateComponent;
     #endregion
-
-    #region Àü¿ª º¯¼ö
+    
     private bool isRunning = false;
     private bool canMove = true;
     private Vector2 playerInputMove;
-    #endregion
 
     public void Hold() => canMove = false;
     public void Release() => canMove = true;
@@ -117,40 +113,34 @@ public class PlayerMoveComponent : MonoBehaviour
         };
     }
 
-    #region Update º¯¼ö
+    #region Update ë³€ìˆ˜
     private Vector2 currentPlayerInputMove;
     private Vector2 currentVelocity = Vector2.zero;
-    private float currentMoveSpeed;
     #endregion
 
     private void Update()
     {
-        #region Ä³¸¯ÅÍ ÀÌµ¿
+        if (canMove == false)
+            return;
+
+        currentPlayerInputMove = Vector2.SmoothDamp(currentPlayerInputMove, playerInputMove, ref currentVelocity, 1f / sensitivity);
+        
+        float moveSpeed = isRunning ? runSpeed : walkSpeed;
+
+        if (currentPlayerInputMove.magnitude > deadZone)
         {
-            if (canMove == false)
-                return;
+            Quaternion cameraRotation = Quaternion.Euler(0, cameraTargetTransform.eulerAngles.y, 0);
+            Vector3 inputDirection = new(currentPlayerInputMove.x, 0, currentPlayerInputMove.y);
+            Quaternion inputRotation = Quaternion.LookRotation(inputDirection);
+            Quaternion lookRotation =  cameraRotation * inputRotation;
 
-            currentPlayerInputMove = Vector2.SmoothDamp(currentPlayerInputMove, playerInputMove, ref currentVelocity, 1f / sensitivity);            
-            float moveSpeed = isRunning ? runSpeed : walkSpeed;
-
-            if (currentPlayerInputMove.magnitude > deadZone)
-            {
-                Quaternion cameraRotation = Quaternion.Euler(0, cameraTargetTransform.eulerAngles.y, 0);
-                Vector3 inputDirection = new(currentPlayerInputMove.x, 0, currentPlayerInputMove.y);
-                Quaternion inputRotation = Quaternion.LookRotation(inputDirection);
-                Quaternion lookRotation =  cameraRotation * inputRotation;
-
-                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, 0.2f);
-                transform.position += transform.forward *= moveSpeed * Time.deltaTime;
-            }
-
-            currentMoveSpeed = Mathf.Lerp(currentMoveSpeed, playerInputMove.magnitude * moveSpeed, 1f / sensitivity * 10);
-
-            animator.SetFloat("SpeedX", currentPlayerInputMove.x * moveSpeed);
-            animator.SetFloat("SpeedY", currentPlayerInputMove.y * moveSpeed);
-            animator.SetFloat("SpeedZ", currentMoveSpeed);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, 0.2f);
         }
-        #endregion
+
+        float newSpeed = currentPlayerInputMove.magnitude * moveSpeed;
+        transform.position += transform.forward * newSpeed * Time.deltaTime;
+
+        animator.SetFloat("SpeedZ", newSpeed);
     }
 
     private void ExecuteEvade()

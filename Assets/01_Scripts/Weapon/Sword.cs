@@ -31,7 +31,7 @@ public class Sword : MeleeWeapon
         transform.SetParent(slotTransform, false);
     }
 
-    public override void Equip()  // �� -> ��
+    public override void Equip()
     {
         base.Equip();
 
@@ -41,7 +41,7 @@ public class Sword : MeleeWeapon
         transform.SetParent(handTransform, false);
     }
 
-    public override void Unequip()  // �� -> ��
+    public override void Unequip()
     {
         base.Unequip();
 

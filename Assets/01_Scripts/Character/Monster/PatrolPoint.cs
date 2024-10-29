@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class PatrolPoint : MonoBehaviour
@@ -28,7 +28,7 @@ public class PatrolPoint : MonoBehaviour
         nextIndex = 0;
     }
 
-    public Vector3 GetNextMovePosition()
+    public Vector3 GetNextPatrolPosition()
     {
         Debug.Assert(nextIndex >= 0 && nextIndex < transform.childCount);
 

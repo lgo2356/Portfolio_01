@@ -1,16 +1,15 @@
 using Cinemachine;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [System.Serializable]
 public class WeaponData
 {
     public float Power;
     public float LaunchDistance;
-    public int HitStopFrame;
     public int ImpactIndex;
     public bool IsCanMove;
 
+    public int HitStopFrame;
     public GameObject HitParticle;
     public Vector3 HitParticleScaleOffset = Vector3.zero;
     public Vector3 HitParticlePositionOffset;
@@ -29,7 +28,6 @@ public enum WeaponType
 
 public class Weapon : MonoBehaviour
 {
-    [FormerlySerializedAs("weaponType")]
     [SerializeField]
     protected WeaponType type;
 

@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [RequireComponent(typeof(MonsterMoveComponent))]
 [RequireComponent(typeof(ChaseComponent))]
@@ -21,29 +19,20 @@ public class CombatComponent : MonoBehaviour
     private float attackCoolTimeDeviation = 0.5f;
 
     [SerializeField]
-    private LayerMask layerMask;
-
-    [FormerlySerializedAs("weaponType")]
-    [SerializeField]
-    private WeaponType type;
+    private WeaponType weaponType;
 
     private Animator animator;
     private AIStateComponent stateComponent;
     private MonsterMoveComponent moveComponent;
     private WeaponController weaponController;
 
-    private GameObject target;
+    private GameObject combatTarget;
     private Vector3 combatPosition;
     private Collider[] colliderBuffer;
     
     private Coroutine combatCoroutine;
     private Coroutine checkCombatRangeCoroutine;
-
-    private void Reset()
-    {
-        layerMask = 1 << LayerMask.NameToLayer("Player");
-    }
-
+    
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -76,10 +65,10 @@ public class CombatComponent : MonoBehaviour
     {
         print("Start Combat");
         
-        this.target = target;
+        combatTarget = target;
         combatPosition = transform.position;
 
-        weaponController.SetWeaponType(type);
+        weaponController.SetWeaponType(weaponType);
         
         checkCombatRangeCoroutine = StartCoroutine(Coroutine_CheckCombatRange());
         combatCoroutine = StartCoroutine(Coroutine_Attack());
@@ -100,20 +89,22 @@ public class CombatComponent : MonoBehaviour
     {
         while (true)
         {
-            if (Vector3.Distance(target.transform.position, transform.position) > attackDistance)
+            if (Vector3.Distance(combatTarget.transform.position, transform.position) > attackDistance)
             {
                 moveComponent
                     .SetMoveSpeed(2.0f)
-                    .SetDestination(target.transform.position);
+                    .SetDestination(combatTarget.transform.position);
             }
             else
             {
                 moveComponent.StopMove();
                 
-                transform.LookAt(target.transform);
+                transform.LookAt(combatTarget.transform);
 
                 animator.SetInteger("ActionType", 1);
                 weaponController.DoAction();
+                
+                //TODO : 플레이어 사망 체크하기
 
                 float coolTime = GetAttackCoolTime();
 
@@ -155,7 +146,7 @@ public class CombatComponent : MonoBehaviour
 
         while (true)
         {
-            transform.LookAt(target.transform);
+            transform.LookAt(combatTarget.transform);
 
             if (Vector3.Distance(moveComponent.Destination, transform.position) < 0.1f)
             {

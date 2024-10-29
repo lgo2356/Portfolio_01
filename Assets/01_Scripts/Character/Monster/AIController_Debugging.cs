@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 public partial class AIController

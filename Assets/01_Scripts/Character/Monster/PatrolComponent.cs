@@ -39,7 +39,7 @@ public class PatrolComponent : MonoBehaviour
 
     private void MoveToNextPatrolPoint()
     {
-        destination = patrolPoint.GetNextMovePosition();
+        destination = patrolPoint.GetNextPatrolPosition();
         patrolPoint.UpdateNextIndex();
 
         moveComponent.StartMove(destination, 1.2f);

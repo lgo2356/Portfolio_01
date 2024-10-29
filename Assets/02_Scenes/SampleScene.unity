@@ -3999,6 +3999,7 @@ GameObject:
   - component: {fileID: 4912017733495976534}
   - component: {fileID: 4912017733495976533}
   - component: {fileID: 4912017733495976545}
+  - component: {fileID: 4912017733495976546}
   m_Layer: 0
   m_Name: Skeleton_Armed_01
   m_TagString: Untagged
@@ -6001,10 +6002,7 @@ MonoBehaviour:
   attackDistance: 2
   attackCoolTime: 2
   attackCoolTimeDeviation: 0.5
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 8
-  type: 1
+  weaponType: 0
 --- !u!114 &4912017733495976537
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6122,6 +6120,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07acc25947ecbec4bbae7d1582412958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4912017733495976546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837752745436639890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64a73831d46132a4fb98396f9726eb57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  patrolPoint: {fileID: 488881228}
 --- !u!1 &4948947395279281066
 GameObject:
   m_ObjectHideFlags: 0
@@ -6817,7 +6828,7 @@ MonoBehaviour:
   cameraTargetTransform: {fileID: 1048249505}
   walkSpeed: 2.5
   runSpeed: 5.5
-  sensitivity: 50
+  sensitivity: 25
   deadZone: 0.001
 --- !u!114 &6127164363632744231
 MonoBehaviour:

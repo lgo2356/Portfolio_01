@@ -26,7 +26,6 @@ public partial class AIController : MonoBehaviour
         Start_BindEvent();
         Start_InitAIStateCanvas();
 
-        // stateComponent.SetPatrolState();
         stateComponent.SetIdleState();
     }
 

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class IdleComponent : MonoBehaviour
@@ -19,6 +18,8 @@ public class IdleComponent : MonoBehaviour
     private void Start()
     {
         originalPosition = transform.position;
+        
+        StartIdle();
     }
 
     public void StartIdle()
