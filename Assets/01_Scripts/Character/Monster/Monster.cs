@@ -67,7 +67,7 @@ public class Monster : Character, IDamagable
                 StartCoroutine(Coroutine_Launch(30, weaponData.LaunchDistance));
             }
             
-            StartCoroutine(Coroutine_SetDamagedColor(30));
+            StartCoroutine(Coroutine_SetDamagedColor(0.15f));
         }
 
         StartCoroutine(Coroutine_StopAnimation(attacker, weaponData.HitStopFrame));
@@ -86,7 +86,7 @@ public class Monster : Character, IDamagable
         }
     }
 
-    private IEnumerator Coroutine_SetDamagedColor(int frame)
+    private IEnumerator Coroutine_SetDamagedColor(float time)
     {
         foreach (KeyValuePair<Material, Color> m in materialTable)
         {

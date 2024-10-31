@@ -41,7 +41,7 @@ public class MeleeCombatComponent : CombatComponent
                 
                 transform.LookAt(combatTarget.transform);
 
-                animator.SetInteger("ActionType", 1);
+                animator.SetInteger("ActionType", (int)weaponType);
                 weaponController.DoAction();
                 
                 //TODO : 플레이어 사망 체크하기
@@ -53,16 +53,6 @@ public class MeleeCombatComponent : CombatComponent
 
             yield return null;
         }
-    }
-
-    private float GetAttackCoolTime()
-    {
-        float result = attackCoolTime;
-        float deviation = UnityEngine.Random.Range(-attackCoolTimeDeviation, attackCoolTimeDeviation);
-
-        result += deviation;
-        
-        return result;
     }
     
     private IEnumerator Coroutine_CheckCombatRange()

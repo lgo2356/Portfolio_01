@@ -40,7 +40,7 @@ public class AIStateComponent : MonoBehaviour
         ChangeState(AIState.Combat);
     }
 
-    public void ChangeState(AIState newState)
+    private void ChangeState(AIState newState)
     {
         if (currentState == newState)
             return;

@@ -1,8 +1,6 @@
-using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(MonsterMoveComponent))]
-[RequireComponent(typeof(ChaseComponent))]
 [RequireComponent(typeof(WeaponController))]
 public class CombatComponent : MonoBehaviour
 {
@@ -38,24 +36,31 @@ public class CombatComponent : MonoBehaviour
         weaponController = GetComponent<WeaponController>();
     }
 
-    protected virtual void Start()
-    {
-        
-    }
-
     public virtual void StartCombat(GameObject target)
     {
         print("Start Combat");
         
         combatTarget = target;
         combatPosition = transform.position;
-
+        
         weaponController.SetWeaponType(weaponType);
     }
 
     public virtual void StopCombat()
     {
         print("Stop Combat");
+        
+        weaponController.SetWeaponType(weaponType);
+    }
+    
+    protected float GetAttackCoolTime()
+    {
+        float result = attackCoolTime;
+        float deviation = UnityEngine.Random.Range(-attackCoolTimeDeviation, attackCoolTimeDeviation);
+
+        result += deviation;
+        
+        return result;
     }
 
     // private IEnumerator Coroutine_Wait()

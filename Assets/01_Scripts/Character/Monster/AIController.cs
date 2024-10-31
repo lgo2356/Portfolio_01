@@ -1,6 +1,7 @@
 using UnityEngine;
 using AIState = AIStateComponent.AIState;
 
+[RequireComponent(typeof(IdleComponent))]
 [RequireComponent(typeof(PerceptionComponent))]
 public partial class AIController : MonoBehaviour
 {
@@ -9,7 +10,6 @@ public partial class AIController : MonoBehaviour
     private PerceptionComponent perceptionComponent;
     private PatrolComponent patrolComponent;
     private CombatComponent combatComponent;
-    private WeaponController weaponController;
 
     private void Awake()
     {

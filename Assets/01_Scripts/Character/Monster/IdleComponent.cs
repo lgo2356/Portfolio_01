@@ -5,6 +5,7 @@ public class IdleComponent : MonoBehaviour
     private AIStateComponent stateComponent;
     private MonsterMoveComponent moveComponent;
     private PerceptionComponent perceptionComponent;
+    private PatrolComponent patrolComponent;
 
     private Vector3 originalPosition;
 
@@ -13,6 +14,7 @@ public class IdleComponent : MonoBehaviour
         stateComponent = GetComponent<AIStateComponent>();
         moveComponent = GetComponent<MonsterMoveComponent>();
         perceptionComponent = GetComponent<PerceptionComponent>();
+        patrolComponent = GetComponent<PatrolComponent>();
     }
 
     private void Start()
@@ -29,7 +31,7 @@ public class IdleComponent : MonoBehaviour
         moveComponent.StopMove();
         perceptionComponent.ClearPerceivedObject();
 
-        if (GetComponent<PatrolComponent>() == null)
+        if (patrolComponent == null)
         {
             moveComponent.StartMove(originalPosition, 1.8f);
         }
