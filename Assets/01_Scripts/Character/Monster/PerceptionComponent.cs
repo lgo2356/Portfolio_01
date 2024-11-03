@@ -54,7 +54,7 @@ public class PerceptionComponent : MonoBehaviour
             {
                 candidates.Add(colliderBuffer[i]);
 
-                Debug.DrawRay(transform.position, direction, Color.blue, 0.1f);
+                // Debug.DrawRay(transform.position, direction, Color.blue, 0.1f);
             }
         }
 
@@ -122,6 +122,20 @@ public class PerceptionComponent : MonoBehaviour
 
         direction = Quaternion.AngleAxis(-perceptionAngle / 2f, Vector3.up) * transform.forward;
         Gizmos.DrawLine(transform.position, transform.position + direction.normalized * perceptionDistance);
+
+        foreach (var perceived in perceivedTable)
+        {
+            Vector3 position = transform.position;
+            position.y += 1.0f;
+
+            Vector3 perceivedPosition = perceived.Key.transform.position;
+            perceivedPosition.y += 1.0f;
+            
+            Vector3 perceivedDirection = perceivedPosition - position;
+            
+            Gizmos.DrawLine(position, position + perceivedDirection.normalized * perceivedDirection.magnitude);
+            Gizmos.DrawWireSphere(perceivedPosition, 0.25f);
+        }
     }
 #endif
 }

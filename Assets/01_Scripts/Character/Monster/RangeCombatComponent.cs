@@ -5,22 +5,26 @@ public class RangeCombatComponent : CombatComponent
 {
     [Header("원거리")]
     [SerializeField]
-    private float avoidRange = 5.0f;
+    private float avoidDistance = 5.0f;
 
     private Coroutine combatCoroutine;
     private Coroutine avoidCoroutine;
 
     private bool isCombat = true;
     private bool canAttack = true;
+    private bool isAvoid = true;
 
     public override void StartCombat(GameObject target)
     {
         base.StartCombat(target);
         
         Debug.Assert(combatCoroutine == null, "Combat Coroutine은 중복 실행할 수 없습니다.");
-
         isCombat = true;
         combatCoroutine = StartCoroutine(Coroutine_Attack());
+        
+        Debug.Assert(avoidCoroutine == null, "Avoid Coroutine은 중복 실행할 수 없습니다.");
+        isAvoid = true;
+        avoidCoroutine = StartCoroutine(Coroutine_Avoid());
     }
 
     public override void StopCombat()
@@ -28,10 +32,14 @@ public class RangeCombatComponent : CombatComponent
         base.StopCombat();
 
         Debug.Assert(combatCoroutine != null, "Combat Coroutine은 이미 실행 해제되었습니다.");
-
         StopCoroutine(combatCoroutine);
         combatCoroutine = null;
         isCombat = false;
+
+        Debug.Assert(avoidCoroutine != null, "Avoid Coroutine은 이미 실행 해제되었습니다.");
+        StopCoroutine(avoidCoroutine);
+        avoidCoroutine = null;
+        isAvoid = false;
     }
 
     private IEnumerator Coroutine_Attack()
@@ -74,5 +82,22 @@ public class RangeCombatComponent : CombatComponent
         yield return new WaitForSeconds(time);
 
         canAttack = true;
+    }
+
+    private IEnumerator Coroutine_Avoid()
+    {
+        while (isAvoid)
+        {
+            if (Vector3.Distance(combatTarget.transform.position, transform.position) <= avoidDistance)
+            {
+                print("Avoid!");
+            }
+            else
+            {
+                
+            }
+            
+            yield return null;
+        }
     }
 }

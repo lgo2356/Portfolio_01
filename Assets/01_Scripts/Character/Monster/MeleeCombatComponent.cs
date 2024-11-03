@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class MeleeCombatComponent : CombatComponent
 {
+    [Header("근접")]
+    [SerializeField]
+    private float combatDistance = 10f;
+    
     private Coroutine combatCoroutine;
     private Coroutine checkCombatRangeCoroutine;
     

@@ -1,12 +1,10 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(MonsterMoveComponent))]
 [RequireComponent(typeof(WeaponController))]
 public class CombatComponent : MonoBehaviour
 {
-    [SerializeField]
-    protected float combatDistance = 10f;
-
     [SerializeField]
     protected float attackDistance = 2.0f;
 
@@ -63,6 +61,12 @@ public class CombatComponent : MonoBehaviour
         result += deviation;
         
         return result;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackDistance);
     }
 
     // private IEnumerator Coroutine_Wait()
