@@ -27,6 +27,8 @@ public class CombatComponent : MonoBehaviour
     protected GameObject combatTarget;
     protected Vector3 combatPosition;
     protected Collider[] colliderBuffer;
+
+    public GameObject CombatTarget => combatTarget;
     
     protected virtual void Awake()
     {

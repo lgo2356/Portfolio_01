@@ -6062,7 +6062,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e04abee1b73d141aea017f5a162b67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  perceptionDistance: 12
+  perceptionDistance: 24
   perceptionAngle: 120
   lostTime: 2
   layerMask:
@@ -6153,7 +6153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   combatDistance: 10
-  attackDistance: 8
+  attackDistance: 24
   attackCoolTime: 2
   attackCoolTimeDeviation: 0.5
   weaponType: 5
@@ -6656,7 +6656,7 @@ GameObject:
   - component: {fileID: 6127164363632744231}
   m_Layer: 3
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

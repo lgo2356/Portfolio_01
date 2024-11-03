@@ -1,31 +1,44 @@
 using System;
 using UnityEngine;
 
-//TODO : 유도 미사일 추가
 public class Projectile : MonoBehaviour
 {
-    [SerializeField]
-    private float force = 1000.0f;
+    // [SerializeField]
+    // private float force = 1000.0f;
 
     private new Rigidbody rigidbody;
     private new Collider collider;
-    private Vector3 direction;
+    // protected Vector3 direction;
 
     public event Action<Collider, Collider, Vector3, Vector3> OnProjectileCollision;
     
-    public Vector3 Direction
-    {
-        set => direction = value;
-    }
+    // public Vector3 Direction
+    // {
+    //     set => direction = value;
+    // }
     
-    private void Awake()
+    protected virtual void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
         collider = GetComponent<Collider>();
     }
 
-    private void Start()
+    public virtual void Shoot(Vector3 direction, float force)
     {
         rigidbody.AddForce(direction * force);
+    }
+
+    public virtual void Shoot(GameObject target, float speed)
+    {
+        
+    }
+
+    protected void OnTriggerEnter(Collider other)
+    {
+        print($"Collision - {other.gameObject.name}");
+        
+        OnProjectileCollision?.Invoke(collider, other, transform.position, other.transform.forward);
+        
+        Destroy(gameObject);
     }
 }

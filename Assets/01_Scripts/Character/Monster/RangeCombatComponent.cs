@@ -11,6 +11,7 @@ public class RangeCombatComponent : CombatComponent
     private Coroutine avoidCoroutine;
 
     private bool isCombat = true;
+    private bool canAttack = true;
 
     public override void StartCombat(GameObject target)
     {
@@ -37,26 +38,41 @@ public class RangeCombatComponent : CombatComponent
     {
         while (isCombat)
         {
-            transform.LookAt(combatTarget.transform);
-            
             if (Vector3.Distance(combatTarget.transform.position, transform.position) > attackDistance)
             {
                 //TODO : 전투 대기
+                
+                transform.LookAt(combatTarget.transform);
             }
             else
             {
-                moveComponent.StopMove();
-
-                weaponController.DoAction();
-                
-                //TODO : 플레이어 사망 체크하기
-
-                float coolTime = GetAttackCoolTime();
-
-                yield return new WaitForSeconds(coolTime);
+                if (canAttack)
+                {
+                    moveComponent.StopMove();
+                    
+                    weaponController.DoAction();
+                    
+                    float coolTime = GetAttackCoolTime();
+                    StartCoroutine(Coroutine_SetCoolTime(coolTime));
+                }
+                else
+                {
+                    transform.LookAt(combatTarget.transform);
+                }
             }
+            
+            //TODO : 플레이어 사망 체크하기
             
             yield return null;
         }
+    }
+
+    private IEnumerator Coroutine_SetCoolTime(float time)
+    {
+        canAttack = false;
+        
+        yield return new WaitForSeconds(time);
+
+        canAttack = true;
     }
 }

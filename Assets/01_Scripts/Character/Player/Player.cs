@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : Character
+public class Player : Character, IDamagable
 {
     [SerializeField]
     private Transform bodyTransform;
@@ -64,5 +64,19 @@ public class Player : Character
         {
             weaponController.DoAction();
         };
+    }
+
+    public void OnDamaged(GameObject attacker, Weapon causer, Vector3 hitPoint, WeaponData weaponData)
+    {
+        hpComponent.AddDamage(weaponData.Power);
+
+        if (weaponData.HitParticle != null)
+        {
+            GameObject go = Instantiate(weaponData.HitParticle);
+            {
+                go.transform.position = hitPoint + weaponData.HitParticlePositionOffset;
+                go.transform.localScale += weaponData.HitParticleScaleOffset;
+            }
+        }
     }
 }

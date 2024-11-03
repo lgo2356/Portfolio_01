@@ -4913,9 +4913,9 @@ GameObject:
   - component: {fileID: 4166745664283874393}
   - component: {fileID: 1942584240608775085}
   - component: {fileID: 7937609064647472225}
-  - component: {fileID: 3674858173505636047}
+  - component: {fileID: 6064020117061895576}
   m_Layer: 0
-  m_Name: Staff_01_Projectile
+  m_Name: Staff_01_Projectile(Guided)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9802,9 +9802,9 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.8
-  m_Center: {x: 0, y: 0, z: 0.43}
---- !u!114 &3674858173505636047
+  m_Radius: 0.4
+  m_Center: {x: 0, y: 0, z: 0.57}
+--- !u!114 &6064020117061895576
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9813,7 +9813,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4166745664283874398}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a257f15203b1cb48ae8a573ba1a83c4, type: 3}
+  m_Script: {fileID: 11500000, guid: 9457098841d72e44a8a65b010e961ff7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   force: 1000

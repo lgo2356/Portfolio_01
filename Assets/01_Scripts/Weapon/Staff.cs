@@ -14,6 +14,11 @@ public class Staff : RangeWeapon
     [SerializeField]
     private GameObject projectilePrefab;
 
+    [SerializeField]
+    private bool isGuided;
+
+    private CombatComponent combatComponent;
+
     private Transform handPositionTransform;
     private Transform muzzlePositionTransform;
     
@@ -27,6 +32,8 @@ public class Staff : RangeWeapon
     protected override void Awake()
     {
         base.Awake();
+
+        combatComponent = rootObject.GetComponent<CombatComponent>();
 
         handPositionTransform = rootObject.transform.FindChildByName(handPositionName);
         {
@@ -87,13 +94,36 @@ public class Staff : RangeWeapon
 
             GameObject go = Instantiate(projectilePrefab, position, rootObject.transform.rotation);
             Projectile projectile = go.GetComponent<Projectile>();
-            {
-                //TODO : 락인한 대상 방향으로 보내기
-                Vector3 direction = rootObject.transform.forward;
-                // Vector3 direction = Camera.main.transform.forward;
+            projectile.OnProjectileCollision += OnProjectileCollision;
+            
+            Vector3 direction = rootObject.transform.forward;
 
-                projectile.Direction = direction;
+            if (isGuided)
+            {
+                (projectile as GuidedProjectile).Shoot(combatComponent.CombatTarget, 10.0f);
+            }
+            else
+            {
+                projectile.Shoot(direction, 1000.0f);
             }
         }
+    }
+
+    private void OnProjectileCollision(Collider projectile, Collider other, Vector3 hitPoint, Vector3 hitNormal)
+    {
+        if (other.gameObject.CompareTag(rootObject.tag))
+            return;
+
+        IDamagable damagable = other.GetComponent<IDamagable>();
+
+        if (damagable != null)
+        {
+            damagable.OnDamaged(rootObject, this, hitPoint, weaponDatas[0]);
+        }
+
+        // if (weaponDatas[0].HitParticle)
+        // {
+        //     Instantiate(weaponDatas[0].HitParticle, hitPoint, rootObject.transform.rotation);
+        // }
     }
 }
