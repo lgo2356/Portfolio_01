@@ -23,7 +23,6 @@ public class CombatComponent : MonoBehaviour
     protected WeaponController weaponController;
 
     protected GameObject combatTarget;
-    protected Vector3 combatPosition;
     protected Collider[] colliderBuffer;
 
     public GameObject CombatTarget => combatTarget;
@@ -41,7 +40,6 @@ public class CombatComponent : MonoBehaviour
         print("Start Combat");
         
         combatTarget = target;
-        combatPosition = transform.position;
         
         weaponController.SetWeaponType(weaponType);
     }
@@ -49,6 +47,8 @@ public class CombatComponent : MonoBehaviour
     public virtual void StopCombat()
     {
         print("Stop Combat");
+
+        combatTarget = null;
         
         weaponController.SetWeaponType(weaponType);
     }
@@ -63,11 +63,24 @@ public class CombatComponent : MonoBehaviour
         return result;
     }
 
-    private void OnDrawGizmosSelected()
+#if UNITY_EDITOR
+    protected virtual void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackDistance);
+        
+        if (Application.isPlaying == false)
+            return;
+
+        if (combatTarget != null)
+        {
+            Vector3 position = combatTarget.transform.position;
+            position.y += 1.0f;
+            
+            Gizmos.DrawWireSphere(position, 1.5f);
+        }
     }
+#endif
 
     // private IEnumerator Coroutine_Wait()
     // {

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class RangeCombatComponent : CombatComponent
 {
@@ -7,12 +8,22 @@ public class RangeCombatComponent : CombatComponent
     [SerializeField]
     private float avoidDistance = 5.0f;
 
+    private NavMeshAgent navMeshAgent;
+
     private Coroutine combatCoroutine;
     private Coroutine avoidCoroutine;
 
     private bool isCombat = true;
     private bool canAttack = true;
     private bool isAvoid = true;
+    private bool isAvoiding;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        navMeshAgent = GetComponent<NavMeshAgent>();
+    }
 
     public override void StartCombat(GameObject target)
     {
@@ -25,6 +36,8 @@ public class RangeCombatComponent : CombatComponent
         Debug.Assert(avoidCoroutine == null, "Avoid Coroutine은 중복 실행할 수 없습니다.");
         isAvoid = true;
         avoidCoroutine = StartCoroutine(Coroutine_Avoid());
+
+        isAvoiding = false;
     }
 
     public override void StopCombat()
@@ -62,6 +75,8 @@ public class RangeCombatComponent : CombatComponent
                     
                     float coolTime = GetAttackCoolTime();
                     StartCoroutine(Coroutine_SetCoolTime(coolTime));
+
+                    yield return null;
                 }
                 else
                 {
@@ -91,13 +106,55 @@ public class RangeCombatComponent : CombatComponent
             if (Vector3.Distance(combatTarget.transform.position, transform.position) <= avoidDistance)
             {
                 print("Avoid!");
-            }
-            else
-            {
                 
+                animator.SetBool("IsAction", false);
+
+                if (isAvoiding == false)
+                {
+                    animator.SetBool("IsWarpAction", true);
+                }
             }
             
             yield return null;
         }
+    }
+
+    //TODO : 스킬 컴포넌트 개발하면 옮기기
+    private void BeginAnimCast()
+    {
+        isAvoiding = true;
+    }
+
+    private void EndAnimCast()
+    {
+        isAvoiding = false;
+        
+        animator.SetBool("IsWarpAction", false);
+        
+        StartCoroutine(Coroutine_SetCoolTime(1.5f));
+    }
+
+    private void DoAnimCast()
+    {
+        Vector3 newPosition = transform.position - transform.forward * 10.0f;
+
+        NavMeshPath newPath = new();
+
+        if (navMeshAgent.CalculatePath(newPosition, newPath))
+        {
+            transform.position = newPosition;
+        }
+        else
+        {
+            print("그곳으로 이동할 수 없습니다.");
+        }
+    }
+
+    protected override void OnDrawGizmosSelected()
+    {
+        base.OnDrawGizmosSelected();
+        
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, avoidDistance);
     }
 }

@@ -6062,7 +6062,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e04abee1b73d141aea017f5a162b67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  perceptionDistance: 24
+  perceptionDistance: 10
   perceptionAngle: 120
   lostTime: 2
   layerMask:
@@ -6152,12 +6152,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 423485f6020c16c4cb60d7a03fe2131a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combatDistance: 10
-  attackDistance: 24
+  attackDistance: 9
   attackCoolTime: 2
   attackCoolTimeDeviation: 0.5
   weaponType: 5
-  avoidRange: 5
+  avoidDistance: 5
 --- !u!114 &5423166020751066508
 MonoBehaviour:
   m_ObjectHideFlags: 0

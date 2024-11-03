@@ -7,12 +7,16 @@ public class MeleeCombatComponent : CombatComponent
     [SerializeField]
     private float combatDistance = 10f;
     
+    private Vector3 combatPosition;
+    
     private Coroutine combatCoroutine;
     private Coroutine checkCombatRangeCoroutine;
     
     public override void StartCombat(GameObject target)
     {
         base.StartCombat(target);
+        
+        combatPosition = transform.position;
         
         checkCombatRangeCoroutine = StartCoroutine(Coroutine_CheckCombatRange());
         combatCoroutine = StartCoroutine(Coroutine_Attack());
@@ -27,6 +31,8 @@ public class MeleeCombatComponent : CombatComponent
         
         StopCoroutine(combatCoroutine);
         combatCoroutine = null;
+        
+        combatPosition = Vector3.zero;
     }
     
     private IEnumerator Coroutine_Attack()

@@ -19,8 +19,6 @@ public class GuidedProjectile : Projectile
 
         if (dot < 0.0f)
         {
-            print($"Dot : {dot}");
-
             StopCoroutine(guideCoroutine);
         }
         

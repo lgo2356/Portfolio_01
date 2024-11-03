@@ -53,8 +53,6 @@ public class PerceptionComponent : MonoBehaviour
             if (Mathf.Abs(signedAngle) < perceptionAngle / 2f)
             {
                 candidates.Add(colliderBuffer[i]);
-
-                // Debug.DrawRay(transform.position, direction, Color.blue, 0.1f);
             }
         }
 
@@ -122,6 +120,9 @@ public class PerceptionComponent : MonoBehaviour
 
         direction = Quaternion.AngleAxis(-perceptionAngle / 2f, Vector3.up) * transform.forward;
         Gizmos.DrawLine(transform.position, transform.position + direction.normalized * perceptionDistance);
+
+        if (Application.isPlaying == false)
+            return;
 
         foreach (var perceived in perceivedTable)
         {
