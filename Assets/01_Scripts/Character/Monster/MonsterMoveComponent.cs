@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,6 +9,7 @@ public class MonsterMoveComponent : MonoBehaviour
 
     private Vector3 destination;
     private float moveSpeed;
+    private Transform lookTarget;
 
     public Vector3 Destination => destination;
     public float MoveSpeed => moveSpeed;
@@ -25,7 +27,28 @@ public class MonsterMoveComponent : MonoBehaviour
 
     private void Update()
     {
-        animator.SetFloat("MoveSpeedZ", navMeshAgent.velocity.magnitude);
+        float velocity = navMeshAgent.velocity.magnitude;
+        
+        if (moveSpeed < 0.0f)
+        {
+            velocity *= (-1.0f);
+        }
+        
+        animator.SetFloat("MoveSpeedZ", velocity);
+        // animator.SetFloat("MoveSpeedZ", navMeshAgent.velocity.x);
+        // animator.SetFloat("MoveSpeedX", navMeshAgent.velocity.z);
+
+        if (lookTarget != null)
+        {
+            transform.LookAt(lookTarget);
+        }
+    }
+
+    public MonsterMoveComponent SetLookTarget(Transform target)
+    {
+        lookTarget = target;
+
+        return this;
     }
 
     public void SetDestination(Vector3 dest)
@@ -44,7 +67,7 @@ public class MonsterMoveComponent : MonoBehaviour
     {
         moveSpeed = speed;
         
-        navMeshAgent.speed = speed;
+        navMeshAgent.speed = Mathf.Abs(speed);
 
         return this;
     }
@@ -56,7 +79,7 @@ public class MonsterMoveComponent : MonoBehaviour
         destination = dest;
         moveSpeed = speed;
 
-        navMeshAgent.speed = speed;
+        navMeshAgent.speed = Mathf.Abs(speed);
         navMeshAgent.isStopped = false;
 
         NavMeshPath navMeshPath = CreateNavMeshPath(dest);

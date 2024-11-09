@@ -14,7 +14,6 @@ public class RangeCombatComponent : CombatComponent
     private Coroutine avoidCoroutine;
 
     private bool isCombat = true;
-    private bool canAttack = true;
     private bool isAvoid = true;
     private bool isAvoiding;
 
@@ -90,15 +89,6 @@ public class RangeCombatComponent : CombatComponent
         }
     }
 
-    private IEnumerator Coroutine_SetCoolTime(float time)
-    {
-        canAttack = false;
-        
-        yield return new WaitForSeconds(time);
-
-        canAttack = true;
-    }
-
     private IEnumerator Coroutine_Avoid()
     {
         while (isAvoid)
@@ -136,7 +126,13 @@ public class RangeCombatComponent : CombatComponent
 
     private void DoAnimCast()
     {
-        Vector3 newPosition = transform.position - transform.forward * 10.0f;
+        Vector3 range = new()
+        {
+            x = UnityEngine.Random.Range(-3.0f, 3.0f),
+            z = UnityEngine.Random.Range(-3.0f, 3.0f),
+        };
+        Vector3 newPosition = transform.position - transform.forward * 5.0f;
+        newPosition += range;
 
         NavMeshPath newPath = new();
 

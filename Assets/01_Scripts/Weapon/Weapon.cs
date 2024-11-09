@@ -23,6 +23,7 @@ public enum WeaponType
 {
     Unarmed = 0,
     Fist, Sword, GreatSword, Katana, Staff, Warp,
+    BossBat,
     Max,
 }
 

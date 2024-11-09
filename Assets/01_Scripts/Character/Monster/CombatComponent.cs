@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(MonsterMoveComponent))]
@@ -24,6 +25,7 @@ public class CombatComponent : MonoBehaviour
 
     protected GameObject combatTarget;
     protected Collider[] colliderBuffer;
+    protected bool canAttack = true;
 
     public GameObject CombatTarget => combatTarget;
     
@@ -61,6 +63,15 @@ public class CombatComponent : MonoBehaviour
         result += deviation;
         
         return result;
+    }
+    
+    protected IEnumerator Coroutine_SetCoolTime(float time)
+    {
+        canAttack = false;
+        
+        yield return new WaitForSeconds(time);
+
+        canAttack = true;
     }
 
 #if UNITY_EDITOR
