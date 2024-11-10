@@ -8,8 +8,24 @@ public class BossCombatComponent : CombatComponent
     private float backwardDistance = 2.0f;
     
     private Coroutine combatCoroutine;
+    private Func<IEnumerator>[] waitCoroutines;
+    private float waitTime;
 
-    public int AttackType = 1;
+    protected override void Start()
+    {
+        base.Start();
+        
+        /**
+         * 코루틴의 인스턴스는 한번 실행되고 완료되면 종료 상태가 되기 때문에 다시 실행할 수 없다.
+         * 코루틴을 다시 실행하려면 새로 인스턴스를 생성해야 한다.
+         */
+        waitCoroutines = new Func<IEnumerator>[]
+        {
+            Coroutine_MoveBackward,
+            Coroutine_MoveRight,
+            Coroutine_MoveLeft,
+        };
+    }
 
     public override void StartCombat(GameObject target)
     {
@@ -35,17 +51,12 @@ public class BossCombatComponent : CombatComponent
             {
                 moveComponent
                     .SetMoveSpeed(2.0f)
+                    .SetLookTarget(combatTarget.transform)
+                    .SetDirection(MonsterMoveComponent.Direction.Forward)
                     .SetDestination(combatTarget.transform.position);
             }
-            
-            //  
-            
             else
             {
-                moveComponent.StopMove();
-                
-                transform.LookAt(combatTarget.transform);
-                
                 // if (canAttack)
                 // {
                 //     animator.SetInteger("AttackType", GetRandomAttackType());
@@ -56,83 +67,111 @@ public class BossCombatComponent : CombatComponent
                 //     
                 //     yield return new WaitForSeconds(coolTime);
                 // }
-
-                // MoveBackward();
-                // MoveRight();
-                // MoveLeft();
-
-                StartCoroutine(Coroutine_MoveLeft(1.0f));
                 
-                yield return new WaitForSeconds(5.0f);
+                moveComponent.StopMove();
+                transform.LookAt(combatTarget.transform);
+
+                waitTime = GetWaitTime();
+                int waitType = GetWaitCoroutineType();
+                IEnumerator waitCoroutine = waitCoroutines[waitType]();
+                StartCoroutine(waitCoroutine);
+                
+                yield return new WaitForSeconds(waitTime);
             }
             
             yield return null;
         }
     }
-
-    private void MoveBackward()
-    {
-        Vector3 dest = transform.position + (-transform.forward * 3.0f);
-        
-        moveComponent
-            .SetLookTarget(combatTarget.transform)
-            .SetMoveSpeed(-1.0f)
-            .SetDestination(dest);
-    }
-
-    private void MoveRight()
-    {
-        Vector3 dest = transform.position + (transform.right * 3.0f);
-        
-        moveComponent
-            .SetLookTarget(combatTarget.transform)
-            .SetMoveSpeed(1.0f)
-            .SetDestination(dest);
-    }
-
-    private IEnumerator Coroutine_MoveLeft(float duration)
+    
+    private IEnumerator Coroutine_MoveBackward()
     {
         float time = 0.0f;
 
         moveComponent
             .SetLookTarget(combatTarget.transform)
+            .SetDirection(MonsterMoveComponent.Direction.Backward)
             .SetMoveSpeed(-1.0f);
-        
-        while (time < duration)
+
+        while (time < waitTime)
         {
             time += Time.deltaTime;
             
-            Vector3 dir = Vector3.Cross(combatTarget.transform.position - transform.position, combatTarget.transform.up);
-            Vector3 dest = transform.position + (dir.normalized * 1.0f);
-            
-            Debug.DrawRay(transform.position, dest, Color.magenta);
-        
+            Vector3 dir = transform.forward * (-1.0f);
+            Vector3 dest = transform.position + (dir * 1.0f);
+
+            Debug.DrawRay(transform.position, dir * 1.0f, Color.magenta);
+
             moveComponent.SetDestination(dest);
             
-            yield return null;   
+            yield return null;
         }
     }
 
-    private void MoveLeft()
+    private IEnumerator Coroutine_MoveRight()
     {
-        Vector3 dir = Vector3.Cross(combatTarget.transform.position - transform.position, combatTarget.transform.up);
-        Vector3 dest = transform.position + (dir.normalized * 3.0f);
-        // Vector3 dest = transform.position + (-transform.right * 3.0f);
-        
-        
-        // Vector3 dir = Vector3.Cross(transform.position - combatTarget.transform.position, combatTarget.transform.up);
+        float time = 0.0f;
 
-        Debug.DrawRay(transform.position, dir, Color.magenta, 10f);
-        
         moveComponent
             .SetLookTarget(combatTarget.transform)
-            .SetMoveSpeed(-1.0f)
-            .SetDestination(dest);
+            .SetDirection(MonsterMoveComponent.Direction.Right)
+            .SetMoveSpeed(1.0f);
+
+        while (time < waitTime)
+        {
+            time += Time.deltaTime;
+            
+            Vector3 dir = transform.right;
+            Vector3 dest = transform.position + (dir * 1.0f);
+
+            Debug.DrawRay(transform.position, dir * 1.0f, Color.magenta);
+
+            moveComponent.SetDestination(dest);
+            
+            yield return null;
+        }
+    }
+
+    private IEnumerator Coroutine_MoveLeft()
+    {
+        float time = 0.0f;
+
+        moveComponent
+            .SetLookTarget(combatTarget.transform)
+            .SetDirection(MonsterMoveComponent.Direction.Left)
+            .SetMoveSpeed(-1.0f);
+
+        while (time < waitTime)
+        {
+            time += Time.deltaTime;
+            
+            Vector3 dir = transform.right * (-1);
+            Vector3 dest = transform.position + (dir * 1.0f);
+
+            Debug.DrawRay(transform.position, dir * 1.0f, Color.magenta);
+
+            moveComponent.SetDestination(dest);
+
+            yield return null;
+        }
     }
 
     private int GetRandomAttackType()
     {
         int type = UnityEngine.Random.Range(1, 4);
+
+        return type;
+    }
+
+    private float GetWaitTime()
+    {
+        float time = UnityEngine.Random.Range(1.5f, 3.0f);
+        
+        return time;
+    }
+
+    private int GetWaitCoroutineType()
+    {
+        int type = UnityEngine.Random.Range(0, waitCoroutines.Length);
 
         return type;
     }

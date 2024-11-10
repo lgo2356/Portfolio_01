@@ -4,12 +4,18 @@ using UnityEngine.AI;
 
 public class MonsterMoveComponent : MonoBehaviour
 {
+    public enum Direction
+    {
+        Forward, Backward, Right, Left,
+    }
+    
     private Animator animator;
     private NavMeshAgent navMeshAgent;
 
     private Vector3 destination;
     private float moveSpeed;
     private Transform lookTarget;
+    private Direction direction;
 
     public Vector3 Destination => destination;
     public float MoveSpeed => moveSpeed;
@@ -24,23 +30,36 @@ public class MonsterMoveComponent : MonoBehaviour
     {
         destination = transform.position;
     }
-
+    
     private void Update()
     {
+        if (lookTarget != null)
+        {
+            transform.LookAt(lookTarget);
+        }
+        
         float velocity = navMeshAgent.velocity.magnitude;
         
         if (moveSpeed < 0.0f)
         {
             velocity *= (-1.0f);
         }
-        
-        animator.SetFloat("MoveSpeedZ", velocity);
-        // animator.SetFloat("MoveSpeedZ", navMeshAgent.velocity.x);
-        // animator.SetFloat("MoveSpeedX", navMeshAgent.velocity.z);
 
-        if (lookTarget != null)
+        switch (direction)
         {
-            transform.LookAt(lookTarget);
+            case Direction.Right:
+            case Direction.Left:
+            {
+                animator.SetFloat("MoveSpeedX", velocity);
+                break;
+            }
+            
+            case Direction.Forward:
+            case Direction.Backward:
+            {
+                animator.SetFloat("MoveSpeedZ", velocity);
+                break;
+            }
         }
     }
 
@@ -48,6 +67,13 @@ public class MonsterMoveComponent : MonoBehaviour
     {
         lookTarget = target;
 
+        return this;
+    }
+
+    public MonsterMoveComponent SetDirection(Direction direction)
+    {
+        this.direction = direction;
+        
         return this;
     }
 
@@ -105,6 +131,8 @@ public class MonsterMoveComponent : MonoBehaviour
         navMeshAgent.speed = 0.0f;
 
         animator.SetFloat("MoveSpeedZ", 0f);
+
+        lookTarget = null;
     }
 
     private NavMeshPath CreateNavMeshPath(Vector3 dest)
@@ -126,5 +154,11 @@ public class MonsterMoveComponent : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawSphere(destination, 0.1f);
+    }
+
+    private void OnGUI()
+    {
+        GUI.color = Color.green;
+        GUILayout.Label($"{navMeshAgent.velocity}");
     }
 }

@@ -10993,7 +10993,7 @@ NavMeshAgent:
   m_AngularSpeed: 360
   m_StoppingDistance: 0.1
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0
@@ -11131,10 +11131,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c8abdf502b92ac4e8c9141363254525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDistance: 3
+  attackDistance: 3.5
   attackCoolTime: 4
   attackCoolTimeDeviation: 0.5
   weaponType: 7
+  backwardDistance: 2
   AttackType: 1
 --- !u!4 &8202707450363251921
 Transform:

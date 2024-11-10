@@ -37,6 +37,11 @@ public class CombatComponent : MonoBehaviour
         weaponController = GetComponent<WeaponController>();
     }
 
+    protected virtual void Start()
+    {
+        
+    }
+
     public virtual void StartCombat(GameObject target)
     {
         print("Start Combat");
