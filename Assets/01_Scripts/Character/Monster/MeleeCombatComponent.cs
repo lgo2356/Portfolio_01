@@ -73,7 +73,7 @@ public class MeleeCombatComponent : CombatComponent
             {
                 print("Out of combat range");
                 
-                stateComponent.SetIdleState();
+                aiStateComponent.SetIdleState();
             }
             
             yield return null;

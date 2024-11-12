@@ -21,7 +21,7 @@ public class BossCombatComponent : CombatComponent
          */
         waitCoroutines = new Func<IEnumerator>[]
         {
-            Coroutine_MoveBackward,
+            // Coroutine_MoveBackward,
             Coroutine_MoveRight,
             Coroutine_MoveLeft,
         };
@@ -57,26 +57,35 @@ public class BossCombatComponent : CombatComponent
             }
             else
             {
-                // if (canAttack)
-                // {
-                //     animator.SetInteger("AttackType", GetRandomAttackType());
-                //     weaponController.DoAction();
-                //     
-                //     float coolTime = GetAttackCoolTime();
-                //     StartCoroutine(Coroutine_SetCoolTime(coolTime));
-                //     
-                //     yield return new WaitForSeconds(coolTime);
-                // }
-                
                 moveComponent.StopMove();
                 transform.LookAt(combatTarget.transform);
-
-                waitTime = GetWaitTime();
-                int waitType = GetWaitCoroutineType();
-                IEnumerator waitCoroutine = waitCoroutines[waitType]();
-                StartCoroutine(waitCoroutine);
                 
-                yield return new WaitForSeconds(waitTime);
+                if (canAttack)
+                {
+                    animator.SetInteger("AttackType", GetRandomAttackType());
+                    weaponController.DoAction();
+                    
+                    float coolTime = GetAttackCoolTime();
+                    StartCoroutine(Coroutine_SetCoolTime(coolTime));
+                }
+
+                if (stateComponent.IsAttackState == false)
+                {
+                    waitTime = GetWaitTime();
+                    
+                    if (Vector3.Distance(combatTarget.transform.position, transform.position) < attackDistance - 2.0f)
+                    {
+                        StartCoroutine(Coroutine_MoveBackward());
+                    }
+                    else
+                    {
+                        int waitType = GetWaitCoroutineType();
+                        IEnumerator waitCoroutine = waitCoroutines[waitType]();
+                        StartCoroutine(waitCoroutine);   
+                    }
+                    
+                    yield return new WaitForSeconds(waitTime);
+                }
             }
             
             yield return null;

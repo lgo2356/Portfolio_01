@@ -88,7 +88,7 @@ public class Weapon : MonoBehaviour
 
     public virtual void DoAction()
     {
-
+        stateComponent.SetAttackState();
     }
 
     public virtual void EndAction()

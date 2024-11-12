@@ -19,7 +19,8 @@ public class CombatComponent : MonoBehaviour
     protected WeaponType weaponType;
 
     protected Animator animator;
-    protected AIStateComponent stateComponent;
+    protected StateComponent stateComponent;
+    protected AIStateComponent aiStateComponent;
     protected MonsterMoveComponent moveComponent;
     protected WeaponController weaponController;
 
@@ -32,7 +33,8 @@ public class CombatComponent : MonoBehaviour
     protected virtual void Awake()
     {
         animator = GetComponent<Animator>();
-        stateComponent = GetComponent<AIStateComponent>();
+        stateComponent = GetComponent<StateComponent>();
+        aiStateComponent = GetComponent<AIStateComponent>();
         moveComponent = GetComponent<MonsterMoveComponent>();
         weaponController = GetComponent<WeaponController>();
     }
