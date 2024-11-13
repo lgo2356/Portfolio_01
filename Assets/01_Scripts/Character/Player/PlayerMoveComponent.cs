@@ -21,10 +21,10 @@ public class PlayerMoveComponent : MonoBehaviour
 
     private void Reset()
     {
-        GameObject go = GameObject.Find("Player");
+        GameObject go = GameObject.FindGameObjectWithTag("Player");
         Debug.Assert(go != null);
 
-        cameraTargetTransform = go.transform.FindChildByName("CameraTarget");
+        cameraTargetTransform = go.transform.FindChildByName("PlayerCameraTarget");
         Debug.Assert(cameraTargetTransform != null);
     }
 
