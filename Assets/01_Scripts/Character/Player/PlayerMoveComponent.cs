@@ -120,6 +120,9 @@ public class PlayerMoveComponent : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.isPlayerInput == false)
+            return;
+        
         if (canMove == false)
             return;
 

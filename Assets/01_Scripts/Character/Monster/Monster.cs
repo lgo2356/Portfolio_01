@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,8 @@ using UnityEngine;
 public class Monster : Character, IDamagable
 {
     private Dictionary<Material, Color> materialTable;
+
+    public Action OnTauntAction;
     
     protected override void Awake()
     {
@@ -117,5 +120,10 @@ public class Monster : Character, IDamagable
 
         attackerAnim.speed = 1.0f;
         animator.speed = 1.0f;
+    }
+
+    private void OnAnimTaunt()
+    {
+        OnTauntAction?.Invoke();
     }
 }

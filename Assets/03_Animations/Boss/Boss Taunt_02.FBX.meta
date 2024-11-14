@@ -674,7 +674,15 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.7821968
+        functionName: OnAnimTaunt
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: ed5c14aca11cba343a37c2b68e91d4b4,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {fileID: 31900000, guid: bdf9c12183f0a3e47946368833550809, type: 2}

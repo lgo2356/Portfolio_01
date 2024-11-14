@@ -13,11 +13,33 @@ public class BossCinematicEventTrigger : MonoBehaviour
 
     [SerializeField]
     private GameObject bossObject;
-    
+
+    [SerializeField]
+    private GameObject cinematicObjects;
+
+    private new Collider collider;
+    private Boss boss;
+
+    private void Awake()
+    {
+        collider = GetComponent<Collider>();
+    }
+
+    private void Start()
+    {
+        boss = bossObject.GetComponent<Boss>();
+        boss.OnTauntAction += () =>
+        {
+            cinematicObjects.SetActive(false);
+        };
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        print("BossCinematicEventTrigger");
+        collider.enabled = false;
 
+        GameManager.isPlayerInput = false;
+        
         StartCoroutine(Coroutine_Camera());
     }
 
@@ -29,7 +51,6 @@ public class BossCinematicEventTrigger : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
 
-        Boss boss = bossObject.GetComponent<Boss>();
         boss.SetTaunt();
 
         yield return new WaitForSeconds(4.5f);
@@ -37,5 +58,11 @@ public class BossCinematicEventTrigger : MonoBehaviour
         // To Player
         playerCamera.Priority = 99;
         bossCamera.Priority = 1;
+
+        bossObject.GetComponent<PerceptionComponent>().enabled = true;
+
+        GameManager.isPlayerInput = true;
+        
+        Destroy(gameObject);
     }
 }

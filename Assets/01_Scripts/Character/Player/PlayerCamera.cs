@@ -43,6 +43,9 @@ public class PlayerCamera : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.isPlayerInput == false)
+            return;
+        
         // 카메라 이동
         transform.position = new Vector3(playerTransform.position.x, playerTransform.position.y + 1.3f, playerTransform.position.z);
         
