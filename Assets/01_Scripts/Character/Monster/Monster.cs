@@ -32,7 +32,7 @@ public class Monster : Character, IDamagable
         }
     }
     
-    public void OnDamaged(GameObject attacker, Weapon causer, Vector3 hitPoint, WeaponData weaponData)
+    public virtual void OnDamaged(GameObject attacker, Weapon causer, Vector3 hitPoint, WeaponData weaponData)
     {
         hpComponent.AddDamage(weaponData.Power);
 
@@ -46,13 +46,7 @@ public class Monster : Character, IDamagable
         if (hpComponent.IsDead)
         {
             stateComponent.SetDeadState();
-
-            rigidbody.useGravity = false;
-
-            Collider collider = GetComponent<Collider>();
-            collider.enabled = false;
-
-            animator.SetTrigger("DoDead");
+            OnDead();
         }
         else
         {
@@ -74,6 +68,16 @@ public class Monster : Character, IDamagable
         }
 
         StartCoroutine(Coroutine_StopAnimation(attacker, weaponData.HitStopFrame));
+    }
+
+    protected virtual void OnDead()
+    {
+        rigidbody.useGravity = false;
+
+        Collider collider = GetComponent<Collider>();
+        collider.enabled = false;
+
+        animator.SetTrigger("DoDead");
     }
 
     private IEnumerator Coroutine_Launch(int frame, float distance)
@@ -102,6 +106,8 @@ public class Monster : Character, IDamagable
         {
             m.Key.color = m.Value;
         }
+        
+        stateComponent.SetIdleState();
     }
 
     private IEnumerator Coroutine_StopAnimation(GameObject attacker, int frame)

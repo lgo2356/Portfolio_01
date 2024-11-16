@@ -8,8 +8,6 @@ public class BossCombatComponent : CombatComponent
     private float backwardDistance = 2.0f;
     
     private Coroutine combatCoroutine;
-    private Func<IEnumerator>[] waitCoroutines;
-    private float waitTime;
 
     protected override void Start()
     {
@@ -37,9 +35,14 @@ public class BossCombatComponent : CombatComponent
     public override void StopCombat()
     {
         base.StopCombat();
-        
-        StopCoroutine(combatCoroutine);
-        combatCoroutine = null;
+
+        if (combatCoroutine != null)
+        {
+            StopCoroutine(combatCoroutine);
+            combatCoroutine = null;
+
+            waitTime = 0.0f;
+        }
     }
 
     private IEnumerator Coroutine_Combat()
@@ -71,7 +74,7 @@ public class BossCombatComponent : CombatComponent
 
                 if (stateComponent.IsAttackState == false)
                 {
-                    waitTime = GetWaitTime();
+                    waitTime = GetWaitTime(1.5f, 2.5f);
                     
                     if (Vector3.Distance(combatTarget.transform.position, transform.position) < attackDistance - 2.0f)
                     {
@@ -115,72 +118,10 @@ public class BossCombatComponent : CombatComponent
             yield return null;
         }
     }
-
-    private IEnumerator Coroutine_MoveRight()
-    {
-        float time = 0.0f;
-
-        moveComponent
-            .SetLookTarget(combatTarget.transform)
-            .SetDirection(MonsterMoveComponent.Direction.Right)
-            .SetMoveSpeed(1.0f);
-
-        while (time < waitTime)
-        {
-            time += Time.deltaTime;
-            
-            Vector3 dir = transform.right;
-            Vector3 dest = transform.position + (dir * 1.0f);
-
-            Debug.DrawRay(transform.position, dir * 1.0f, Color.magenta);
-
-            moveComponent.SetDestination(dest);
-            
-            yield return null;
-        }
-    }
-
-    private IEnumerator Coroutine_MoveLeft()
-    {
-        float time = 0.0f;
-
-        moveComponent
-            .SetLookTarget(combatTarget.transform)
-            .SetDirection(MonsterMoveComponent.Direction.Left)
-            .SetMoveSpeed(-1.0f);
-
-        while (time < waitTime)
-        {
-            time += Time.deltaTime;
-            
-            Vector3 dir = transform.right * (-1);
-            Vector3 dest = transform.position + (dir * 1.0f);
-
-            Debug.DrawRay(transform.position, dir * 1.0f, Color.magenta);
-
-            moveComponent.SetDestination(dest);
-
-            yield return null;
-        }
-    }
-
+    
     private int GetRandomAttackType()
     {
         int type = UnityEngine.Random.Range(1, 4);
-
-        return type;
-    }
-
-    private float GetWaitTime()
-    {
-        float time = UnityEngine.Random.Range(1.5f, 3.0f);
-        
-        return time;
-    }
-
-    private int GetWaitCoroutineType()
-    {
-        int type = UnityEngine.Random.Range(0, waitCoroutines.Length);
 
         return type;
     }

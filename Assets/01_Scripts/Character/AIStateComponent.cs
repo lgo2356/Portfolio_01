@@ -6,7 +6,7 @@ public class AIStateComponent : MonoBehaviour
     public enum AIState
     {
         Idle = 0,
-        Patrol, Chase, Combat,
+        Patrol, Chase, Combat, Dead,
         Max,
     }
 
@@ -19,6 +19,7 @@ public class AIStateComponent : MonoBehaviour
     public bool IsPatrolState => currentState == AIState.Patrol;
     public bool IsChaseState => currentState == AIState.Chase;
     public bool IsCombatState => currentState == AIState.Combat;
+    public bool IsDeadState => currentState == AIState.Dead;
 
     public void SetIdleState()
     {
@@ -38,6 +39,11 @@ public class AIStateComponent : MonoBehaviour
     public void SetCombatState()
     {
         ChangeState(AIState.Combat);
+    }
+
+    public void SetDeadState()
+    {
+        ChangeState(AIState.Dead);
     }
 
     private void ChangeState(AIState newState)

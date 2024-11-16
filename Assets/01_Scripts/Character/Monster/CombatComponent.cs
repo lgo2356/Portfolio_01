@@ -16,6 +16,9 @@ public class CombatComponent : MonoBehaviour
     protected float attackCoolTimeDeviation = 0.5f;
 
     [SerializeField]
+    protected float combatWalkSpeed = 1.0f;
+
+    [SerializeField]
     protected WeaponType weaponType;
 
     protected Animator animator;
@@ -27,6 +30,9 @@ public class CombatComponent : MonoBehaviour
     protected GameObject combatTarget;
     protected Collider[] colliderBuffer;
     protected bool canAttack = true;
+    protected float waitTime;
+    
+    protected Func<IEnumerator>[] waitCoroutines;
 
     public GameObject CombatTarget => combatTarget;
     
@@ -79,6 +85,68 @@ public class CombatComponent : MonoBehaviour
         yield return new WaitForSeconds(time);
 
         canAttack = true;
+    }
+    
+    protected IEnumerator Coroutine_MoveRight()
+    {
+        float time = 0.0f;
+
+        moveComponent
+            .SetLookTarget(combatTarget.transform)
+            .SetDirection(MonsterMoveComponent.Direction.Right)
+            .SetMoveSpeed(combatWalkSpeed);
+
+        while (time < waitTime)
+        {
+            time += Time.deltaTime;
+            
+            Vector3 dir = transform.right;
+            Vector3 dest = transform.position + (dir * 0.5f);
+
+            Debug.DrawRay(transform.position, dir * 0.5f, Color.magenta);
+
+            moveComponent.SetDestination(dest);
+            
+            yield return null;
+        }
+    }
+
+    protected IEnumerator Coroutine_MoveLeft()
+    {
+        float time = 0.0f;
+
+        moveComponent
+            .SetLookTarget(combatTarget.transform)
+            .SetDirection(MonsterMoveComponent.Direction.Left)
+            .SetMoveSpeed(combatWalkSpeed * (-1.0f));
+
+        while (time < waitTime)
+        {
+            time += Time.deltaTime;
+            
+            Vector3 dir = transform.right * (-1);
+            Vector3 dest = transform.position + (dir * 0.5f);
+
+            Debug.DrawRay(transform.position, dir * 0.5f, Color.magenta);
+
+            moveComponent.SetDestination(dest);
+
+            yield return null;
+        }
+    }
+
+    protected float GetWaitTime(float min, float max)
+    {
+        float time = UnityEngine.Random.Range(min, max);
+        
+        return time;
+    }
+    
+    protected int GetWaitCoroutineType()
+    {
+        int type = UnityEngine.Random.Range(0, waitCoroutines.Length);
+
+        return type;
     }
 
 #if UNITY_EDITOR

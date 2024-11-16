@@ -1484,6 +1484,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponPrefabs:
   - {fileID: 6416291301515761843, guid: 8724c530234461b49a3c2621fa1a806b, type: 3}
+  currentType: 0
 --- !u!114 &7302478710564101874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1535,6 +1536,7 @@ MonoBehaviour:
   attackDistance: 9
   attackCoolTime: 2
   attackCoolTimeDeviation: 0.5
+  combatWalkSpeed: 0.5
   weaponType: 5
   avoidDistance: 5
 --- !u!1 &4095733142277841163

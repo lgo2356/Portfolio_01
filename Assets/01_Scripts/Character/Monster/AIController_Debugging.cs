@@ -45,7 +45,8 @@ public partial class AIController
         if (uiAIStateText == null)
             return;
 
-        uiAIStateText.text = $"{stateComponent.CurrentState.ToString()} (0.00)";
+        uiAIStateText.text = $"{aiStateComponent.CurrentState.ToString()}";
+        // uiAIStateText.text = $"{stateComponent.CurrentState.ToString()}";
     }
 
     private void LateUpdate_Billboard()

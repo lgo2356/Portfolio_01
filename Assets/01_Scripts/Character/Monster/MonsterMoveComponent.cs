@@ -125,6 +125,8 @@ public class MonsterMoveComponent : MonoBehaviour
     public void StopMove()
     {
         destination = transform.position;
+        SetDestination(destination);
+        
         moveSpeed = 0f;
         
         navMeshAgent.isStopped = true;

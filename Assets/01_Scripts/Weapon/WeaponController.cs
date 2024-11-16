@@ -10,7 +10,7 @@ public class WeaponController : MonoBehaviour
     private Animator animator;
     private StateComponent stateComponent;
 
-    private WeaponType currentType = WeaponType.Unarmed;
+    public WeaponType currentType = WeaponType.Unarmed;
     private Dictionary<WeaponType, Weapon> weaponTable;
 
     public bool IsUnarmed => currentType == WeaponType.Unarmed;
@@ -138,6 +138,13 @@ public class WeaponController : MonoBehaviour
         weaponTable[currentType].DoAction();
     }
 
+    public void EndAction()
+    {
+        animator.SetBool("IsAction", false);
+
+        weaponTable[currentType].EndAction();
+    }
+
     #region Equip
     private void BeginAnimEquip()
     {
@@ -169,9 +176,7 @@ public class WeaponController : MonoBehaviour
 
     private void EndAnimAction()
     {
-        animator.SetBool("IsAction", false);
-
-        weaponTable[currentType].EndAction();
+        EndAction();
     }
 
     private void BeginAnimComboInputSection()

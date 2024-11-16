@@ -5,7 +5,8 @@ using AIState = AIStateComponent.AIState;
 [RequireComponent(typeof(PerceptionComponent))]
 public partial class AIController : MonoBehaviour
 {
-    private AIStateComponent stateComponent;
+    private StateComponent stateComponent;
+    private AIStateComponent aiStateComponent;
     private IdleComponent idleComponent;
     private PerceptionComponent perceptionComponent;
     private PatrolComponent patrolComponent;
@@ -13,7 +14,8 @@ public partial class AIController : MonoBehaviour
 
     private void Awake()
     {
-        stateComponent = GetComponent<AIStateComponent>();
+        stateComponent = GetComponent<StateComponent>();
+        aiStateComponent = GetComponent<AIStateComponent>();
         idleComponent = GetComponent<IdleComponent>();
         perceptionComponent = GetComponent<PerceptionComponent>();
         patrolComponent = GetComponent<PatrolComponent>();
@@ -25,13 +27,13 @@ public partial class AIController : MonoBehaviour
         Start_BindEvent();
         Start_InitAIStateCanvas();
 
-        stateComponent.SetIdleState();
+        aiStateComponent.SetIdleState();
     }
 
     private void Start_BindEvent()
     {
         #region State
-        stateComponent.OnAIStateChanged += (prevState, newState) =>
+        aiStateComponent.OnAIStateChanged += (prevState, newState) =>
         {
             print($"{prevState} -> {newState}");
             
@@ -49,6 +51,21 @@ public partial class AIController : MonoBehaviour
                         return;
                     
                     patrolComponent.StartPatrol();
+                    
+                    break;
+                }
+                
+                case AIState.Dead:
+                {
+                    perceptionComponent.enabled = false;
+                    combatComponent.StopCombat();
+
+                    if (patrolComponent != null)
+                    {
+                        patrolComponent.StopPatrol();    
+                    }
+                    
+                    idleComponent.StopIdle();
                     
                     break;
                 }
@@ -87,14 +104,14 @@ public partial class AIController : MonoBehaviour
             print($"Found : {found.name}");
 
             combatComponent.StartCombat(found);
-            stateComponent.SetCombatState();
+            aiStateComponent.SetCombatState();
         };
 
         perceptionComponent.OnLostAction += (lost) =>
         {
             print($"Lost : {lost.name}");
 
-            stateComponent.SetIdleState();
+            aiStateComponent.SetIdleState();
         };
         #endregion
     }

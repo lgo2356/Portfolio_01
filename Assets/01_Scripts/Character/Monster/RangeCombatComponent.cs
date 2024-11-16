@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -12,9 +13,10 @@ public class RangeCombatComponent : CombatComponent
 
     private Coroutine combatCoroutine;
     private Coroutine avoidCoroutine;
+    private Coroutine currentWaitCoroutine;
 
-    private bool isCombat = true;
-    private bool isAvoid = true;
+    private bool isCombatCoroutineRunning;
+    private bool isAvoidCoroutineRunning;
     private bool isAvoiding;
 
     protected override void Awake()
@@ -24,16 +26,27 @@ public class RangeCombatComponent : CombatComponent
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
+    protected override void Start()
+    {
+        base.Start();
+        
+        waitCoroutines = new Func<IEnumerator>[]
+        {
+            Coroutine_MoveRight,
+            Coroutine_MoveLeft,
+        };
+    }
+
     public override void StartCombat(GameObject target)
     {
         base.StartCombat(target);
         
         Debug.Assert(combatCoroutine == null, "Combat Coroutine은 중복 실행할 수 없습니다.");
-        isCombat = true;
+        isCombatCoroutineRunning = true;
         combatCoroutine = StartCoroutine(Coroutine_Attack());
         
         Debug.Assert(avoidCoroutine == null, "Avoid Coroutine은 중복 실행할 수 없습니다.");
-        isAvoid = true;
+        isAvoidCoroutineRunning = true;
         avoidCoroutine = StartCoroutine(Coroutine_Avoid());
 
         isAvoiding = false;
@@ -46,17 +59,17 @@ public class RangeCombatComponent : CombatComponent
         Debug.Assert(combatCoroutine != null, "Combat Coroutine은 이미 실행 해제되었습니다.");
         StopCoroutine(combatCoroutine);
         combatCoroutine = null;
-        isCombat = false;
+        isCombatCoroutineRunning = false;
 
         Debug.Assert(avoidCoroutine != null, "Avoid Coroutine은 이미 실행 해제되었습니다.");
         StopCoroutine(avoidCoroutine);
         avoidCoroutine = null;
-        isAvoid = false;
+        isAvoidCoroutineRunning = false;
     }
 
     private IEnumerator Coroutine_Attack()
     {
-        while (isCombat)
+        while (isCombatCoroutineRunning)
         {
             if (Vector3.Distance(combatTarget.transform.position, transform.position) > attackDistance)
             {
@@ -66,6 +79,8 @@ public class RangeCombatComponent : CombatComponent
             }
             else
             {
+                transform.LookAt(combatTarget.transform);
+                
                 if (canAttack)
                 {
                     moveComponent.StopMove();
@@ -77,9 +92,15 @@ public class RangeCombatComponent : CombatComponent
 
                     yield return null;
                 }
-                else
+
+                if (stateComponent.IsAttackState == false)
                 {
-                    transform.LookAt(combatTarget.transform);
+                    waitTime = GetWaitTime(1.0f, 1.8f);
+                    int waitType = GetWaitCoroutineType();
+                    IEnumerator waitCoroutine = waitCoroutines[waitType]();
+                    StartCoroutine(waitCoroutine);
+
+                    yield return new WaitForSeconds(waitTime);
                 }
             }
             
@@ -90,18 +111,22 @@ public class RangeCombatComponent : CombatComponent
     }
 
     private IEnumerator Coroutine_Avoid()
-    {
-        while (isAvoid)
+    {    
+        while (isAvoidCoroutineRunning)
         {
             if (Vector3.Distance(combatTarget.transform.position, transform.position) <= avoidDistance)
             {
-                print("Avoid!");
-                
-                animator.SetBool("IsAction", false);
-
-                if (isAvoiding == false)
+                if (stateComponent.IsIdleState)
                 {
-                    animator.SetBool("IsWarpAction", true);
+                    waitTime = 0.0f;
+                    moveComponent.StopMove();
+                    
+                    stateComponent.SetAvoidState();
+                    
+                    if (isAvoiding == false)
+                    {
+                        animator.SetBool("IsWarpAction", true);
+                    }
                 }
             }
             
@@ -119,6 +144,8 @@ public class RangeCombatComponent : CombatComponent
     {
         isAvoiding = false;
         
+        stateComponent.SetIdleState();
+        
         animator.SetBool("IsWarpAction", false);
         
         StartCoroutine(Coroutine_SetCoolTime(1.5f));
@@ -131,7 +158,7 @@ public class RangeCombatComponent : CombatComponent
             x = UnityEngine.Random.Range(-3.0f, 3.0f),
             z = UnityEngine.Random.Range(-3.0f, 3.0f),
         };
-        Vector3 newPosition = transform.position - transform.forward * 5.0f;
+        Vector3 newPosition = transform.position - transform.forward * 8.0f;
         newPosition += range;
 
         NavMeshPath newPath = new();
