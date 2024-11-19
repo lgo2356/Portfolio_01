@@ -157,10 +157,4 @@ public class MonsterMoveComponent : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawSphere(destination, 0.1f);
     }
-
-    private void OnGUI()
-    {
-        GUI.color = Color.green;
-        GUILayout.Label($"{navMeshAgent.velocity}");
-    }
 }
