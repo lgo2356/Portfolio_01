@@ -35,29 +35,9 @@ public class Player : Character, IDamagable
         PlayerInput playerInput = GetComponent<PlayerInput>();
         InputActionMap actionMap = playerInput.actions.FindActionMap("PlayerActions");
 
-        actionMap.FindAction("Equip_Sword").started += (callback) =>
+        actionMap.FindAction("Equip").started += (callback) =>
         {
-            weaponController.SetSword();
-        };
-
-        actionMap.FindAction("Equip_GreatSword").started += (callback) =>
-        {
-            weaponController.SetGreatSword();
-        };
-
-        actionMap.FindAction("Equip_Katana").started += (callback) =>
-        {
-            weaponController.SetKatana();
-        };
-
-        actionMap.FindAction("Equip_Staff").started += callback =>
-        {
-            weaponController.SetStaff();
-        };
-        
-        actionMap.FindAction("Equip_Warp").started += callback =>
-        {
-            weaponController.SetWarp();
+            weaponController.Equip();
         };
 
         actionMap.FindAction("Action").started += (callback) =>
