@@ -55,13 +55,6 @@ public class StateComponent : MonoBehaviour
 
     public void SetDamagedState()
     {
-        animator.Play($"Blend {weaponController.currentType}", 0);
-
-        if (animator.GetBool("IsAction"))
-        {
-            weaponController.EndAction();
-        }
-
         ChangeType(StateType.Damaged);
 
         OnDamagedAction?.Invoke();

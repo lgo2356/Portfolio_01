@@ -105,6 +105,8 @@ public class MeleeWeapon : Weapon
         isInputNextCombo = false;
         isNextComboEnabled = false;
         comboIndex = 0;
+
+        DisableCollision();
     }
 
     public virtual void EnableCollision()

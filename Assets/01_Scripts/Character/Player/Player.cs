@@ -22,13 +22,9 @@ public class Player : Character, IDamagable
     {
         base.Awake();
 
-        Awake_GetComponent();
-        Awake_BindInput();
-    }
-
-    private void Awake_GetComponent()
-    {
         weaponController = GetComponent<WeaponController>();
+
+        Awake_BindInput();
     }
 
     private void Awake_BindInput()
@@ -51,8 +47,6 @@ public class Player : Character, IDamagable
     {
         hpComponent.AddDamage(weaponData.Power);
 
-        stateComponent.SetDamagedState();
-
         if (weaponData.HitParticle != null)
         {
             GameObject go = Instantiate(weaponData.HitParticle, transform, false);
@@ -60,6 +54,13 @@ public class Player : Character, IDamagable
                 go.transform.localPosition = hitPoint + weaponData.HitParticlePositionOffset;
                 go.transform.localScale += weaponData.HitParticleScaleOffset;
             }
+        }
+
+        animator.Play($"Blend {weaponController.currentType}", 0);
+
+        if (animator.GetBool("IsAction"))
+        {
+            weaponController.EndAction();
         }
 
         animator.SetInteger("ImpactType", (int)causer.Type);
@@ -77,7 +78,6 @@ public class Player : Character, IDamagable
         WaitForFixedUpdate waitForFixedUpdate = new();
 
         float launchDistance = rigidbody.drag * distance * 1000f;
-        //rigidbody.AddForce(-transform.forward * launchDistance);
         rigidbody.AddForce(attacker.transform.forward * launchDistance);
 
         for (int i = 0; i < frame; i++)

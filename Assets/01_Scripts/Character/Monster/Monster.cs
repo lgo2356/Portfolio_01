@@ -6,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(AIController))]
 public class Monster : Character, IDamagable
 {
+    private WeaponController weaponController;
+
     private Dictionary<Material, Color> materialTable;
 
     public Action OnTauntAction;
@@ -13,6 +15,8 @@ public class Monster : Character, IDamagable
     protected override void Awake()
     {
         base.Awake();
+
+        weaponController = GetComponent<WeaponController>();
 
         Awake_InitMaterial();
     }
@@ -50,11 +54,15 @@ public class Monster : Character, IDamagable
         }
         else
         {
-            //stateComponent.SetDamagedState();
-
             transform.LookAt(attacker.transform, Vector3.up);
 
-            //animator.SetInteger(1, 1);
+            animator.Play($"Blend {weaponController.currentType}", 0);
+
+            if (animator.GetBool("IsAction"))
+            {
+                weaponController.EndAction();
+            }
+
             animator.SetInteger("ImpactType", (int)causer.Type);
             animator.SetInteger("ImpactIndex", weaponData.ImpactIndex);
             animator.SetTrigger("DoImpact");
@@ -87,7 +95,6 @@ public class Monster : Character, IDamagable
         WaitForFixedUpdate waitForFixedUpdate = new();
 
         float launchDistance = rigidbody.drag * distance * 1000f;
-        //rigidbody.AddForce(-transform.forward * launchDistance);
         rigidbody.AddForce(attacker.transform.forward * launchDistance);
 
         for (int i = 0; i < frame; i++)
@@ -109,8 +116,6 @@ public class Monster : Character, IDamagable
         {
             m.Key.color = m.Value;
         }
-        
-        //stateComponent.SetIdleState();
     }
 
     private IEnumerator Coroutine_StopAnimation(GameObject attacker, int frame)
