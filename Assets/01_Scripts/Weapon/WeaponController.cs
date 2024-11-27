@@ -8,9 +8,10 @@ public class WeaponController : MonoBehaviour
     private Animator animator;
     private StateComponent stateComponent;
 
-    public WeaponType currentType = WeaponType.Unarmed;
     private Weapon currentWeapon;
+    private bool isEquipping;
 
+    public WeaponType currentType = WeaponType.Unarmed;
     public bool IsUnarmed => currentType == WeaponType.Unarmed;
 
     protected virtual void Awake()
@@ -63,6 +64,7 @@ public class WeaponController : MonoBehaviour
         animator.SetInteger("WeaponType", (int)newType);
         animator.SetBool("IsEquipping", true);
 
+        isEquipping = true;
         currentType = newType;
     }
 
@@ -84,6 +86,10 @@ public class WeaponController : MonoBehaviour
         if (currentType == WeaponType.Unarmed)
             return;
 
+        //TODO : 커맨드 안 들어가는 구간 설정하기
+        if (isEquipping)
+            return;
+
         animator.SetBool("IsAction", true);
         currentWeapon.DoAction();
     }
@@ -103,7 +109,9 @@ public class WeaponController : MonoBehaviour
 
     private void EndAnimEquip()
     {
+        // 애니메이션 파라미터 초기화
         animator.SetBool("IsEquipping", false);
+        isEquipping = false;
     }
 
     private void BeginAnimUnequip()
