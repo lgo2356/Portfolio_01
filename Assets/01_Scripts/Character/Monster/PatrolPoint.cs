@@ -21,6 +21,10 @@ public class PatrolPoint : MonoBehaviour
     [SerializeField]
     private Color debuggingLineColor = Color.magenta;
 
+    [Header("디버깅")]
+    [SerializeField]
+    private bool debuggingMode;
+
     private void Reset()
     {
         isLoop = false;
@@ -47,6 +51,12 @@ public class PatrolPoint : MonoBehaviour
                 return;
             }
 
+            if (isLoop)
+            {
+                nextIndex = count - 1;
+                return;
+            }
+
             isReverse = false;
             nextIndex = 1;
 
@@ -59,12 +69,22 @@ public class PatrolPoint : MonoBehaviour
             return;
         }
 
+        if (isLoop)
+        {
+            nextIndex = 0;
+            return;
+        }
+
         isReverse = true;
         nextIndex = count - 2;
     }
 
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
+        if (debuggingMode == false)
+            return;
+
         int waypointCount = transform.childCount;
 
         if (waypointCount == 0)
@@ -83,6 +103,11 @@ public class PatrolPoint : MonoBehaviour
             {
                 Debugging_DrawPathLine(i, i + 1);
             }
+        }
+
+        if (isLoop)
+        {
+            Debugging_DrawPathLine(waypointCount - 1, 0);
         }
     }
 
@@ -104,4 +129,5 @@ public class PatrolPoint : MonoBehaviour
         Gizmos.color = debuggingLineColor;
         Gizmos.DrawLine(startPosition, endPosition);
     }
+#endif
 }

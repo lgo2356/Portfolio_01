@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 653212649243189151}
   - component: {fileID: 4521463276132995130}
   - component: {fileID: 1827196654880646384}
-  - component: {fileID: 5447514179314067174}
+  - component: {fileID: 402244442218147912}
   m_Layer: 0
   m_Name: SM_Prop_Body_Burnt_04
   m_TagString: Untagged
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5447514179314067174
-BoxCollider:
+--- !u!136 &402244442218147912
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -102,6 +102,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.1606406, y: 0.8400216, z: 0.9582452}
-  m_Center: {x: -0.0005158186, y: 0.4614954, z: 0.63011765}
+  serializedVersion: 2
+  m_Radius: 0.28383148
+  m_Height: 0.8684409
+  m_Direction: 1
+  m_Center: {x: -0.068469256, y: 0.4954715, z: 0.48}

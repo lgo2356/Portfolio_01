@@ -50,18 +50,18 @@ public class Monster : Character, IDamagable
         }
         else
         {
-            stateComponent.SetDamagedState();
+            //stateComponent.SetDamagedState();
 
             transform.LookAt(attacker.transform, Vector3.up);
 
-            animator.SetInteger(1, 1);
+            //animator.SetInteger(1, 1);
             animator.SetInteger("ImpactType", (int)causer.Type);
             animator.SetInteger("ImpactIndex", weaponData.ImpactIndex);
             animator.SetTrigger("DoImpact");
 
             if (weaponData.LaunchDistance > 0f)
             {
-                StartCoroutine(Coroutine_Launch(30, weaponData.LaunchDistance));
+                StartCoroutine(Coroutine_Launch(attacker, 30, weaponData.LaunchDistance));
             }
             
             StartCoroutine(Coroutine_SetDamagedColor(0.15f));
@@ -78,14 +78,17 @@ public class Monster : Character, IDamagable
         collider.enabled = false;
 
         animator.SetTrigger("DoDead");
+
+        GetComponent<AIStateComponent>().SetDeadState();
     }
 
-    private IEnumerator Coroutine_Launch(int frame, float distance)
+    private IEnumerator Coroutine_Launch(GameObject attacker, int frame, float distance)
     {
         WaitForFixedUpdate waitForFixedUpdate = new();
 
         float launchDistance = rigidbody.drag * distance * 1000f;
-        rigidbody.AddForce(-transform.forward * launchDistance);
+        //rigidbody.AddForce(-transform.forward * launchDistance);
+        rigidbody.AddForce(attacker.transform.forward * launchDistance);
 
         for (int i = 0; i < frame; i++)
         {
@@ -107,7 +110,7 @@ public class Monster : Character, IDamagable
             m.Key.color = m.Value;
         }
         
-        stateComponent.SetIdleState();
+        //stateComponent.SetIdleState();
     }
 
     private IEnumerator Coroutine_StopAnimation(GameObject attacker, int frame)

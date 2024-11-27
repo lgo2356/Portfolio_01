@@ -630,7 +630,7 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
-    motionNodeName: 
+    motionNodeName: <Root Transform>
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
@@ -671,11 +671,27 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.045198485
+        functionName: BeginAnimDamaged
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 6ff67686e65c48b40812329bcd0eb5f4,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.9209041
+        functionName: EndAnimDamaged
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 6ff67686e65c48b40812329bcd0eb5f4,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {fileID: 31900000, guid: bdf9c12183f0a3e47946368833550809, type: 2}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 750
     isReadable: 1
   meshes:
     lODScreenPercentages: []

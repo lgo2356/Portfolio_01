@@ -11,6 +11,7 @@ public class MonsterMoveComponent : MonoBehaviour
     
     private Animator animator;
     private NavMeshAgent navMeshAgent;
+    private StateComponent stateComponent;
 
     private Vector3 destination;
     private float moveSpeed;
@@ -24,6 +25,12 @@ public class MonsterMoveComponent : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
+        stateComponent = GetComponent<StateComponent>();
+
+        stateComponent.OnDamagedAction += () =>
+        {
+            StopMove();
+        };
     }
 
     private void Start()
@@ -81,11 +88,7 @@ public class MonsterMoveComponent : MonoBehaviour
     {
         destination = dest;
         
-        if (navMeshAgent.isStopped)
-        {
-            navMeshAgent.isStopped = false;
-        }
-
+        navMeshAgent.isStopped = false;
         navMeshAgent.SetDestination(dest);
     }
 

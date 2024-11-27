@@ -17,6 +17,7 @@ public class StateComponent : MonoBehaviour
 
     public event Action<StateType, StateType> OnStateTypeChanged;
     public event Action OnDeadAction;
+    public event Action OnDamagedAction;
 
     public StateType CurrentState => currentState;
     public bool IsIdleState => currentState == StateType.Idle;
@@ -33,7 +34,6 @@ public class StateComponent : MonoBehaviour
     public void SetAttackState() => ChangeType(StateType.Attack);
     public void SetGuardState() => ChangeType(StateType.Guard);
     public void SetEvadeState() => ChangeType(StateType.Evade);
-    public void SetDamagedState() => ChangeType(StateType.Damaged);
 
     private void Awake()
     {
@@ -43,8 +43,7 @@ public class StateComponent : MonoBehaviour
 
     public void SetAvoidState()
     {
-        // 기준 상태로 되돌리기
-        animator.Play($"Blend {weaponController.currentType.ToString()}", 0);
+        animator.Play($"Blend {weaponController.currentType}", 0);
 
         if (animator.GetBool("IsAction"))
         {
@@ -52,6 +51,20 @@ public class StateComponent : MonoBehaviour
         }
         
         ChangeType(StateType.Avoid);
+    }
+
+    public void SetDamagedState()
+    {
+        animator.Play($"Blend {weaponController.currentType}", 0);
+
+        if (animator.GetBool("IsAction"))
+        {
+            weaponController.EndAction();
+        }
+
+        ChangeType(StateType.Damaged);
+
+        OnDamagedAction?.Invoke();
     }
 
     public void SetDeadState()

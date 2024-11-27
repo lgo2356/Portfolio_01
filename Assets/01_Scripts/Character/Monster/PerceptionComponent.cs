@@ -26,6 +26,8 @@ public class PerceptionComponent : MonoBehaviour
     private Dictionary<GameObject, float> perceivedTable;
     private bool bPerceivedTableClearFlag;
 
+    private Coroutine checkPerceivedTimeCoroutine;
+
     public event Action<GameObject> OnFoundAction;
     public event Action<GameObject> OnLostAction;
 
@@ -37,7 +39,7 @@ public class PerceptionComponent : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(Coroutine_RemoveOutOfPerceivedTime());
+        checkPerceivedTimeCoroutine = StartCoroutine(Coroutine_CheckPerceivedTime());
     }
 
     private void Update()
@@ -71,12 +73,20 @@ public class PerceptionComponent : MonoBehaviour
         }
     }
 
+    public void StopPerception()
+    {
+        StopCoroutine(checkPerceivedTimeCoroutine);
+        ClearPerceivedObject();
+
+        enabled = false;
+    }
+
     public void ClearPerceivedObject()
     {
         bPerceivedTableClearFlag = true;
     }
 
-    private IEnumerator Coroutine_RemoveOutOfPerceivedTime()
+    private IEnumerator Coroutine_CheckPerceivedTime()
     {
         List<GameObject> removeReservationList = new();
 

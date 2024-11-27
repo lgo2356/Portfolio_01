@@ -28,4 +28,14 @@ public class Character : MonoBehaviour
     {
         transform.position += animator.deltaPosition;
     }
+
+    private void BeginAnimDamaged()
+    {
+        stateComponent.SetDamagedState();
+    }
+
+    private void EndAnimDamaged()
+    {
+        stateComponent.SetIdleState();
+    }
 }

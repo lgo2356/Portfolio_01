@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -11,7 +12,24 @@ public class MeleeCombatComponent : CombatComponent
     
     private Coroutine combatCoroutine;
     private Coroutine checkCombatRangeCoroutine;
-    
+    private Coroutine strafeCoroutine;
+
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+
+        waitCoroutines = new Func<IEnumerator>[]
+        {
+            Coroutine_MoveRight,
+            Coroutine_MoveLeft,
+        };
+    }
+
     public override void StartCombat(GameObject target)
     {
         base.StartCombat(target);
@@ -25,12 +43,18 @@ public class MeleeCombatComponent : CombatComponent
     public override void StopCombat()
     {
         base.StopCombat();
-        
-        StopCoroutine(checkCombatRangeCoroutine);
-        checkCombatRangeCoroutine = null;
-        
-        StopCoroutine(combatCoroutine);
-        combatCoroutine = null;
+
+        if (checkCombatRangeCoroutine != null)
+        {
+            StopCoroutine(checkCombatRangeCoroutine);
+            checkCombatRangeCoroutine = null;
+        }
+
+        if (combatCoroutine != null)
+        {
+            StopCoroutine(combatCoroutine);
+            combatCoroutine = null;
+        }
         
         combatPosition = Vector3.zero;
     }
@@ -41,24 +65,46 @@ public class MeleeCombatComponent : CombatComponent
         {
             if (Vector3.Distance(combatTarget.transform.position, transform.position) > attackDistance)
             {
-                moveComponent
-                    .SetMoveSpeed(2.0f)
-                    .SetDestination(combatTarget.transform.position);
+                // 공격 동작 중에 움직이는 버그 수정
+                if (stateComponent.IsAttackState == false)
+                {
+                    moveComponent
+                        .SetMoveSpeed(2.0f)
+                        .SetLookTarget(combatTarget.transform)
+                        .SetDirection(MonsterMoveComponent.Direction.Forward)
+                        .SetDestination(combatTarget.transform.position);
+                }
             }
             else
             {
-                moveComponent.StopMove();
-                
-                transform.LookAt(combatTarget.transform);
+                if (canAttack && stateComponent.IsDamagedState == false)
+                {
+                    moveComponent.StopMove();
+                    transform.LookAt(combatTarget.transform);
 
-                animator.SetInteger("ActionType", (int)weaponType);
-                weaponController.DoAction();
-                
+                    animator.SetInteger("ActionType", (int)weaponType);
+                    weaponController.DoAction();
+
+                    float coolTime = GetAttackCoolTime();
+                    StartCoroutine(Coroutine_SetCoolTime(coolTime));
+
+                    yield return null;
+                }
+
+                if (stateComponent.IsAttackState == false && stateComponent.IsDamagedState == false)
+                {
+                    moveComponent.StopMove();
+                    transform.LookAt(combatTarget.transform);
+
+                    int waitType = GetWaitCoroutineType();
+                    IEnumerator waitCoroutine = waitCoroutines[waitType]();
+                    strafeCoroutine = StartCoroutine(waitCoroutine);
+
+                    waitTime = GetWaitTime(1.0f, 1.8f);
+                    yield return new WaitForSeconds(waitTime);
+                }
+
                 //TODO : 플레이어 사망 체크하기
-
-                float coolTime = GetAttackCoolTime();
-
-                yield return new WaitForSeconds(coolTime);
             }
 
             yield return null;

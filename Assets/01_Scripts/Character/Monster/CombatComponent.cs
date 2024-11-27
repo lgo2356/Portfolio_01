@@ -99,13 +99,16 @@ public class CombatComponent : MonoBehaviour
         while (time < waitTime)
         {
             time += Time.deltaTime;
-            
-            Vector3 dir = transform.right;
-            Vector3 dest = transform.position + (dir * 0.5f);
 
-            Debug.DrawRay(transform.position, dir * 0.5f, Color.magenta);
+            if (stateComponent.IsDamagedState == false)
+            {
+                Vector3 dir = transform.right;
+                Vector3 dest = transform.position + (dir * 0.5f);
 
-            moveComponent.SetDestination(dest);
+                Debug.DrawRay(transform.position, dir * 0.5f, Color.magenta);
+
+                moveComponent.SetDestination(dest);
+            }
             
             yield return null;
         }

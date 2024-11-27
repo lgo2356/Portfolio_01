@@ -20,23 +20,17 @@ public partial class AIController : MonoBehaviour
         perceptionComponent = GetComponent<PerceptionComponent>();
         patrolComponent = GetComponent<PatrolComponent>();
         combatComponent = GetComponent<CombatComponent>();
+
+        Awake_BindEvent();
     }
 
-    private void Start()
-    {
-        Start_BindEvent();
-        Start_InitAIStateCanvas();
-
-        aiStateComponent.SetIdleState();
-    }
-
-    private void Start_BindEvent()
+    private void Awake_BindEvent()
     {
         #region State
         aiStateComponent.OnAIStateChanged += (prevState, newState) =>
         {
             print($"{prevState} -> {newState}");
-            
+
             switch (newState)
             {
                 case AIState.Idle:
@@ -49,24 +43,28 @@ public partial class AIController : MonoBehaviour
                 {
                     if (patrolComponent == null)
                         return;
-                    
+
                     patrolComponent.StartPatrol();
-                    
+
                     break;
                 }
-                
+
                 case AIState.Dead:
                 {
-                    perceptionComponent.enabled = false;
+                    perceptionComponent.StopPerception();
                     combatComponent.StopCombat();
 
                     if (patrolComponent != null)
                     {
-                        patrolComponent.StopPatrol();    
+                        patrolComponent.StopPatrol();
                     }
-                    
-                    idleComponent.StopIdle();
-                    
+
+                    MonsterMoveComponent moveComponent = GetComponent<MonsterMoveComponent>();
+                    moveComponent.StopMove();
+                    moveComponent.enabled = false;
+
+                    //idleComponent.StopIdle();
+
                     break;
                 }
             }
@@ -83,9 +81,9 @@ public partial class AIController : MonoBehaviour
                 {
                     if (patrolComponent == null)
                         return;
-                    
+
                     patrolComponent.StopPatrol();
-                    
+
                     break;
                 }
 
@@ -114,6 +112,13 @@ public partial class AIController : MonoBehaviour
             aiStateComponent.SetIdleState();
         };
         #endregion
+    }
+
+    private void Start()
+    {
+        Start_InitAIStateCanvas();
+
+        //aiStateComponent.SetIdleState();
     }
 
     private void Update()

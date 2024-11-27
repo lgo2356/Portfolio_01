@@ -30,6 +30,11 @@ public class MeleeWeapon : Weapon
             return;
         }
 
+        if (other.gameObject.CompareTag(rootObject.tag))
+        {
+            return;
+        }
+
         IDamagable damagable = other.GetComponent<IDamagable>();
 
         if (damagable == null)

@@ -95,12 +95,13 @@ public class RangeCombatComponent : CombatComponent
 
                 if (stateComponent.IsAttackState == false)
                 {
-                    waitTime = GetWaitTime(1.0f, 1.8f);
-                    int waitType = GetWaitCoroutineType();
-                    IEnumerator waitCoroutine = waitCoroutines[waitType]();
-                    StartCoroutine(waitCoroutine);
+                    //// 스트레이프
+                    //waitTime = GetWaitTime(1.0f, 1.8f);
+                    //int waitType = GetWaitCoroutineType();
+                    //IEnumerator waitCoroutine = waitCoroutines[waitType]();
+                    //StartCoroutine(waitCoroutine);
 
-                    yield return new WaitForSeconds(waitTime);
+                    //yield return new WaitForSeconds(waitTime);
                 }
             }
             

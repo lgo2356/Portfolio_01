@@ -1,4 +1,4 @@
-﻿using TMPro;
+using TMPro;
 using UnityEngine;
 
 public partial class AIController
@@ -45,8 +45,8 @@ public partial class AIController
         if (uiAIStateText == null)
             return;
 
-        uiAIStateText.text = $"{aiStateComponent.CurrentState.ToString()}";
-        // uiAIStateText.text = $"{stateComponent.CurrentState.ToString()}";
+        uiAIStateText.text = $"{aiStateComponent.CurrentState}\n{stateComponent.CurrentState}";
+        //uiAIStateText.text = $"{stateComponent.CurrentState.ToString()}";
     }
 
     private void LateUpdate_Billboard()
