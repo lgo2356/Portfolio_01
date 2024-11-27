@@ -49,7 +49,19 @@ public class PlayerMoveComponent : MonoBehaviour
     private void Awake_GetComponents()
     {
         animator = GetComponent<Animator>();
+        
         stateComponent = GetComponent<StateComponent>();
+        {
+            stateComponent.OnIdleAction += () =>
+            {
+                Release();
+            };
+
+            stateComponent.OnDamagedAction += () =>
+            {
+                Hold();
+            };
+        }
     }
 
     private void Awake_BindInput()
@@ -122,13 +134,8 @@ public class PlayerMoveComponent : MonoBehaviour
     {
         if (GameManager.isPlayerInput == false)
             return;
-        
-        if (canMove == false)
-            return;
 
         currentPlayerInputMove = Vector2.SmoothDamp(currentPlayerInputMove, playerInputMove, ref currentVelocity, 1f / sensitivity);
-        
-        float moveSpeed = isRunning ? runSpeed : walkSpeed;
 
         if (currentPlayerInputMove.magnitude > deadZone)
         {
@@ -139,6 +146,15 @@ public class PlayerMoveComponent : MonoBehaviour
 
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, 0.2f);
         }
+
+        if (canMove == false)
+        {
+            animator.SetFloat("SpeedZ", 0.0f);
+
+            return;
+        }
+
+        float moveSpeed = isRunning ? runSpeed : walkSpeed;
 
         float newSpeed = currentPlayerInputMove.magnitude * moveSpeed;
         transform.position += transform.forward * newSpeed * Time.deltaTime;

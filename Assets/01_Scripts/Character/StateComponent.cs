@@ -16,6 +16,7 @@ public class StateComponent : MonoBehaviour
     private StateType currentState = StateType.Idle;
 
     public event Action<StateType, StateType> OnStateTypeChanged;
+    public event Action OnIdleAction;
     public event Action OnDeadAction;
     public event Action OnDamagedAction;
 
@@ -29,7 +30,6 @@ public class StateComponent : MonoBehaviour
     public bool IsDamagedState => currentState == StateType.Damaged;
     public bool IsDeadState => currentState == StateType.Dead;
 
-    public void SetIdleState() => ChangeType(StateType.Idle);
     public void SetEquipState() => ChangeType(StateType.Equip);
     public void SetAttackState() => ChangeType(StateType.Attack);
     public void SetGuardState() => ChangeType(StateType.Guard);
@@ -39,6 +39,13 @@ public class StateComponent : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         weaponController = GetComponent<WeaponController>();
+    }
+
+    public void SetIdleState()
+    {
+        ChangeType(StateType.Idle);
+
+        OnIdleAction?.Invoke();
     }
 
     public void SetAvoidState()
