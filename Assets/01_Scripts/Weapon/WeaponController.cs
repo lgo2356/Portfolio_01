@@ -86,8 +86,10 @@ public class WeaponController : MonoBehaviour
         if (currentType == WeaponType.Unarmed)
             return;
 
-        //TODO : 커맨드 안 들어가는 구간 설정하기
         if (isEquipping)
+            return;
+
+        if (stateComponent.IsDamagedState)
             return;
 
         animator.SetBool("IsAction", true);
