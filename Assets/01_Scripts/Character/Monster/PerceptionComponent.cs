@@ -18,9 +18,13 @@ public class PerceptionComponent : MonoBehaviour
     [SerializeField]
     private LayerMask layerMask;
 
+    [SerializeField]
+    private bool isDebugging;
+
     private void Reset()
     {
         layerMask = 1 << LayerMask.NameToLayer("Player");
+        isDebugging = true;
     }
 
     private Collider[] colliderBuffer;
@@ -121,6 +125,9 @@ public class PerceptionComponent : MonoBehaviour
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
+        if (isDebugging == false)
+            return;
+
         #region 시야 범위
         Handles.color = Color.white;
         Handles.DrawWireArc(transform.position, Vector3.up, transform.forward, 360, perceptionDistance);
@@ -136,6 +143,7 @@ public class PerceptionComponent : MonoBehaviour
         Gizmos.DrawLine(transform.position, transform.position + direction.normalized * perceptionDistance);
         #endregion
 
+        #region 감지 표시
         if (Application.isPlaying == false)
             return;
 
@@ -152,6 +160,7 @@ public class PerceptionComponent : MonoBehaviour
             Gizmos.DrawLine(position, position + perceivedDirection.normalized * perceivedDirection.magnitude);
             Gizmos.DrawWireSphere(perceivedPosition, 0.25f);
         }
+        #endregion
     }
 #endif
 }

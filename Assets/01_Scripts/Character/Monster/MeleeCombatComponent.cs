@@ -6,13 +6,19 @@ public class MeleeCombatComponent : CombatComponent
 {
     [Header("근접")]
     [SerializeField]
-    private float combatDistance = 10f;
-    
+    private float combatDistance;
+
+    protected override void Reset()
+    {
+        base.Reset();
+
+        combatDistance = 10.0f;
+    }
+
     private Vector3 combatPosition;
     
     private Coroutine combatCoroutine;
     private Coroutine checkCombatRangeCoroutine;
-    private Coroutine strafeCoroutine;
 
     protected override void Awake()
     {
@@ -103,7 +109,7 @@ public class MeleeCombatComponent : CombatComponent
 
                     int waitType = GetWaitCoroutineType();
                     IEnumerator waitCoroutine = waitCoroutines[waitType]();
-                    strafeCoroutine = StartCoroutine(waitCoroutine);
+                    StartCoroutine(waitCoroutine);
 
                     waitTime = GetWaitTime(1.0f, 1.8f);
                     yield return new WaitForSeconds(waitTime);

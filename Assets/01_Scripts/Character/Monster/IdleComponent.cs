@@ -37,7 +37,14 @@ public class IdleComponent : MonoBehaviour
         }
         else
         {
-            stateComponent.SetPatrolState();
+            if (patrolComponent.CanPatrol)
+            {
+                stateComponent.SetPatrolState();
+            }
+            else
+            {
+                moveComponent.StartMove(originalPosition, 1.8f);
+            }
         }
     }
 

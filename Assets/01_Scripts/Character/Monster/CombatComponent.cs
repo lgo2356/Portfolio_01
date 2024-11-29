@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(MonsterMoveComponent))]
@@ -7,19 +8,33 @@ using UnityEngine;
 public class CombatComponent : MonoBehaviour
 {
     [SerializeField]
-    protected float attackDistance = 2.0f;
+    protected float attackDistance;
 
     [SerializeField]
-    protected float attackCoolTime = 2.0f;
+    protected float attackCoolTime;
 
     [SerializeField]
-    protected float attackCoolTimeDeviation = 0.5f;
+    protected float attackCoolTimeDeviation;
 
     [SerializeField]
-    protected float combatWalkSpeed = 1.0f;
+    protected float combatWalkSpeed;
 
     [SerializeField]
     protected WeaponType weaponType;
+
+    [SerializeField]
+    private bool isDebugging;
+
+    protected virtual void Reset()
+    {
+        attackDistance = 2.0f;
+        attackCoolTime = 3.0f;
+        attackCoolTimeDeviation = 0.5f;
+        combatWalkSpeed = 1.0f;
+        weaponType = WeaponType.Unarmed;
+
+        isDebugging = true;
+    }
 
     protected Animator animator;
     protected StateComponent stateComponent;
@@ -160,46 +175,22 @@ public class CombatComponent : MonoBehaviour
 #if UNITY_EDITOR
     protected virtual void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackDistance);
-        
-        if (Application.isPlaying == false)
+        if (isDebugging == false)
             return;
 
-        if (combatTarget != null)
-        {
-            Vector3 position = combatTarget.transform.position;
-            position.y += 1.0f;
+        Handles.color = Color.red;
+        Handles.DrawWireArc(transform.position, Vector3.up, transform.forward, 360, attackDistance);
+        
+        //if (Application.isPlaying == false)
+        //    return;
+
+        //if (combatTarget != null)
+        //{
+        //    Vector3 position = combatTarget.transform.position;
+        //    position.y += 1.0f;
             
-            Gizmos.DrawWireSphere(position, 1.5f);
-        }
+        //    Gizmos.DrawWireSphere(position, 1.5f);
+        //}
     }
 #endif
-
-    // private IEnumerator Coroutine_Wait()
-    // {
-    //     moveComponent.SetDestination(transform.position);
-    //
-    //     while (true)
-    //     {
-    //         transform.LookAt(combatTarget.transform);
-    //
-    //         if (Vector3.Distance(moveComponent.Destination, transform.position) < 0.1f)
-    //         {
-    //             moveComponent.StartMove(GetRandomPosition(), 0.8f);
-    //         }
-    //
-    //         yield return null;
-    //     }
-    // }
-    //
-    // private Vector3 GetRandomPosition()
-    // {
-    //     float x = UnityEngine.Random.Range(-0.5f, 0.5f);
-    //     float z = UnityEngine.Random.Range(-0.3f, 0.3f);
-    //
-    //     Vector3 delta = new(x, 0, z);
-    //
-    //     return transform.position + delta;
-    // }
 }

@@ -16,10 +16,53 @@ public class PatrolComponent : MonoBehaviour
     private Vector3 destination;
     private bool isPatrol;
 
+    public bool CanPatrol => patrolPoint != null;
+
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         moveComponent = GetComponent<MonsterMoveComponent>();
+    }
+
+    public void StartPatrol()
+    {
+        if (patrolPoint == null)
+        {
+            print($"'{gameObject.name}'은 순찰을 할 수 없습니다.");
+            return;
+        }
+
+        print("StartPatrol");
+
+        if (patrolCoroutine != null)
+        {
+            Debug.LogError("Coroutine_Patrol can't be duplicated");
+            return;
+        }
+
+        isPatrol = true;
+
+        destination = transform.position;
+        patrolCoroutine = Coroutine_Patrol(0.0f);
+        StartCoroutine(patrolCoroutine);
+    }
+
+    public void StopPatrol()
+    {
+        if (isPatrol == false)
+            return;
+
+        print("StopPatrol");
+
+        if (patrolCoroutine == null)
+            return;
+
+        isPatrol = false;
+
+        StopCoroutine(patrolCoroutine);
+        patrolCoroutine = null;
+
+        moveComponent.StopMove();
     }
 
     private IEnumerator Coroutine_Patrol(float time)
@@ -43,37 +86,5 @@ public class PatrolComponent : MonoBehaviour
         patrolPoint.UpdateNextIndex();
 
         moveComponent.StartMove(destination, 1.2f);
-    }
-
-    public void StartPatrol()
-    {
-        print("StartPatrol");
-        
-        if (patrolCoroutine != null)
-        {
-            Debug.LogError("Coroutine_Patrol can't be duplicated");
-            return;
-        }
-
-        isPatrol = true;
-
-        destination = transform.position;
-        patrolCoroutine = Coroutine_Patrol(0.0f);
-        StartCoroutine(patrolCoroutine);
-    }
-
-    public void StopPatrol()
-    {
-        print("StopPatrol");
-        
-        if (patrolCoroutine == null)
-            return;
-
-        isPatrol = false;
-
-        StopCoroutine(patrolCoroutine);
-        patrolCoroutine = null;
-
-        moveComponent.StopMove();
     }
 }

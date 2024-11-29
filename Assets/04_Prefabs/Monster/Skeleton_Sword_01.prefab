@@ -970,12 +970,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e04abee1b73d141aea017f5a162b67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  perceptionDistance: 5
-  perceptionAngle: 120
-  lostTime: 10
+  perceptionDistance: 7
+  perceptionAngle: 130
+  lostTime: 5
   layerMask:
     serializedVersion: 2
     m_Bits: 8
+  isDebugging: 1
 --- !u!114 &1632883164865296975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1067,10 +1068,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDistance: 2
-  attackCoolTime: 2
+  attackCoolTime: 3
   attackCoolTimeDeviation: 0.5
   combatWalkSpeed: 1
   weaponType: 2
+  isDebugging: 1
   combatDistance: 10
 --- !u!114 &6884159932499763328
 MonoBehaviour:
