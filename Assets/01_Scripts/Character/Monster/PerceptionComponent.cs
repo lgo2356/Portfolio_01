@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PerceptionComponent : MonoBehaviour
@@ -120,16 +121,20 @@ public class PerceptionComponent : MonoBehaviour
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.white;
-        Gizmos.DrawWireSphere(transform.position, perceptionDistance);
+        #region 시야 범위
+        Handles.color = Color.white;
+        Handles.DrawWireArc(transform.position, Vector3.up, transform.forward, 360, perceptionDistance);
+        #endregion
+
+        #region 시야 각도
+        Vector3 direction = Quaternion.AngleAxis(+perceptionAngle / 2f, Vector3.up) * transform.forward;
 
         Gizmos.color = Color.blue;
-
-        Vector3 direction = Quaternion.AngleAxis(+perceptionAngle / 2f, Vector3.up) * transform.forward;
         Gizmos.DrawLine(transform.position, transform.position + direction.normalized * perceptionDistance);
 
         direction = Quaternion.AngleAxis(-perceptionAngle / 2f, Vector3.up) * transform.forward;
         Gizmos.DrawLine(transform.position, transform.position + direction.normalized * perceptionDistance);
+        #endregion
 
         if (Application.isPlaying == false)
             return;

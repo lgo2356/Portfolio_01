@@ -99,6 +99,9 @@ public partial class AIController : MonoBehaviour
         #region Perception
         perceptionComponent.OnFoundAction += (found) =>
         {
+            if (combatComponent.CombatTarget != null)
+                return;
+
             print($"Found : {found.name}");
 
             combatComponent.StartCombat(found);
@@ -129,5 +132,11 @@ public partial class AIController : MonoBehaviour
     private void LateUpdate()
     {
         LateUpdate_Billboard();
+    }
+
+    public void OnDamaged(GameObject attacker)
+    {
+        combatComponent.StartCombat(attacker);
+        aiStateComponent.SetCombatState();
     }
 }

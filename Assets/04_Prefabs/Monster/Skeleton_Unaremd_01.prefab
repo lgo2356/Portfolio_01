@@ -1409,9 +1409,10 @@ GameObject:
   - component: {fileID: 859976400779298969}
   - component: {fileID: 778524351396844481}
   - component: {fileID: 2621928499199118721}
-  m_Layer: 0
+  - component: {fileID: 4672883743677431231}
+  m_Layer: 6
   m_Name: Skeleton_Unaremd_01
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1565,7 +1566,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53e7fd68f1115674fb872c3ba0b73a62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsDebugging: 1
+  isDebugging: 1
+  uiAIStatePrefabName: UI_MonsterAIState
   uiAIStatePrefab: {fileID: 8843381287509632613, guid: aa2de601a971fef47b151b3ff8071218,
     type: 3}
 --- !u!114 &4098056611504718442
@@ -1624,11 +1626,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1344e21f0ae03d34396b0dbfb19c8157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combatDistance: 10
   attackDistance: 2
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 8
+  attackCoolTime: 2
+  attackCoolTimeDeviation: 0.5
+  combatWalkSpeed: 1
   weaponType: 1
 --- !u!114 &778524351396844481
 MonoBehaviour:
@@ -1642,8 +1643,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cff3b6c097dc94242abf0245a668a1c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponPrefabs:
-  - {fileID: 2001536435507662984, guid: d7e6c30ff522a2e479783d9ecf48f3d8, type: 3}
+  weaponPrefab: {fileID: 0}
+  currentType: 0
 --- !u!195 &2621928499199118721
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1666,6 +1667,18 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &4672883743677431231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6063257902096645113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07acc25947ecbec4bbae7d1582412958, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6331067853518670130
 GameObject:
   m_ObjectHideFlags: 0

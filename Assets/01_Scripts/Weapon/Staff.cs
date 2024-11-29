@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Staff : RangeWeapon
@@ -15,7 +16,13 @@ public class Staff : RangeWeapon
     private GameObject projectilePrefab;
 
     [SerializeField]
+    private GameObject hitPrefab;
+
+    [SerializeField]
     private bool isGuided;
+
+    [SerializeField]
+    private float aimAngle = 15.0f;
 
     private CombatComponent combatComponent;
 
@@ -96,7 +103,17 @@ public class Staff : RangeWeapon
             Projectile projectile = go.GetComponent<Projectile>();
             projectile.OnProjectileCollision += OnProjectileCollision;
             
-            Vector3 direction = rootObject.transform.forward;
+            Vector3 direction;
+            GameObject target = GetGuidedTarget();
+
+            if (target == null)
+            {
+                direction = rootObject.transform.forward;
+            }
+            else
+            {
+                direction = target.transform.position - rootObject.transform.position;
+            }
 
             if (isGuided)
             {
@@ -104,26 +121,74 @@ public class Staff : RangeWeapon
             }
             else
             {
-                projectile.Shoot(direction, 1000.0f);
+                projectile.Shoot(direction.normalized, 1000.0f);
             }
         }
     }
 
-    private void OnProjectileCollision(Collider projectile, Collider other, Vector3 hitPoint, Vector3 hitNormal)
+    private void OnProjectileCollision(Collider projectileCollider, Collider otherCollider, Vector3 hitPoint, Vector3 hitNormal)
     {
-        if (other.gameObject.CompareTag(rootObject.tag))
+        if (otherCollider.gameObject.CompareTag(rootObject.tag))
             return;
 
-        IDamagable damagable = other.GetComponent<IDamagable>();
+        print($"Projectile Collision - {otherCollider.gameObject.name}");
+
+        GameObject hitObject = Instantiate(hitPrefab);
+        hitObject.transform.position = projectileCollider.gameObject.transform.position;
+
+        Destroy(projectileCollider.gameObject);
+
+        IDamagable damagable = otherCollider.gameObject.GetComponent<IDamagable>();
 
         if (damagable != null)
         {
             damagable.OnDamaged(rootObject, this, hitPoint, weaponDatas[0]);
         }
+    }
 
-        // if (weaponDatas[0].HitParticle)
-        // {
-        //     Instantiate(weaponDatas[0].HitParticle, hitPoint, rootObject.transform.rotation);
-        // }
+    private GameObject GetGuidedTarget()
+    {
+        LayerMask layerMask = 1 << LayerMask.NameToLayer("Monster");
+        Vector3 position = rootObject.transform.position;
+        float radius = 12.0f;
+
+        Collider[] colliders = Physics.OverlapSphere(transform.position, radius, layerMask);
+        List<GameObject> candidates = new();
+
+        foreach (Collider collider in colliders)
+        {
+            if (collider.gameObject.TryGetComponent<Monster>(out var monster))
+            {
+                candidates.Add(monster.gameObject);
+            }
+        }
+
+        GameObject result = null;
+        float maxAngle = float.MinValue;
+
+        foreach (GameObject candidate in candidates)
+        {
+            Vector3 direction = candidate.transform.position - position;
+            float angle = Vector3.SignedAngle(rootObject.transform.forward, direction.normalized, Vector3.up);
+
+            if (Mathf.Abs(angle) > aimAngle)
+                continue;
+
+            if (angle > maxAngle)
+            {
+                maxAngle = angle;
+                result = candidate;
+
+                Debug.DrawLine(position, position + (result.transform.position - position), Color.blue, 5.0f);
+            }
+        }
+
+        //Vector3 d = Quaternion.AngleAxis(+45.0f, Vector3.up) * rootObject.transform.forward;
+        //Debug.DrawLine(position, position + d.normalized * radius, Color.red, 5.0f);
+
+        //d = Quaternion.AngleAxis(-45.0f, Vector3.up) * rootObject.transform.forward;
+        //Debug.DrawLine(position, position + d.normalized * radius, Color.red, 5.0f);
+
+        return result;
     }
 }

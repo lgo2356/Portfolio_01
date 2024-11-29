@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(AIController))]
 public class Monster : Character, IDamagable
 {
+    private AIController aiController;
     private WeaponController weaponController;
 
     private Dictionary<Material, Color> materialTable;
@@ -16,6 +16,7 @@ public class Monster : Character, IDamagable
     {
         base.Awake();
 
+        aiController = GetComponent<AIController>();
         weaponController = GetComponent<WeaponController>();
 
         Awake_InitMaterial();
@@ -35,10 +36,13 @@ public class Monster : Character, IDamagable
             }
         }
     }
-    
+
     public virtual void OnDamaged(GameObject attacker, Weapon causer, Vector3 hitPoint, WeaponData weaponData)
     {
         hpComponent.AddDamage(weaponData.Power);
+        aiController.OnDamaged(attacker);
+
+        print($"{gameObject.name} Damaged : {weaponData.Power}");
 
         if (weaponData.HitParticle != null)
         {
@@ -54,14 +58,17 @@ public class Monster : Character, IDamagable
         }
         else
         {
-            transform.LookAt(attacker.transform, Vector3.up);
-
-            animator.Play($"Blend {weaponController.currentType}", 0);
-
-            if (animator.GetBool("IsAction"))
+            if (weaponController != null)
             {
-                weaponController.EndAction();
+                animator.Play($"Blend {weaponController.currentType}", 0);
+
+                if (animator.GetBool("IsAction"))
+                {
+                    weaponController.EndAction();
+                }
             }
+
+            transform.LookAt(attacker.transform, Vector3.up);
 
             animator.SetInteger("ImpactType", (int)causer.Type);
             animator.SetInteger("ImpactIndex", weaponData.ImpactIndex);
@@ -87,7 +94,10 @@ public class Monster : Character, IDamagable
 
         animator.SetTrigger("DoDead");
 
-        GetComponent<AIStateComponent>().SetDeadState();
+        if (TryGetComponent<AIStateComponent>(out var aiStateComponent))
+        {
+            aiStateComponent.SetDeadState();
+        }
     }
 
     private IEnumerator Coroutine_Launch(GameObject attacker, int frame, float distance)

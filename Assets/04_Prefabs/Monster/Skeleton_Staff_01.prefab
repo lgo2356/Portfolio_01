@@ -1268,9 +1268,9 @@ GameObject:
   - component: {fileID: 8915370157989875269}
   - component: {fileID: 1547391615508651306}
   - component: {fileID: 7479511681366626916}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Skeleton_Staff_01
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1482,8 +1482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cff3b6c097dc94242abf0245a668a1c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponPrefabs:
-  - {fileID: 6416291301515761843, guid: 8724c530234461b49a3c2621fa1a806b, type: 3}
+  weaponPrefab: {fileID: 0}
   currentType: 0
 --- !u!114 &7302478710564101874
 MonoBehaviour:

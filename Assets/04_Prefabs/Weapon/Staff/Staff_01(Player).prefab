@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4759111293454596454}
   - component: {fileID: 650604379924607986}
   m_Layer: 0
-  m_Name: Staff_01(Hand)
+  m_Name: Staff_01(Player)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,13 +98,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 5
-  weaponDatas: []
+  weaponDatas:
+  - Power: 30
+    LaunchDistance: 0
+    ImpactIndex: 0
+    IsCanMove: 0
+    HitStopFrame: 0
+    HitParticle: {fileID: 0}
+    HitParticleScaleOffset: {x: 0, y: 0, z: 0}
+    HitParticlePositionOffset: {x: 0, y: 0, z: 0}
+    CameraShakeDuration: 0
+    CameraShakeDirection: {x: 0, y: 0, z: 0}
+    CameraShakeDirectionDeviation: {x: 0, y: 0, z: 0}
   handPositionName: Hand_Staff
   muzzlePositionName: Hand_Muzzle
   muzzlePrefab: {fileID: 2831285941179162297, guid: 192c8835c09c9df418212ffbd1cbdc4e,
     type: 3}
-  projectilePrefab: {fileID: 4166745664283874398, guid: 8d8147fe5874a744f9a08c3a3b2de486,
+  projectilePrefab: {fileID: 3244775856695447552, guid: 41b3efba504380b4aa16bc3966081f46,
     type: 3}
+  hitPrefab: {fileID: 6750108211637369354, guid: 31b2c23c1d0f2a2418e464bd4dde83b3,
+    type: 3}
+  isGuided: 0
+  aimAngle: 15
 --- !u!1 &6827889401010128713
 GameObject:
   m_ObjectHideFlags: 0

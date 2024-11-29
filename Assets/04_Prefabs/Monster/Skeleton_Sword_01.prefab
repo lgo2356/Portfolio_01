@@ -801,7 +801,7 @@ GameObject:
   - component: {fileID: 6247904900909035195}
   - component: {fileID: 3755809604393618587}
   - component: {fileID: 6884159932499763328}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Skeleton_Sword_01
   m_TagString: Monster
   m_Icon: {fileID: 0}

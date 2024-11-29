@@ -36,7 +36,7 @@ public class MeleeCombatComponent : CombatComponent
         
         combatPosition = transform.position;
         
-        checkCombatRangeCoroutine = StartCoroutine(Coroutine_CheckCombatRange());
+        //checkCombatRangeCoroutine = StartCoroutine(Coroutine_CheckCombatRange());
         combatCoroutine = StartCoroutine(Coroutine_Attack());
     }
 
@@ -44,11 +44,11 @@ public class MeleeCombatComponent : CombatComponent
     {
         base.StopCombat();
 
-        if (checkCombatRangeCoroutine != null)
-        {
-            StopCoroutine(checkCombatRangeCoroutine);
-            checkCombatRangeCoroutine = null;
-        }
+        //if (checkCombatRangeCoroutine != null)
+        //{
+        //    StopCoroutine(checkCombatRangeCoroutine);
+        //    checkCombatRangeCoroutine = null;
+        //}
 
         if (combatCoroutine != null)
         {
@@ -63,6 +63,11 @@ public class MeleeCombatComponent : CombatComponent
     {
         while (true)
         {
+            if (combatTarget == null)
+            {
+                break;
+            }
+
             if (Vector3.Distance(combatTarget.transform.position, transform.position) > attackDistance)
             {
                 // 공격 동작 중에 움직이는 버그 수정

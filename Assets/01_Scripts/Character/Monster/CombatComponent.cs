@@ -52,6 +52,11 @@ public class CombatComponent : MonoBehaviour
 
     public virtual void StartCombat(GameObject target)
     {
+        if (combatTarget != null)
+        {
+            return;
+        }
+
         print("Start Combat");
         
         combatTarget = target;
