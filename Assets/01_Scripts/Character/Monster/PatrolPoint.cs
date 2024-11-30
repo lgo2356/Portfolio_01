@@ -23,13 +23,14 @@ public class PatrolPoint : MonoBehaviour
 
     [Header("디버깅")]
     [SerializeField]
-    private bool debuggingMode;
+    private bool isDebuggingMode;
 
     private void Reset()
     {
         isLoop = false;
         isReverse = false;
         nextIndex = 0;
+        isDebuggingMode = true;
     }
 
     public Vector3 GetNextPatrolPosition()
@@ -80,9 +81,9 @@ public class PatrolPoint : MonoBehaviour
     }
 
 #if UNITY_EDITOR
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
-        if (debuggingMode == false)
+        if (isDebuggingMode == false)
             return;
 
         int waypointCount = transform.childCount;
