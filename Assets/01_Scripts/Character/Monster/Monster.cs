@@ -40,7 +40,11 @@ public class Monster : Character, IDamagable
     public virtual void OnDamaged(GameObject attacker, Weapon causer, Vector3 hitPoint, WeaponData weaponData)
     {
         hpComponent.AddDamage(weaponData.Power);
-        aiController.OnDamaged(attacker);
+
+        if (aiController != null)
+        {
+            aiController.OnDamaged(attacker);
+        }
 
         print($"{gameObject.name} Damaged : {weaponData.Power}");
 

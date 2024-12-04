@@ -100,7 +100,6 @@ MonoBehaviour:
   weaponDatas: []
   handPositionName: Hand_Warp
   cursorDistance: 100
-  cursorPrefab: {fileID: 620143187003437719, guid: ac74d97fab3e7004e8226f00afaeebed,
+  cursorPrefab: {fileID: 7851882727209530665, guid: f15a2e33b8293cf4c81b9a2ad84ba040,
     type: 3}
-  fxPrefab: {fileID: 2033358281796941150, guid: ce012633ee816a2488b151e7a6dc5f7a,
-    type: 3}
+  fxPrefab: {fileID: 640602461530948004, guid: 4befe8d405bd77e45ac37ca28556a025, type: 3}

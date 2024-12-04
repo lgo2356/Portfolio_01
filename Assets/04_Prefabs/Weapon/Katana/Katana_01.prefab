@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 3300000}
   - component: {fileID: 2300000}
   - component: {fileID: 2612700018760150467}
-  - component: {fileID: 5831214482228311176}
   - component: {fileID: 205412083079398142}
+  - component: {fileID: 5831214482228311176}
   m_Layer: 0
   m_Name: Katana_01
   m_TagString: Untagged
@@ -109,58 +109,6 @@ CapsuleCollider:
   m_Height: 92.52831
   m_Direction: 2
   m_Center: {x: -9.8502935e-15, y: -0.6322843, z: 20.132175}
---- !u!114 &5831214482228311176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7abdd8d5422e9e43820f4cc32f316a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 4
-  weaponDatas:
-  - Power: 5
-    LaunchDistance: 3
-    ImpactIndex: 1
-    IsCanMove: 0
-    HitStopFrame: 2
-    HitParticle: {fileID: 1521653833230474388, guid: 8befa3668666f75418f5f69307ef4c87,
-      type: 3}
-    HitParticleScaleOffset: {x: 0, y: 0, z: 0}
-    HitParticlePositionOffset: {x: 0, y: 0, z: 0}
-    CameraShakeDuration: 0.1
-    CameraShakeDirection: {x: 0.1, y: -0.1, z: 0}
-    CameraShakeDirectionDeviation: {x: 0.1, y: 0.2, z: 0}
-  - Power: 5
-    LaunchDistance: 3
-    ImpactIndex: 1
-    IsCanMove: 0
-    HitStopFrame: 2
-    HitParticle: {fileID: 1521653833230474388, guid: 8befa3668666f75418f5f69307ef4c87,
-      type: 3}
-    HitParticleScaleOffset: {x: 0, y: 0, z: 0}
-    HitParticlePositionOffset: {x: 0, y: 0, z: 0}
-    CameraShakeDuration: 0.1
-    CameraShakeDirection: {x: 0.1, y: -0.1, z: 0}
-    CameraShakeDirectionDeviation: {x: 0.1, y: 0.2, z: 0}
-  - Power: 10
-    LaunchDistance: 8
-    ImpactIndex: 1
-    IsCanMove: 0
-    HitStopFrame: 4
-    HitParticle: {fileID: 1521653833230474388, guid: 8befa3668666f75418f5f69307ef4c87,
-      type: 3}
-    HitParticleScaleOffset: {x: 0, y: 0, z: 0}
-    HitParticlePositionOffset: {x: 0, y: 0, z: 0}
-    CameraShakeDuration: 0.1
-    CameraShakeDirection: {x: 0.1, y: -0.1, z: 0}
-    CameraShakeDirectionDeviation: {x: 0.1, y: 0.2, z: 0}
-  slotName: Slot_Katana
-  handName: Hand_Katana
 --- !u!114 &205412083079398142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,3 +162,55 @@ MonoBehaviour:
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
   m_DefaultVelocity: {x: 0, y: -1, z: 0}
+--- !u!114 &5831214482228311176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7abdd8d5422e9e43820f4cc32f316a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 4
+  weaponDatas:
+  - Power: 5
+    LaunchDistance: 3
+    ImpactIndex: 1
+    IsCanMove: 0
+    HitStopFrame: 2
+    HitParticle: {fileID: 1521653833230474388, guid: 8befa3668666f75418f5f69307ef4c87,
+      type: 3}
+    HitParticleScaleOffset: {x: 0, y: 0, z: 0}
+    HitParticlePositionOffset: {x: 0, y: 0, z: 0}
+    CameraShakeDuration: 0.1
+    CameraShakeDirection: {x: 0.1, y: -0.1, z: 0}
+    CameraShakeDirectionDeviation: {x: 0.1, y: 0.2, z: 0}
+  - Power: 5
+    LaunchDistance: 3
+    ImpactIndex: 1
+    IsCanMove: 0
+    HitStopFrame: 2
+    HitParticle: {fileID: 1521653833230474388, guid: 8befa3668666f75418f5f69307ef4c87,
+      type: 3}
+    HitParticleScaleOffset: {x: 0, y: 0, z: 0}
+    HitParticlePositionOffset: {x: 0, y: 0, z: 0}
+    CameraShakeDuration: 0.1
+    CameraShakeDirection: {x: 0.1, y: -0.1, z: 0}
+    CameraShakeDirectionDeviation: {x: 0.1, y: 0.2, z: 0}
+  - Power: 10
+    LaunchDistance: 8
+    ImpactIndex: 2
+    IsCanMove: 0
+    HitStopFrame: 4
+    HitParticle: {fileID: 1521653833230474388, guid: 8befa3668666f75418f5f69307ef4c87,
+      type: 3}
+    HitParticleScaleOffset: {x: 0, y: 0, z: 0}
+    HitParticlePositionOffset: {x: 0, y: 0, z: 0}
+    CameraShakeDuration: 0.1
+    CameraShakeDirection: {x: 0.1, y: -0.1, z: 0}
+    CameraShakeDirectionDeviation: {x: 0.1, y: 0.2, z: 0}
+  slotName: Slot_Katana
+  handName: Hand_Katana
