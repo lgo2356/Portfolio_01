@@ -61,6 +61,11 @@ public class PlayerMoveComponent : MonoBehaviour
             {
                 Hold();
             };
+
+            stateComponent.OnKnockdownAction += () =>
+            {
+                Hold();
+            };
         }
     }
 
@@ -137,15 +142,13 @@ public class PlayerMoveComponent : MonoBehaviour
 
         currentPlayerInputMove = Vector2.SmoothDamp(currentPlayerInputMove, playerInputMove, ref currentVelocity, 1f / sensitivity);
 
-        if (currentPlayerInputMove.magnitude > deadZone)
-        {
-            Quaternion cameraRotation = Quaternion.Euler(0, cameraTargetTransform.eulerAngles.y, 0);
-            Vector3 inputDirection = new(currentPlayerInputMove.x, 0, currentPlayerInputMove.y);
-            Quaternion inputRotation = Quaternion.LookRotation(inputDirection);
-            Quaternion lookRotation =  cameraRotation * inputRotation;
+        if (currentPlayerInputMove.magnitude <= deadZone)
+            return;
 
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, 0.2f);
-        }
+        Quaternion cameraRotation = Quaternion.Euler(0, cameraTargetTransform.eulerAngles.y, 0);
+        Vector3 inputDirection = new(currentPlayerInputMove.x, 0, currentPlayerInputMove.y);
+        Quaternion inputRotation = Quaternion.LookRotation(inputDirection);
+        Quaternion lookRotation = cameraRotation * inputRotation;
 
         if (canMove == false)
         {
@@ -154,9 +157,11 @@ public class PlayerMoveComponent : MonoBehaviour
             return;
         }
 
-        float moveSpeed = isRunning ? runSpeed : walkSpeed;
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, 0.2f);
 
+        float moveSpeed = isRunning ? runSpeed : walkSpeed;
         float newSpeed = currentPlayerInputMove.magnitude * moveSpeed;
+
         transform.position += transform.forward * newSpeed * Time.deltaTime;
 
         animator.SetFloat("SpeedZ", newSpeed);

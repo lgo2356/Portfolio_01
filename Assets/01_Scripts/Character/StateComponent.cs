@@ -6,7 +6,7 @@ public class StateComponent : MonoBehaviour
     public enum StateType
     {
         Idle = 0,
-        Equip, Attack, Guard, Evade, Avoid, Damaged, Dead,
+        Equip, Attack, Guard, Evade, Avoid, Damaged, Dead, Knockdown,
         Max,
     }
 
@@ -19,6 +19,7 @@ public class StateComponent : MonoBehaviour
     public event Action OnIdleAction;
     public event Action OnDeadAction;
     public event Action OnDamagedAction;
+    public event Action OnKnockdownAction;
 
     public StateType CurrentState => currentState;
     public bool IsIdleState => currentState == StateType.Idle;
@@ -72,6 +73,13 @@ public class StateComponent : MonoBehaviour
         ChangeType(StateType.Dead);
         
         OnDeadAction?.Invoke();
+    }
+
+    public void SetKnockdownState()
+    {
+        ChangeType(StateType.Knockdown);
+
+        OnKnockdownAction?.Invoke();
     }
 
     private void ChangeType(StateType newType)

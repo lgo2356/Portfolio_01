@@ -11,6 +11,7 @@ public class WeaponController : MonoBehaviour
     private Weapon currentWeapon;
     private bool isEquipping;
 
+    public Weapon CurrentWeapon => currentWeapon;
     public WeaponType currentType = WeaponType.Unarmed;
     public bool IsUnarmed => currentType == WeaponType.Unarmed;
 

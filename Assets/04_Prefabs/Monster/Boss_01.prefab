@@ -377,6 +377,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 8
+  isDebugging: 0
 --- !u!114 &2915664333454180318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -389,8 +390,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cff3b6c097dc94242abf0245a668a1c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponPrefabs:
-  - {fileID: 272799329185852563, guid: cab0db1858637f34ba6a81d9b04d5e77, type: 3}
+  weaponPrefab: {fileID: 272799329185852563, guid: cab0db1858637f34ba6a81d9b04d5e77,
+    type: 3}
+  currentType: 0
 --- !u!114 &1134406909608825717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -404,10 +406,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDistance: 4.6
-  attackCoolTime: 10
+  attackCoolTime: 3
   attackCoolTimeDeviation: 0.5
+  combatWalkSpeed: 1.5
   weaponType: 7
+  isDebugging: 1
   backwardDistance: 2
+  jumpAttackFX: {fileID: 5013878782555061258, guid: d9fa0c80412e48448acaa78def63d086,
+    type: 3}
 --- !u!1 &539439456031625190
 GameObject:
   m_ObjectHideFlags: 0
@@ -720,7 +726,7 @@ Transform:
   m_GameObject: {fileID: 2555399158892400353}
   serializedVersion: 2
   m_LocalRotation: {x: 0.677829, y: 0.21690631, z: 0.39596945, w: -0.5802652}
-  m_LocalPosition: {x: 0.133, y: 0.017, z: 0.132}
+  m_LocalPosition: {x: 0.183, y: -0.133, z: 0.078}
   m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_ConstrainProportionsScale: 1
   m_Children: []

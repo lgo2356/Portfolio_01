@@ -43,6 +43,7 @@ public class Weapon : MonoBehaviour
     protected GameObject rootObject;
 
     public WeaponType Type => type;
+    public WeaponData[] WeaponDatas => weaponDatas;
 
     protected virtual void Reset()
     {

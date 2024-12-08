@@ -49,12 +49,14 @@ public class PatrolPoint : MonoBehaviour
             if (nextIndex > 0)
             {
                 nextIndex--;
+
                 return;
             }
 
             if (isLoop)
             {
                 nextIndex = count - 1;
+
                 return;
             }
 
@@ -67,12 +69,14 @@ public class PatrolPoint : MonoBehaviour
         if (nextIndex < count - 1)
         {
             nextIndex++;
+
             return;
         }
 
         if (isLoop)
         {
             nextIndex = 0;
+
             return;
         }
 
@@ -81,7 +85,7 @@ public class PatrolPoint : MonoBehaviour
     }
 
 #if UNITY_EDITOR
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
         if (isDebuggingMode == false)
             return;

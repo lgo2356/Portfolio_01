@@ -1,11 +1,19 @@
 using System;
 using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BossCombatComponent : CombatComponent
 {
     [SerializeField, Header("보스")]
     private float backwardDistance = 2.0f;
+
+    [SerializeField]
+    private GameObject jumpAttackFX;
+
+    private bool isCombatPaused = false;
+    private bool canSkill = true;
     
     private Coroutine combatCoroutine;
 
@@ -49,48 +57,63 @@ public class BossCombatComponent : CombatComponent
     {
         while (true)
         {
-            // 뛰어서 접근할 거리 판단
-            if (Vector3.Distance(combatTarget.transform.position, transform.position) > attackDistance)
-            {
-                moveComponent
-                    .SetMoveSpeed(2.0f)
-                    .SetLookTarget(combatTarget.transform)
-                    .SetDirection(MonsterMoveComponent.Direction.Forward)
-                    .SetDestination(combatTarget.transform.position);
-            }
-            else
-            {
-                moveComponent.StopMove();
-                transform.LookAt(combatTarget.transform);
-                
-                if (canAttack)
-                {
-                    animator.SetInteger("AttackType", GetRandomAttackType());
-                    weaponController.DoAction();
-                    
-                    float coolTime = GetAttackCoolTime();
-                    StartCoroutine(Coroutine_SetCoolTime(coolTime));
-                }
+            if (combatTarget == null)
+                break;
 
-                if (stateComponent.IsAttackState == false)
+            if (isCombatPaused == false)
+            {
+                // 뛰어서 접근할 거리 판단
+                if (Vector3.Distance(combatTarget.transform.position, transform.position) > attackDistance)
                 {
-                    waitTime = GetWaitTime(1.5f, 2.5f);
-                    
-                    if (Vector3.Distance(combatTarget.transform.position, transform.position) < attackDistance - 2.0f)
+                    moveComponent
+                        .SetMoveSpeed(2.0f)
+                        .SetLookTarget(combatTarget.transform)
+                        .SetDirection(MonsterMoveComponent.Direction.Forward)
+                        .SetDestination(combatTarget.transform.position);
+                }
+                else
+                {
+                    moveComponent.StopMove();
+                    transform.LookAt(combatTarget.transform);
+
+                    if (canAttack)
                     {
-                        StartCoroutine(Coroutine_MoveBackward());
+                        animator.SetInteger("AttackType", GetRandomAttackType());
+                        weaponController.DoAction();
+
+                        float coolTime = GetAttackCoolTime();
+                        StartCoroutine(Coroutine_SetCoolTime(coolTime));
                     }
-                    else
+
+                    if (stateComponent.IsAttackState == false)
                     {
-                        int waitType = GetWaitCoroutineType();
-                        IEnumerator waitCoroutine = waitCoroutines[waitType]();
-                        StartCoroutine(waitCoroutine);   
+                        waitTime = GetWaitTime(1.5f, 2.5f);
+
+                        if (Vector3.Distance(combatTarget.transform.position, transform.position) < attackDistance - 2.0f)
+                        {
+                            StartCoroutine(Coroutine_MoveBackward());
+                        }
+                        else
+                        {
+                            int waitType = GetWaitCoroutineType();
+                            IEnumerator waitCoroutine = waitCoroutines[waitType]();
+                            StartCoroutine(waitCoroutine);
+                        }
+
+                        yield return new WaitForSeconds(waitTime);
                     }
-                    
-                    yield return new WaitForSeconds(waitTime);
                 }
             }
-            
+
+            if (Vector3.Distance(combatTarget.transform.position, transform.position) > 9.0f)
+            {
+                if (canSkill)
+                {
+                    StartCoroutine(Coroutine_JumpAttack());
+                    StartCoroutine(Coroutine_SkillCooltime(15.0f));
+                }
+            }
+
             yield return null;
         }
     }
@@ -118,11 +141,112 @@ public class BossCombatComponent : CombatComponent
             yield return null;
         }
     }
+
+    private IEnumerator Coroutine_JumpAttack()
+    {
+        isCombatPaused = true;
+
+        moveComponent.StopMove();
+
+        rigidbody.isKinematic = true;
+        rigidbody.useGravity = false;
+        nevMeshAgent.updatePosition = false;
+
+        float jumpDelta = 0.1f;
+        float timer = 0.0f;
+        float height = 0.0f;
+        float originalPosition = transform.position.y;
+
+        yield return new WaitForSeconds(1.0f);
+
+        animator.SetTrigger("DoJump");
+
+        while (height < 5.0f)
+        {
+            Vector3 position = transform.position;
+            position.y += jumpDelta * 2.0f;
+
+            transform.position = position;
+
+            height = transform.position.y - originalPosition;
+
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+        timer = 0.0f;
+        Vector3 jumpPosition = combatTarget.transform.position;
+
+        while (Vector3.Distance(transform.position, jumpPosition) > 0.1f)
+        {
+            timer += Time.deltaTime;
+            transform.position = Vector3.Lerp(transform.position, jumpPosition, timer / 2.0f);
+
+            if (Vector3.Distance(transform.position, jumpPosition) <= 1f)
+            {
+                OnLand();
+            }
+
+            yield return null;
+        }
+
+        nevMeshAgent.updatePosition = true;
+        rigidbody.isKinematic = false;
+        rigidbody.useGravity = true;
+
+        isLand = false;
+        isCombatPaused = false;
+    }
     
     private int GetRandomAttackType()
     {
         int type = UnityEngine.Random.Range(1, 4);
 
         return type;
+    }
+
+    bool isLand = false;
+    private void OnLand()
+    {
+        if (isLand)
+        {
+            return;
+        }
+
+        isLand = true;
+        animator.SetTrigger("DoLand");
+
+        GameObject go = Instantiate(jumpAttackFX);
+        go.transform.position = transform.position;
+
+        LayerMask layerMask = 1 << LayerMask.NameToLayer("Player");
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 5.0f, layerMask);
+        WeaponController weaponController = GetComponent<WeaponController>();
+        Weapon weapon = GetComponent<WeaponController>().CurrentWeapon;
+
+        foreach (Collider collider in colliders)
+        {
+            //Character character = collider.GetComponent<Character>();
+            //Vector3 direction = collider.gameObject.transform.position - transform.position;
+            //character.OnKnockdown(direction);
+
+            collider.gameObject.transform.LookAt(transform.position);
+
+            IDamagable damagable = collider.GetComponent<IDamagable>();
+            damagable.OnDamaged(gameObject, weapon, Vector3.zero, weapon.WeaponDatas[1]);
+
+            Rigidbody colliderRigidbody = collider.gameObject.GetComponent<Rigidbody>();
+            colliderRigidbody.AddExplosionForce(600f, transform.position, 5.0f, 0f, ForceMode.Impulse);
+        }
+    }
+
+    private IEnumerator Coroutine_SkillCooltime(float time)
+    {
+        canSkill = false;
+
+        yield return new WaitForSeconds(time);
+
+        canSkill = true;
     }
 }

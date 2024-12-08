@@ -38,4 +38,19 @@ public class Character : MonoBehaviour
     {
         stateComponent.SetIdleState();
     }
+
+    private void BeginAnimKnockdown()
+    {
+        stateComponent.SetKnockdownState();
+    }
+
+    private void EndAnimKnockdown()
+    {
+        stateComponent.SetIdleState();
+    }
+
+    public virtual void OnKnockdown(Vector3 direction)
+    {
+        transform.forward = direction * (-1);
+    }
 }

@@ -87,6 +87,15 @@ public class MonsterMoveComponent : MonoBehaviour
     public void SetDestination(Vector3 dest)
     {
         destination = dest;
+
+        if (navMeshAgent.isOnNavMesh)
+        {
+            print("OnNavMesh");
+        }
+        else
+        {
+            print("No OnNavMesh");
+        }
         
         navMeshAgent.isStopped = false;
         navMeshAgent.SetDestination(dest);

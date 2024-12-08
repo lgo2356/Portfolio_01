@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(MonsterMoveComponent))]
 [RequireComponent(typeof(WeaponController))]
@@ -37,6 +38,8 @@ public class CombatComponent : MonoBehaviour
     }
 
     protected Animator animator;
+    protected new Rigidbody rigidbody;
+    protected NavMeshAgent nevMeshAgent;
     protected StateComponent stateComponent;
     protected AIStateComponent aiStateComponent;
     protected MonsterMoveComponent moveComponent;
@@ -54,6 +57,8 @@ public class CombatComponent : MonoBehaviour
     protected virtual void Awake()
     {
         animator = GetComponent<Animator>();
+        rigidbody = GetComponent<Rigidbody>();
+        nevMeshAgent = GetComponent<NavMeshAgent>();
         stateComponent = GetComponent<StateComponent>();
         aiStateComponent = GetComponent<AIStateComponent>();
         moveComponent = GetComponent<MonsterMoveComponent>();

@@ -100,7 +100,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -121,5 +121,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 7
-  weaponDatas: []
+  weaponDatas:
+  - Power: 10
+    LaunchDistance: 5
+    ImpactIndex: 0
+    IsCanMove: 0
+    HitStopFrame: 0
+    HitParticle: {fileID: 1521653833230474388, guid: 8befa3668666f75418f5f69307ef4c87,
+      type: 3}
+    HitParticleScaleOffset: {x: 0, y: 0, z: 0}
+    HitParticlePositionOffset: {x: 0, y: 0, z: 0}
+    CameraShakeDuration: 0
+    CameraShakeDirection: {x: 0, y: 0, z: 0}
+    CameraShakeDirectionDeviation: {x: 0, y: 0, z: 0}
+  - Power: 10
+    LaunchDistance: 5
+    ImpactIndex: 1
+    IsCanMove: 0
+    HitStopFrame: 0
+    HitParticle: {fileID: 1521653833230474388, guid: 8befa3668666f75418f5f69307ef4c87,
+      type: 3}
+    HitParticleScaleOffset: {x: 0, y: 0, z: 0}
+    HitParticlePositionOffset: {x: 0, y: 0, z: 0}
+    CameraShakeDuration: 0
+    CameraShakeDirection: {x: 0, y: 0, z: 0}
+    CameraShakeDirectionDeviation: {x: 0, y: 0, z: 0}
   handName: Hand_BossBat
