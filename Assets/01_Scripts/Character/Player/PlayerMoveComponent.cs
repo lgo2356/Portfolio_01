@@ -133,6 +133,9 @@ public class PlayerMoveComponent : MonoBehaviour
     #region Update 변수
     private Vector2 currentPlayerInputMove;
     private Vector2 currentVelocity = Vector2.zero;
+
+    private Quaternion inputR;
+    private Quaternion lookR;
     #endregion
 
     private void Update()
@@ -149,6 +152,9 @@ public class PlayerMoveComponent : MonoBehaviour
         Vector3 inputDirection = new(currentPlayerInputMove.x, 0, currentPlayerInputMove.y);
         Quaternion inputRotation = Quaternion.LookRotation(inputDirection);
         Quaternion lookRotation = cameraRotation * inputRotation;
+
+        inputR = inputRotation;
+        lookR = lookRotation;
 
         if (canMove == false)
         {
@@ -177,5 +183,13 @@ public class PlayerMoveComponent : MonoBehaviour
     {
         stateComponent.SetIdleState();
         canMove = true;
+    }
+
+    private void OnGUI()
+    {
+        GUI.color = Color.green;
+        
+        GUILayout.Label(inputR.eulerAngles.ToString());
+        GUILayout.Label(lookR.eulerAngles.ToString());
     }
 }

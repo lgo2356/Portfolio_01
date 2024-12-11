@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
-using System.Runtime.CompilerServices;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class BossCombatComponent : CombatComponent
 {
@@ -153,7 +151,6 @@ public class BossCombatComponent : CombatComponent
         nevMeshAgent.updatePosition = false;
 
         float jumpDelta = 0.1f;
-        float timer = 0.0f;
         float height = 0.0f;
         float originalPosition = transform.position.y;
 
@@ -175,7 +172,7 @@ public class BossCombatComponent : CombatComponent
 
         yield return new WaitForSeconds(0.5f);
 
-        timer = 0.0f;
+        float timer = 0.0f;
         Vector3 jumpPosition = combatTarget.transform.position;
 
         while (Vector3.Distance(transform.position, jumpPosition) > 0.1f)

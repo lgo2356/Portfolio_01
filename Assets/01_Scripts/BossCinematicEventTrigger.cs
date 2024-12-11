@@ -1,6 +1,5 @@
-using System;
-using System.Collections;
 using Cinemachine;
+using System.Collections;
 using UnityEngine;
 
 public class BossCinematicEventTrigger : MonoBehaviour
