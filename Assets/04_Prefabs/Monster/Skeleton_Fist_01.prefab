@@ -637,13 +637,13 @@ GameObject:
   - component: {fileID: 7318355635978133031}
   - component: {fileID: 5256306921319170975}
   - component: {fileID: 6841183522047208629}
+  - component: {fileID: 6154774461697548981}
   - component: {fileID: 1436792170735456199}
   - component: {fileID: 3510159462376771913}
   - component: {fileID: 7241792051020773664}
   - component: {fileID: 8565527510645367208}
   - component: {fileID: 7864110751986177453}
   - component: {fileID: 2758073539676034820}
-  - component: {fileID: 462584204604840639}
   - component: {fileID: 671731451364343147}
   - component: {fileID: 8277054352784393618}
   - component: {fileID: 2187041611234485319}
@@ -777,6 +777,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed5c14aca11cba343a37c2b68e91d4b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6154774461697548981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2641231251684304253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0e908bf1f0da7f4388ff651db847279, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 100
+  uiHpBar: {fileID: 0}
 --- !u!114 &1436792170735456199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -823,6 +837,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 8
+  isDebugging: 0
 --- !u!114 &8565527510645367208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -862,19 +877,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 473f4216e50219d4883845649966de4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &462584204604840639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2641231251684304253}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cf89e1128026e94bb5d539b2f2cf8da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHP: 100
 --- !u!114 &671731451364343147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -917,6 +919,7 @@ MonoBehaviour:
   attackCoolTimeDeviation: 0.5
   combatWalkSpeed: 1
   weaponType: 1
+  isDebugging: 0
   combatDistance: 10
 --- !u!114 &609484197631441455
 MonoBehaviour:

@@ -1258,10 +1258,10 @@ GameObject:
   - component: {fileID: 9072063311332583271}
   - component: {fileID: 3531777521549195494}
   - component: {fileID: 6557823283105819551}
+  - component: {fileID: 2477493944121950290}
   - component: {fileID: 6034890209957863229}
   - component: {fileID: 4377752220244701287}
   - component: {fileID: 6929834640396709996}
-  - component: {fileID: 451040289101479335}
   - component: {fileID: 7989768927423125666}
   - component: {fileID: 1261894757046993994}
   - component: {fileID: 7302478710564101874}
@@ -1274,7 +1274,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &189427809271126703
 Transform:
   m_ObjectHideFlags: 0
@@ -1398,6 +1398,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed5c14aca11cba343a37c2b68e91d4b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2477493944121950290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3953981271101086224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0e908bf1f0da7f4388ff651db847279, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 100
+  uiHpBar: {fileID: 0}
 --- !u!114 &6034890209957863229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1444,19 +1458,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 8
---- !u!114 &451040289101479335
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3953981271101086224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cf89e1128026e94bb5d539b2f2cf8da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHP: 100
+  isDebugging: 0
 --- !u!114 &7989768927423125666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1537,6 +1539,7 @@ MonoBehaviour:
   attackCoolTimeDeviation: 0.5
   combatWalkSpeed: 0.5
   weaponType: 5
+  isDebugging: 0
   avoidDistance: 5
 --- !u!1 &4095733142277841163
 GameObject:
