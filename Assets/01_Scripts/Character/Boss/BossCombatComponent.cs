@@ -10,10 +10,19 @@ public class BossCombatComponent : CombatComponent
     [SerializeField]
     private GameObject jumpAttackFX;
 
+    private BossHpComponent hpComponent;
+
     private bool isCombatPaused = false;
     private bool canSkill = true;
     
     private Coroutine combatCoroutine;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        hpComponent = GetComponent<BossHpComponent>();
+    }
 
     protected override void Start()
     {
@@ -36,6 +45,8 @@ public class BossCombatComponent : CombatComponent
         base.StartCombat(target);
 
         combatCoroutine = StartCoroutine(Coroutine_Combat());
+
+        hpComponent.ShowHpBar();
     }
 
     public override void StopCombat()
@@ -53,11 +64,8 @@ public class BossCombatComponent : CombatComponent
 
     private IEnumerator Coroutine_Combat()
     {
-        while (true)
+        while (combatTarget != null)
         {
-            if (combatTarget == null)
-                break;
-
             if (isCombatPaused == false)
             {
                 // 뛰어서 접근할 거리 판단
@@ -102,6 +110,9 @@ public class BossCombatComponent : CombatComponent
                     }
                 }
             }
+
+            if (combatTarget == null)
+                break;
 
             if (Vector3.Distance(combatTarget.transform.position, transform.position) > 9.0f)
             {

@@ -185,11 +185,11 @@ public class PlayerMoveComponent : MonoBehaviour
         canMove = true;
     }
 
-    private void OnGUI()
-    {
-        GUI.color = Color.green;
+    //private void OnGUI()
+    //{
+    //    GUI.color = Color.green;
         
-        GUILayout.Label(inputR.eulerAngles.ToString());
-        GUILayout.Label(lookR.eulerAngles.ToString());
-    }
+    //    GUILayout.Label(inputR.eulerAngles.ToString());
+    //    GUILayout.Label(lookR.eulerAngles.ToString());
+    //}
 }

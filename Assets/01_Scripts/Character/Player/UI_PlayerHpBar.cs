@@ -10,11 +10,6 @@ public class UI_PlayerHpBar : MonoBehaviour
         slider = GetComponent<Slider>();
     }
 
-    private void Start()
-    {
-        
-    }
-
     public void SetMaxHpAmount(float amount)
     {
         slider.maxValue = (int)amount;
