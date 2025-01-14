@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class WeaponController : MonoBehaviour
@@ -10,6 +11,8 @@ public class WeaponController : MonoBehaviour
 
     private Weapon currentWeapon;
     private bool isEquipping;
+
+    public event Action<Weapon> OnWeaponChanged;
 
     public Weapon CurrentWeapon => currentWeapon;
     public WeaponType currentType = WeaponType.Unarmed;
@@ -35,6 +38,8 @@ public class WeaponController : MonoBehaviour
         }
 
         currentWeapon = weapon;
+
+        OnWeaponChanged?.Invoke(currentWeapon);
     }
 
     private void SetUnarmed()

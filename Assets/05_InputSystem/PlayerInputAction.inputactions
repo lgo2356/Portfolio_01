@@ -60,6 +60,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Skill",
+                    "type": "Button",
+                    "id": "52b5ae57-5d6f-4066-a1e1-9684cc5fc9cc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "ChangeCameraToPlayer",
                     "type": "Button",
                     "id": "07793e5f-d485-47f6-bfa9-afa3bbd3acfc",
@@ -208,6 +217,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Equip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f7ae862e-7142-4c33-926e-d977baae736b",
+                    "path": "<Keyboard>/e",
+                    "interactions": "Hold(duration=1),Tap(duration=0.2)",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Skill",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

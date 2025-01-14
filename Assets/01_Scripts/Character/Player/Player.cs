@@ -1,6 +1,8 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
 
 public class Player : Character, IDamagable
 {
@@ -8,6 +10,7 @@ public class Player : Character, IDamagable
     private Transform bodyTransform;
 
     private WeaponController weaponController;
+    private SkillController skillController;
 
     private void Reset()
     {
@@ -23,6 +26,7 @@ public class Player : Character, IDamagable
         base.Awake();
 
         weaponController = GetComponent<WeaponController>();
+        skillController = GetComponent<SkillController>();
 
         Awake_BindInput();
     }
@@ -40,6 +44,37 @@ public class Player : Character, IDamagable
         actionMap.FindAction("Action").started += (callback) =>
         {
             weaponController.DoAction();
+        };
+
+
+        actionMap.FindAction("Skill").started += (callback) =>
+        {
+            skillController.OnPressedDown();
+        };
+
+        actionMap.FindAction("Skill").performed += (callback) =>
+        {
+            switch (callback.interaction)
+            {
+                case TapInteraction:
+                {
+                    skillController.OnPerformedShort();
+                }
+                break;
+
+                case HoldInteraction:
+                {
+                    skillController.OnPerformedLong();
+                }
+                break;
+            }
+        };
+
+        actionMap.FindAction("Skill").canceled += (callback) =>
+        {
+            Debug.Log("Cancel");
+
+            skillController.OnPressedUp();
         };
     }
 
