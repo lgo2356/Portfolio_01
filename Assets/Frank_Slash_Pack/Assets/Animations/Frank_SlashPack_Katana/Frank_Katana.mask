@@ -3,8 +3,9 @@
 --- !u!319 &31900000
 AvatarMask:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Frank_Katana
   m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
   m_Elements:
@@ -13,13 +14,13 @@ AvatarMask:
   - m_Path: Frank_Mesh_Unity
     m_Weight: 1
   - m_Path: FX_Slash_R
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Mesh_Pants
     m_Weight: 1
   - m_Path: Quick_Slash
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: R_Shash_FX
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: root
     m_Weight: 1
   - m_Path: root/ik_foot_root

@@ -577,6 +577,118 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.37545788
+        functionName: BeginAnimCollision
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: cff3b6c097dc94242abf0245a668a1c8,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.3881191
+        functionName: EndAnimCollision
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: cff3b6c097dc94242abf0245a668a1c8,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.41649944
+        functionName: BeginAnimCollision
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: cff3b6c097dc94242abf0245a668a1c8,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.43680522
+        functionName: EndAnimCollision
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: cff3b6c097dc94242abf0245a668a1c8,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.45985028
+        functionName: BeginAnimCollision
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: cff3b6c097dc94242abf0245a668a1c8,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.47892973
+        functionName: EndAnimCollision
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: cff3b6c097dc94242abf0245a668a1c8,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.4932792
+        functionName: BeginAnimCollision
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: cff3b6c097dc94242abf0245a668a1c8,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.5089982
+        functionName: EndAnimCollision
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: cff3b6c097dc94242abf0245a668a1c8,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.5331102
+        functionName: BeginAnimCollision
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: cff3b6c097dc94242abf0245a668a1c8,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.5463927
+        functionName: EndAnimCollision
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: cff3b6c097dc94242abf0245a668a1c8,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.5679087
+        functionName: BeginAnimCollision
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: cff3b6c097dc94242abf0245a668a1c8,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.5822582
+        functionName: EndAnimCollision
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: cff3b6c097dc94242abf0245a668a1c8,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.60560596
+        functionName: BeginAnimCollision
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: cff3b6c097dc94242abf0245a668a1c8,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.6196528
+        functionName: EndAnimCollision
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: cff3b6c097dc94242abf0245a668a1c8,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {fileID: 31900000, guid: 439ba199625774642a840fab7509737c, type: 2}

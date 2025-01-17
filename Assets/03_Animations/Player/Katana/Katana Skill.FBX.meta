@@ -569,14 +569,6 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.92307687
-        functionName: Anim_EndAction
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: c5cb9215771bfa74d963e651927a5aa8,
-          type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
       - time: 0.013846153
         functionName: BeginAnimCollision
         data: 
@@ -625,7 +617,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.56959707
+      - time: 0.5787295
         functionName: BeginAnimCollision
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: cff3b6c097dc94242abf0245a668a1c8,
@@ -637,6 +629,14 @@ ModelImporter:
         functionName: EndAnimCollision
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: cff3b6c097dc94242abf0245a668a1c8,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.92307687
+        functionName: Anim_EndAction
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: c5cb9215771bfa74d963e651927a5aa8,
           type: 3}
         floatParameter: 0
         intParameter: 0

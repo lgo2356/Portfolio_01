@@ -132,6 +132,11 @@ public class MeleeWeapon : Weapon
         hitObjectList.Clear();
     }
 
+    public virtual void ShowSlashFX()
+    {
+        
+    }
+
     private void ShakeCamera()
     {
         if (impulseSource == null)

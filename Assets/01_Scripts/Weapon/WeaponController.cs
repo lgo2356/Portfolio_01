@@ -177,6 +177,8 @@ public class WeaponController : MonoBehaviour
                 meleeWeapon?.EnableCollision(index);
             }
         }
+
+        meleeWeapon.ShowSlashFX();
     }
 
     private void EndAnimCollision()

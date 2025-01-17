@@ -8,6 +8,9 @@ public class Katana : MeleeWeapon
     [SerializeField]
     private string handName = "Hand_Katana";
 
+    [SerializeField]
+    private GameObject slashFX;
+
     private Transform slotTransform;
     private Transform handTransform;
 
@@ -49,5 +52,15 @@ public class Katana : MeleeWeapon
         transform.position = Vector3.zero;
         transform.rotation = Quaternion.identity;
         transform.SetParent(slotTransform,false);
+    }
+
+    public override void ShowSlashFX()
+    {
+        base.ShowSlashFX();
+
+        GameObject go = Instantiate(slashFX, transform);
+        go.transform.parent.DetachChildren();
+        //slashFX.gameObject.SetActive(true);
+        //slashFX.transform.parent.DetachChildren();
     }
 }
