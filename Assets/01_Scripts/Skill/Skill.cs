@@ -3,6 +3,7 @@ using UnityEngine;
 public abstract class Skill : MonoBehaviour
 {
     protected Animator animator;
+    protected Weapon weapon;
 
     protected GameObject rootObject;
 
@@ -10,6 +11,11 @@ public abstract class Skill : MonoBehaviour
     {
         Awake_InitRootObject();
         Awake_GetComponents();
+    }
+
+    protected virtual void Start()
+    {
+
     }
 
     private void Awake_InitRootObject()
@@ -21,10 +27,6 @@ public abstract class Skill : MonoBehaviour
     private void Awake_GetComponents()
     {
         animator = rootObject.GetComponent<Animator>();
-    }
-
-    private void Start()
-    {
-        
+        weapon = gameObject.GetComponent<Weapon>();
     }
 }

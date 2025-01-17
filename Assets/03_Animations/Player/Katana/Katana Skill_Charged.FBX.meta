@@ -583,7 +583,7 @@ ModelImporter:
         objectReferenceParameter: {fileID: 11500000, guid: cff3b6c097dc94242abf0245a668a1c8,
           type: 3}
         floatParameter: 0
-        intParameter: 0
+        intParameter: 7
         messageOptions: 0
       - time: 0.3881191
         functionName: EndAnimCollision
@@ -599,7 +599,7 @@ ModelImporter:
         objectReferenceParameter: {fileID: 11500000, guid: cff3b6c097dc94242abf0245a668a1c8,
           type: 3}
         floatParameter: 0
-        intParameter: 0
+        intParameter: 8
         messageOptions: 0
       - time: 0.43680522
         functionName: EndAnimCollision
@@ -615,7 +615,7 @@ ModelImporter:
         objectReferenceParameter: {fileID: 11500000, guid: cff3b6c097dc94242abf0245a668a1c8,
           type: 3}
         floatParameter: 0
-        intParameter: 0
+        intParameter: 9
         messageOptions: 0
       - time: 0.47892973
         functionName: EndAnimCollision
@@ -631,7 +631,7 @@ ModelImporter:
         objectReferenceParameter: {fileID: 11500000, guid: cff3b6c097dc94242abf0245a668a1c8,
           type: 3}
         floatParameter: 0
-        intParameter: 0
+        intParameter: 10
         messageOptions: 0
       - time: 0.5089982
         functionName: EndAnimCollision
@@ -647,7 +647,7 @@ ModelImporter:
         objectReferenceParameter: {fileID: 11500000, guid: cff3b6c097dc94242abf0245a668a1c8,
           type: 3}
         floatParameter: 0
-        intParameter: 0
+        intParameter: 11
         messageOptions: 0
       - time: 0.5463927
         functionName: EndAnimCollision
@@ -663,7 +663,7 @@ ModelImporter:
         objectReferenceParameter: {fileID: 11500000, guid: cff3b6c097dc94242abf0245a668a1c8,
           type: 3}
         floatParameter: 0
-        intParameter: 0
+        intParameter: 12
         messageOptions: 0
       - time: 0.5822582
         functionName: EndAnimCollision
@@ -679,7 +679,7 @@ ModelImporter:
         objectReferenceParameter: {fileID: 11500000, guid: cff3b6c097dc94242abf0245a668a1c8,
           type: 3}
         floatParameter: 0
-        intParameter: 0
+        intParameter: 13
         messageOptions: 0
       - time: 0.6196528
         functionName: EndAnimCollision

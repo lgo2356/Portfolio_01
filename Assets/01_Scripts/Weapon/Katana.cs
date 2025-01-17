@@ -60,7 +60,5 @@ public class Katana : MeleeWeapon
 
         GameObject go = Instantiate(slashFX, transform);
         go.transform.parent.DetachChildren();
-        //slashFX.gameObject.SetActive(true);
-        //slashFX.transform.parent.DetachChildren();
     }
 }

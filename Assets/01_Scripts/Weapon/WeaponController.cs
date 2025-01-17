@@ -161,6 +161,11 @@ public class WeaponController : MonoBehaviour
     {
         MeleeWeapon meleeWeapon = currentWeapon as MeleeWeapon;
 
+        if (evt.intParameter != 0)
+        {
+            meleeWeapon.ComboIndex = evt.intParameter;
+        }
+
         if (string.IsNullOrEmpty(evt.stringParameter))
         {
             print($"Enable Collider {meleeWeapon}");
@@ -185,6 +190,8 @@ public class WeaponController : MonoBehaviour
     {
         MeleeWeapon meleeWeapon = currentWeapon as MeleeWeapon;
         meleeWeapon?.DisableCollision();
+
+        meleeWeapon.ComboIndex = 0;
     }
     #endregion
     

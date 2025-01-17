@@ -10,6 +10,19 @@ public class MeleeWeapon : Weapon
     protected Collider[] colliders;
     private List<GameObject> hitObjectList;
 
+    public int ComboIndex
+    {
+        get
+        {
+            return comboIndex;
+        }
+
+        set
+        {
+            comboIndex = value;
+        }
+    }
+
     protected override void Awake()
     {
         base.Awake();

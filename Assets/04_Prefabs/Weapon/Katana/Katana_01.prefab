@@ -214,6 +214,138 @@ MonoBehaviour:
     CameraShakeDuration: 0.1
     CameraShakeDirection: {x: 0.1, y: -0.1, z: 0}
     CameraShakeDirectionDeviation: {x: 0.1, y: 0.2, z: 0}
+  - Power: 10
+    LaunchDistance: 0
+    ImpactIndex: 1
+    IsCanMove: 0
+    HitStopFrame: 4
+    HitParticle: {fileID: 1521653833230474388, guid: 8befa3668666f75418f5f69307ef4c87,
+      type: 3}
+    HitParticleScaleOffset: {x: 0, y: 0, z: 0}
+    HitParticlePositionOffset: {x: 0, y: 0, z: 0}
+    CameraShakeDuration: 0.1
+    CameraShakeDirection: {x: 0.1, y: -0.1, z: 0}
+    CameraShakeDirectionDeviation: {x: 0.1, y: 0.2, z: 0}
+  - Power: 10
+    LaunchDistance: 0
+    ImpactIndex: 1
+    IsCanMove: 0
+    HitStopFrame: 4
+    HitParticle: {fileID: 1521653833230474388, guid: 8befa3668666f75418f5f69307ef4c87,
+      type: 3}
+    HitParticleScaleOffset: {x: 0, y: 0, z: 0}
+    HitParticlePositionOffset: {x: 0, y: 0, z: 0}
+    CameraShakeDuration: 0.1
+    CameraShakeDirection: {x: 0.1, y: -0.1, z: 0}
+    CameraShakeDirectionDeviation: {x: 0.1, y: 0.2, z: 0}
+  - Power: 10
+    LaunchDistance: 2
+    ImpactIndex: 1
+    IsCanMove: 0
+    HitStopFrame: 4
+    HitParticle: {fileID: 1521653833230474388, guid: 8befa3668666f75418f5f69307ef4c87,
+      type: 3}
+    HitParticleScaleOffset: {x: 0, y: 0, z: 0}
+    HitParticlePositionOffset: {x: 0, y: 0, z: 0}
+    CameraShakeDuration: 0.1
+    CameraShakeDirection: {x: 0.1, y: -0.1, z: 0}
+    CameraShakeDirectionDeviation: {x: 0.1, y: 0.2, z: 0}
+  - Power: 10
+    LaunchDistance: 10
+    ImpactIndex: 2
+    IsCanMove: 0
+    HitStopFrame: 4
+    HitParticle: {fileID: 1521653833230474388, guid: 8befa3668666f75418f5f69307ef4c87,
+      type: 3}
+    HitParticleScaleOffset: {x: 0, y: 0, z: 0}
+    HitParticlePositionOffset: {x: 0, y: 0, z: 0}
+    CameraShakeDuration: 0.1
+    CameraShakeDirection: {x: 0.1, y: -0.1, z: 0}
+    CameraShakeDirectionDeviation: {x: 0.1, y: 0.2, z: 0}
+  - Power: 10
+    LaunchDistance: 0
+    ImpactIndex: 1
+    IsCanMove: 0
+    HitStopFrame: 4
+    HitParticle: {fileID: 1521653833230474388, guid: 8befa3668666f75418f5f69307ef4c87,
+      type: 3}
+    HitParticleScaleOffset: {x: 0, y: 0, z: 0}
+    HitParticlePositionOffset: {x: 0, y: 0, z: 0}
+    CameraShakeDuration: 0.1
+    CameraShakeDirection: {x: 0.1, y: -0.1, z: 0}
+    CameraShakeDirectionDeviation: {x: 0.1, y: 0.2, z: 0}
+  - Power: 10
+    LaunchDistance: 0
+    ImpactIndex: 1
+    IsCanMove: 0
+    HitStopFrame: 4
+    HitParticle: {fileID: 1521653833230474388, guid: 8befa3668666f75418f5f69307ef4c87,
+      type: 3}
+    HitParticleScaleOffset: {x: 0, y: 0, z: 0}
+    HitParticlePositionOffset: {x: 0, y: 0, z: 0}
+    CameraShakeDuration: 0.1
+    CameraShakeDirection: {x: 0.1, y: -0.1, z: 0}
+    CameraShakeDirectionDeviation: {x: 0.1, y: 0.2, z: 0}
+  - Power: 10
+    LaunchDistance: 0
+    ImpactIndex: 1
+    IsCanMove: 0
+    HitStopFrame: 4
+    HitParticle: {fileID: 1521653833230474388, guid: 8befa3668666f75418f5f69307ef4c87,
+      type: 3}
+    HitParticleScaleOffset: {x: 0, y: 0, z: 0}
+    HitParticlePositionOffset: {x: 0, y: 0, z: 0}
+    CameraShakeDuration: 0.1
+    CameraShakeDirection: {x: 0.1, y: -0.1, z: 0}
+    CameraShakeDirectionDeviation: {x: 0.1, y: 0.2, z: 0}
+  - Power: 10
+    LaunchDistance: 0
+    ImpactIndex: 1
+    IsCanMove: 0
+    HitStopFrame: 4
+    HitParticle: {fileID: 1521653833230474388, guid: 8befa3668666f75418f5f69307ef4c87,
+      type: 3}
+    HitParticleScaleOffset: {x: 0, y: 0, z: 0}
+    HitParticlePositionOffset: {x: 0, y: 0, z: 0}
+    CameraShakeDuration: 0.1
+    CameraShakeDirection: {x: 0.1, y: -0.1, z: 0}
+    CameraShakeDirectionDeviation: {x: 0.1, y: 0.2, z: 0}
+  - Power: 10
+    LaunchDistance: 0
+    ImpactIndex: 1
+    IsCanMove: 0
+    HitStopFrame: 4
+    HitParticle: {fileID: 1521653833230474388, guid: 8befa3668666f75418f5f69307ef4c87,
+      type: 3}
+    HitParticleScaleOffset: {x: 0, y: 0, z: 0}
+    HitParticlePositionOffset: {x: 0, y: 0, z: 0}
+    CameraShakeDuration: 0.1
+    CameraShakeDirection: {x: 0.1, y: -0.1, z: 0}
+    CameraShakeDirectionDeviation: {x: 0.1, y: 0.2, z: 0}
+  - Power: 10
+    LaunchDistance: 2
+    ImpactIndex: 1
+    IsCanMove: 0
+    HitStopFrame: 4
+    HitParticle: {fileID: 1521653833230474388, guid: 8befa3668666f75418f5f69307ef4c87,
+      type: 3}
+    HitParticleScaleOffset: {x: 0, y: 0, z: 0}
+    HitParticlePositionOffset: {x: 0, y: 0, z: 0}
+    CameraShakeDuration: 0.1
+    CameraShakeDirection: {x: 0.1, y: -0.1, z: 0}
+    CameraShakeDirectionDeviation: {x: 0.1, y: 0.2, z: 0}
+  - Power: 10
+    LaunchDistance: 10
+    ImpactIndex: 2
+    IsCanMove: 0
+    HitStopFrame: 4
+    HitParticle: {fileID: 1521653833230474388, guid: 8befa3668666f75418f5f69307ef4c87,
+      type: 3}
+    HitParticleScaleOffset: {x: 0, y: 0, z: 0}
+    HitParticlePositionOffset: {x: 0, y: 0, z: 0}
+    CameraShakeDuration: 0.1
+    CameraShakeDirection: {x: 0.1, y: -0.1, z: 0}
+    CameraShakeDirectionDeviation: {x: 0.1, y: 0.2, z: 0}
   slotName: Slot_Katana
   handName: Hand_Katana
   slashFX: {fileID: 4214304940546854769, guid: f3ed1a225d580fe4bb7b6a1242474832, type: 3}

@@ -575,7 +575,7 @@ ModelImporter:
         objectReferenceParameter: {fileID: 11500000, guid: cff3b6c097dc94242abf0245a668a1c8,
           type: 3}
         floatParameter: 0
-        intParameter: 0
+        intParameter: 3
         messageOptions: 0
       - time: 0.045787543
         functionName: EndAnimCollision
@@ -591,7 +591,7 @@ ModelImporter:
         objectReferenceParameter: {fileID: 11500000, guid: cff3b6c097dc94242abf0245a668a1c8,
           type: 3}
         floatParameter: 0
-        intParameter: 0
+        intParameter: 4
         messageOptions: 0
       - time: 0.17032968
         functionName: EndAnimCollision
@@ -607,7 +607,7 @@ ModelImporter:
         objectReferenceParameter: {fileID: 11500000, guid: cff3b6c097dc94242abf0245a668a1c8,
           type: 3}
         floatParameter: 0
-        intParameter: 0
+        intParameter: 5
         messageOptions: 0
       - time: 0.24725276
         functionName: EndAnimCollision
@@ -623,7 +623,7 @@ ModelImporter:
         objectReferenceParameter: {fileID: 11500000, guid: cff3b6c097dc94242abf0245a668a1c8,
           type: 3}
         floatParameter: 0
-        intParameter: 0
+        intParameter: 6
         messageOptions: 0
       - time: 0.59816843
         functionName: EndAnimCollision
