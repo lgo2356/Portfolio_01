@@ -13,11 +13,6 @@ public abstract class Skill : MonoBehaviour
         Awake_GetComponents();
     }
 
-    protected virtual void Start()
-    {
-
-    }
-
     private void Awake_InitRootObject()
     {
         rootObject = transform.root.gameObject;
@@ -28,5 +23,20 @@ public abstract class Skill : MonoBehaviour
     {
         animator = rootObject.GetComponent<Animator>();
         weapon = gameObject.GetComponent<Weapon>();
+    }
+
+    protected virtual void Start()
+    {
+
+    }
+
+    public virtual void DoAction()
+    {
+
+    }
+
+    public virtual void BeginAction()
+    {
+
     }
 }

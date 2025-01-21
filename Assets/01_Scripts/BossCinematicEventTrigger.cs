@@ -37,7 +37,7 @@ public class BossCinematicEventTrigger : MonoBehaviour
     {
         collider.enabled = false;
 
-        GameManager.isPlayerInput = false;
+        CustomGameManager.IsPlayerInput = false;
         
         StartCoroutine(Coroutine_Camera());
     }
@@ -60,7 +60,7 @@ public class BossCinematicEventTrigger : MonoBehaviour
 
         bossObject.GetComponent<PerceptionComponent>().enabled = true;
 
-        GameManager.isPlayerInput = true;
+        CustomGameManager.IsPlayerInput = true;
         
         Destroy(gameObject);
     }

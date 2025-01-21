@@ -108,6 +108,12 @@ public class Player : Character, IDamagable
         }
     }
 
+    public virtual void OnDamaged(GameObject attacker, float damage)
+    {
+        Debug.Log(damage);
+        hpComponent.AddDamage(damage);
+    }
+
     private IEnumerator Coroutine_Launch(GameObject attacker, int frame, float distance)
     {
         WaitForFixedUpdate waitForFixedUpdate = new();

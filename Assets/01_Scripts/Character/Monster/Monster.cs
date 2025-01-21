@@ -89,6 +89,11 @@ public class Monster : Character, IDamagable
         StartCoroutine(Coroutine_StopAnimation(attacker, weaponData.HitStopFrame));
     }
 
+    public virtual void OnDamaged(GameObject attacker, float damage)
+    {
+
+    }
+
     protected virtual void OnDead()
     {
         rigidbody.useGravity = false;

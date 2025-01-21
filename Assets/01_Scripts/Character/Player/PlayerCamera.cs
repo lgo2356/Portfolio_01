@@ -43,7 +43,7 @@ public class PlayerCamera : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.isPlayerInput == false)
+        if (CustomGameManager.IsPlayerInput == false)
             return;
         
         // 카메라 이동

@@ -46,6 +46,16 @@ public class SkillController : MonoBehaviour
         handler?.OnPerformedLong();
     }
 
+    private void Anim_DoAction()
+    {
+        currentSkill.DoAction();
+    }
+
+    private void Anim_BeginAction()
+    {
+        currentSkill.BeginAction();
+    }
+
     private void Anim_EndAction()
     {
         animator.SetBool("IsSkillAction", false);

@@ -140,7 +140,7 @@ public class PlayerMoveComponent : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.isPlayerInput == false)
+        if (CustomGameManager.IsPlayerInput == false)
             return;
 
         currentPlayerInputMove = Vector2.SmoothDamp(currentPlayerInputMove, playerInputMove, ref currentVelocity, 1f / sensitivity);

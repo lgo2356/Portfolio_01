@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7345148651565075884}
   - component: {fileID: 4759111293454596454}
   - component: {fileID: 650604379924607986}
+  - component: {fileID: 4643143452354193410}
   m_Layer: 0
   m_Name: Staff_01(Player)
   m_TagString: Untagged
@@ -120,6 +121,22 @@ MonoBehaviour:
     type: 3}
   isGuided: 0
   aimAngle: 15
+--- !u!114 &4643143452354193410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6416291301515761843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bafb82a43bb0034494e89547f5628a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorPrefab: {fileID: 4580325160271238322, guid: d79ecb8657c7040408d718499763185e,
+    type: 3}
+  effectPrefab: {fileID: 4580325160271238322, guid: ba53855453bfd74499834677547175da,
+    type: 3}
 --- !u!1 &6827889401010128713
 GameObject:
   m_ObjectHideFlags: 0
