@@ -9,22 +9,29 @@ public class Skill_Staff_Effect : MonoBehaviour
     [SerializeField]
     private float range;
 
+    [SerializeField]
+    private WeaponData weaponData;
+
     private LayerMask layerMask;
+
+    public GameObject RootObject { get; set; }
 
     private void Start()
     {
-        layerMask = 1 << LayerMask.NameToLayer("Player");
+        layerMask = 1 << LayerMask.NameToLayer("Monster");
 
         StartCoroutine(Coroutine_Hit());
     }
 
     private IEnumerator Coroutine_Hit()
     {
-        WaitForSeconds wait = new WaitForSeconds(0.25f);
+        WaitForSeconds wait = new(0.25f);
 
         yield return new WaitForSeconds(1.0f);
 
-        while (true)
+        float timer = 0.0f;
+
+        while (timer < 2.0f)
         {
             var hits = Physics.SphereCastAll(transform.position, radius, Vector3.up, range, layerMask);
 
@@ -35,13 +42,12 @@ public class Skill_Staff_Effect : MonoBehaviour
 
                 if (damagable != null)
                 {
-                    Debug.Log(go.name);
-
-                    damagable.OnDamaged(gameObject, 5.0f);
+                    damagable.OnDamaged(RootObject, 2, weaponData);
                 }
             }
 
             yield return wait;
+            timer += 0.25f;
         }
     }
 

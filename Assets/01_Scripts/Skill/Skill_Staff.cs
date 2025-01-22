@@ -40,6 +40,8 @@ public class Skill_Staff : Skill, ISkillPressedDownHandler, ISkillPressedUpHandl
 
         GameObject effectObject = Instantiate(effectPrefab);
         effectObject.transform.position = cursor.transform.position;
+        Skill_Staff_Effect effect = effectObject.GetComponent<Skill_Staff_Effect>();
+        effect.RootObject = rootObject;
         
         cursor.SetDisabled();
     }

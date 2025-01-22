@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class Monster : Character, IDamagable
@@ -89,9 +90,56 @@ public class Monster : Character, IDamagable
         StartCoroutine(Coroutine_StopAnimation(attacker, weaponData.HitStopFrame));
     }
 
-    public virtual void OnDamaged(GameObject attacker, float damage)
+    public virtual void OnDamaged(GameObject attacker, int causerType, WeaponData weaponData)
     {
+        hpComponent.AddDamage(weaponData.Power);
 
+        if (aiController != null)
+        {
+            aiController.OnDamaged(attacker);
+        }
+
+        print($"{gameObject.name} Damaged : {weaponData.Power}");
+
+        //if (weaponData.HitParticle != null)
+        //{
+        //    GameObject go = Instantiate(weaponData.HitParticle, transform, false);
+        //    go.transform.localPosition = hitPoint + weaponData.HitParticlePositionOffset;
+        //    go.transform.localScale += weaponData.HitParticleScaleOffset;
+        //}
+
+        if (hpComponent.IsDead)
+        {
+            stateComponent.SetDeadState();
+            OnDead();
+        }
+        else
+        {
+            if (weaponController != null)
+            {
+                animator.Play($"Blend {weaponController.currentType}", 0);
+
+                if (animator.GetBool("IsAction"))
+                {
+                    weaponController.EndAction();
+                }
+            }
+
+            transform.LookAt(attacker.transform, Vector3.up);
+
+            animator.SetInteger("ImpactType", causerType);
+            animator.SetInteger("ImpactIndex", weaponData.ImpactIndex);
+            animator.SetTrigger("DoImpact");
+
+            if (weaponData.LaunchDistance > 0f)
+            {
+                StartCoroutine(Coroutine_Launch(attacker, 30, weaponData.LaunchDistance));
+            }
+
+            StartCoroutine(Coroutine_SetDamagedColor(0.15f));
+        }
+
+        //StartCoroutine(Coroutine_StopAnimation(attacker, weaponData.HitStopFrame));
     }
 
     protected virtual void OnDead()
