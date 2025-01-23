@@ -91,16 +91,18 @@ public class Player : Character, IDamagable
             }
         }
 
-        animator.Play($"Blend {weaponController.currentType}", 0);
+        if (stateComponent.GetSubType(StateComponent.SubStateType.Toughness) == false)
+        {
+            animator.Play($"Blend {weaponController.currentType}", 0);
+            animator.SetInteger("ImpactType", (int)causer.Type);
+            animator.SetInteger("ImpactIndex", weaponData.ImpactIndex);
+            animator.SetTrigger("DoImpact");
+        }
 
         if (animator.GetBool("IsAction"))
         {
             weaponController.EndAction();
         }
-
-        animator.SetInteger("ImpactType", (int)causer.Type);
-        animator.SetInteger("ImpactIndex", weaponData.ImpactIndex);
-        animator.SetTrigger("DoImpact");
 
         if (weaponData.LaunchDistance > 0f)
         {

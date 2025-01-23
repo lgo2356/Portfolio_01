@@ -789,7 +789,7 @@ GameObject:
   - component: {fileID: 4793564116789152232}
   - component: {fileID: 4057215414355714811}
   - component: {fileID: 7324684327144311139}
-  - component: {fileID: 8607874028896295042}
+  - component: {fileID: 1060180900963679596}
   - component: {fileID: 6884159932499763328}
   m_Layer: 6
   m_Name: Dummy
@@ -898,7 +898,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed5c14aca11cba343a37c2b68e91d4b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8607874028896295042
+--- !u!114 &1060180900963679596
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -907,10 +907,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3840103029975375621}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cf89e1128026e94bb5d539b2f2cf8da, type: 3}
+  m_Script: {fileID: 11500000, guid: b0e908bf1f0da7f4388ff651db847279, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 100
+  maxHP: 1000
+  uiHpBarPrefab: {fileID: 8976051129653608589, guid: 576a6f4d6c89ff343ac37093073503ba,
+    type: 3}
 --- !u!114 &6884159932499763328
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class StateComponent : MonoBehaviour
@@ -10,10 +12,16 @@ public class StateComponent : MonoBehaviour
         Max,
     }
 
+    public enum SubStateType
+    {
+        Hold, Toughness
+    }
+
     private Animator animator;
     private WeaponController weaponController;
 
     private StateType currentState = StateType.Idle;
+    private Dictionary<SubStateType, bool> subStateTypes;
 
     public event Action<StateType, StateType> OnStateTypeChanged;
     public event Action OnIdleAction;
@@ -40,6 +48,12 @@ public class StateComponent : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         weaponController = GetComponent<WeaponController>();
+
+        subStateTypes = new();
+        {
+            subStateTypes.Add(SubStateType.Hold, false);
+            subStateTypes.Add(SubStateType.Toughness, false);
+        }
     }
 
     public void SetIdleState()
@@ -92,4 +106,67 @@ public class StateComponent : MonoBehaviour
 
         OnStateTypeChanged?.Invoke(prevType, newType);
     }
+
+    public bool GetSubType(SubStateType type)
+    {
+        return subStateTypes[type];
+    }
+
+    private void SetSubType(SubStateType type)
+    {
+        subStateTypes[type] = true;
+    }
+
+    private void UnsetSubType(SubStateType type)
+    {
+        subStateTypes[type] = false;
+    }
+
+    private bool isHold;
+    private bool isTough;
+
+#if UNITY_EDITOR
+    [CustomEditor(typeof(StateComponent))]
+    public class StateComponentEditor : Editor
+    {
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
+
+            if (!Application.isPlaying)
+                return;
+
+            StateComponent script = (StateComponent)target;
+
+            //bool isHold = script.GetSubType(SubStateType.Hold);
+            //bool isTough = script.GetSubType(SubStateType.Toughness);
+
+            script.isHold = EditorGUILayout.Toggle("Hold", script.isHold);
+            script.isTough = EditorGUILayout.Toggle("Toughness", script.isTough);
+
+            if (GUI.changed)
+            {
+                EditorUtility.SetDirty(script);
+            }
+
+            if (script.isHold)
+            {
+                script.SetSubType(SubStateType.Hold);
+            }
+            else
+            {
+                script.UnsetSubType(SubStateType.Hold);
+            }
+
+            if (script.isTough)
+            {
+                script.SetSubType(SubStateType.Toughness);
+            }
+            else
+            {
+                script.UnsetSubType(SubStateType.Toughness);
+            }
+        }
+    }
+#endif
 }

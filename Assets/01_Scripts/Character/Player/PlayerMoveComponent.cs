@@ -156,6 +156,13 @@ public class PlayerMoveComponent : MonoBehaviour
         inputR = inputRotation;
         lookR = lookRotation;
 
+        if (stateComponent.GetSubType(StateComponent.SubStateType.Hold))
+        {
+            animator.SetFloat("SpeedZ", 0.0f);
+
+            return;
+        }
+
         if (canMove == false)
         {
             animator.SetFloat("SpeedZ", 0.0f);
