@@ -46,6 +46,15 @@ public class SkillController : MonoBehaviour
         handler?.OnPerformedLong();
     }
 
+    public void EndAction()
+    {
+        animator.SetBool("IsSkillAction", false);
+        animator.SetBool("IsCharging", false);
+        animator.SetBool("IsCharged", false);
+
+        currentSkill.EndAction();
+    }
+
     private void Anim_DoAction()
     {
         currentSkill.DoAction();
@@ -58,13 +67,13 @@ public class SkillController : MonoBehaviour
 
     private void Anim_EndAction()
     {
-        animator.SetBool("IsSkillAction", false);
-        animator.SetBool("IsCharging", false);
-        animator.SetBool("IsCharged", false);
+        EndAction();
     }
 
     private void Anim_EndCharging()
     {
         animator.SetBool("IsCharged", true);
+
+        currentSkill.OnCharged();
     }
 }

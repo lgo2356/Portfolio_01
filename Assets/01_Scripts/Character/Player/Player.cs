@@ -97,11 +97,13 @@ public class Player : Character, IDamagable
             animator.SetInteger("ImpactType", (int)causer.Type);
             animator.SetInteger("ImpactIndex", weaponData.ImpactIndex);
             animator.SetTrigger("DoImpact");
-        }
 
-        if (animator.GetBool("IsAction"))
-        {
-            weaponController.EndAction();
+            if (animator.GetBool("IsAction"))
+            {
+                weaponController.EndAction();
+            }
+
+            skillController.EndAction();
         }
 
         if (weaponData.LaunchDistance > 0f)

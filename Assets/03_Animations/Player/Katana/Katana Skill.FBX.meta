@@ -633,14 +633,6 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.92307687
-        functionName: Anim_EndAction
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: c5cb9215771bfa74d963e651927a5aa8,
-          type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {fileID: 31900000, guid: 626cb70fd43a10a4fb253728fe6dc9f6, type: 2}

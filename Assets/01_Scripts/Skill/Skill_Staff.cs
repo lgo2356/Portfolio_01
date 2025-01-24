@@ -51,5 +51,14 @@ public class Skill_Staff : Skill, ISkillPressedDownHandler, ISkillPressedUpHandl
         base.BeginAction();
 
         cursor.HoldCursor(true);
+
+        stateComponent.SetSubType(StateComponent.SubStateType.Hold);
+    }
+
+    public override void EndAction()
+    {
+        base.EndAction();
+
+        stateComponent.UnsetSubType(StateComponent.SubStateType.Hold);
     }
 }

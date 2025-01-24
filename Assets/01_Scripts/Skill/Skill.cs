@@ -4,6 +4,7 @@ public abstract class Skill : MonoBehaviour
 {
     protected Animator animator;
     protected Weapon weapon;
+    protected StateComponent stateComponent;
 
     protected GameObject rootObject;
 
@@ -23,6 +24,7 @@ public abstract class Skill : MonoBehaviour
     {
         animator = rootObject.GetComponent<Animator>();
         weapon = gameObject.GetComponent<Weapon>();
+        stateComponent = rootObject.GetComponent<StateComponent>();
     }
 
     protected virtual void Start()
@@ -36,6 +38,16 @@ public abstract class Skill : MonoBehaviour
     }
 
     public virtual void BeginAction()
+    {
+
+    }
+
+    public virtual void EndAction()
+    {
+
+    }
+
+    public virtual void OnCharged()
     {
 
     }

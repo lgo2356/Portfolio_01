@@ -112,12 +112,12 @@ public class StateComponent : MonoBehaviour
         return subStateTypes[type];
     }
 
-    private void SetSubType(SubStateType type)
+    public void SetSubType(SubStateType type)
     {
         subStateTypes[type] = true;
     }
 
-    private void UnsetSubType(SubStateType type)
+    public void UnsetSubType(SubStateType type)
     {
         subStateTypes[type] = false;
     }
