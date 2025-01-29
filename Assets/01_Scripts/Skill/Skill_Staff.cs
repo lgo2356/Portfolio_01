@@ -1,6 +1,7 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Skill_Staff : Skill, ISkillPressedDownHandler, ISkillPressedUpHandler
+public class Skill_Staff : Skill, ISkillPressedDownHandler, ISkillPressedUpHandler, ISkillPerformedShortHandler
 {
     [SerializeField]
     private GameObject cursorPrefab;
@@ -32,6 +33,63 @@ public class Skill_Staff : Skill, ISkillPressedDownHandler, ISkillPressedUpHandl
     {
         animator.SetBool("IsSkillAction", true);
         animator.SetBool("IsSkillReady", false);
+    }
+
+    public void OnPerformedShort()
+    {
+        GameObject target = FindClosestTarget();
+
+        if (target == null)
+            return;
+
+        cursor.transform.position = target.transform.position;
+        cursor.HoldCursor(true);
+
+        animator.SetBool("IsSkillAction", true);
+        animator.SetBool("IsSkillReady", false);
+    }
+
+    private GameObject FindClosestTarget()
+    {
+        LayerMask layerMask = 1 << LayerMask.NameToLayer("Monster");
+        Collider[] colliders = Physics.OverlapSphere(rootObject.transform.position, 10.0f, layerMask);
+        List<GameObject> candidates = new List<GameObject>();
+
+        foreach (var collider in colliders)
+        {
+            if (collider.TryGetComponent<Monster>(out var monster))
+            {
+                candidates.Add(monster.gameObject);
+            }
+        }
+
+        GameObject result = null;
+        float maxAngle = float.MinValue;
+        float closestDistance = float.MaxValue;
+
+        foreach (var candidate in candidates)
+        {
+            Vector3 direction = candidate.transform.position - rootObject.transform.position;
+            float distance = direction.magnitude;
+            float angle = Vector3.Dot(rootObject.transform.forward, direction.normalized);
+
+            if (angle < 0.5f)
+                continue;
+
+            //if (distance < closestDistance)
+            //{
+            //    closestDistance = distance;
+            //    result = candidate;
+            //}
+
+            if (angle > maxAngle)
+            {
+                maxAngle = angle;
+                result = candidate;
+            }
+        }
+
+        return result;
     }
 
     public override void DoAction()

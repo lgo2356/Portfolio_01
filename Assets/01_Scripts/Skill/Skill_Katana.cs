@@ -5,6 +5,7 @@ public class Skill_Katana : Skill, ISkillPerformedShortHandler, ISkillPressedDow
     public void OnPerformedShort()
     {
         animator.SetBool("IsCharging", false);
+        //animator.SetBool("IsSkillAction", false);
     }
 
     public void OnPressedDown()

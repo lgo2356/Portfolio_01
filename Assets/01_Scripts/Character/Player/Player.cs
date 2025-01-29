@@ -47,8 +47,12 @@ public class Player : Character, IDamagable
         };
 
 
+        float pressedDownTime = 0.0f;
+
         actionMap.FindAction("Skill").started += (callback) =>
         {
+            pressedDownTime = Time.time;
+
             skillController.OnPressedDown();
         };
 
@@ -58,7 +62,7 @@ public class Player : Character, IDamagable
             {
                 case TapInteraction:
                 {
-                    skillController.OnPerformedShort();
+                    //skillController.OnPerformedShort();
                 }
                 break;
 
@@ -72,9 +76,16 @@ public class Player : Character, IDamagable
 
         actionMap.FindAction("Skill").canceled += (callback) =>
         {
-            Debug.Log("Cancel");
+            float pressedUpTime = Time.time;
 
-            skillController.OnPressedUp();
+            if (pressedUpTime - pressedDownTime < 0.2f)
+            {
+                skillController.OnPerformedShort();
+            }
+            else
+            {
+                skillController.OnPressedUp();
+            }
         };
     }
 
