@@ -224,7 +224,7 @@
                     "name": "",
                     "id": "f7ae862e-7142-4c33-926e-d977baae736b",
                     "path": "<Keyboard>/e",
-                    "interactions": "Hold(duration=1),Tap",
+                    "interactions": "Hold(duration=1)",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Skill",

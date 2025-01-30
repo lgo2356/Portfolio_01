@@ -1,11 +1,8 @@
-using UnityEngine;
-
 public class Skill_Katana : Skill, ISkillPerformedShortHandler, ISkillPressedDownHandler, ISkillPressedUpHandler
 {
     public void OnPerformedShort()
     {
         animator.SetBool("IsCharging", false);
-        //animator.SetBool("IsSkillAction", false);
     }
 
     public void OnPressedDown()

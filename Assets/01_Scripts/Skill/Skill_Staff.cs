@@ -43,6 +43,7 @@ public class Skill_Staff : Skill, ISkillPressedDownHandler, ISkillPressedUpHandl
             return;
 
         cursor.transform.position = target.transform.position;
+        cursor.transform.position += Vector3.up * 0.05f;
         cursor.HoldCursor(true);
 
         animator.SetBool("IsSkillAction", true);
@@ -65,22 +66,14 @@ public class Skill_Staff : Skill, ISkillPressedDownHandler, ISkillPressedUpHandl
 
         GameObject result = null;
         float maxAngle = float.MinValue;
-        float closestDistance = float.MaxValue;
 
         foreach (var candidate in candidates)
         {
             Vector3 direction = candidate.transform.position - rootObject.transform.position;
-            float distance = direction.magnitude;
             float angle = Vector3.Dot(rootObject.transform.forward, direction.normalized);
 
             if (angle < 0.5f)
                 continue;
-
-            //if (distance < closestDistance)
-            //{
-            //    closestDistance = distance;
-            //    result = candidate;
-            //}
 
             if (angle > maxAngle)
             {
